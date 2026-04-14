@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Paklet | Admin Atelier</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-secondary-fixed": "#261900",
+              "surface-container-high": "#eae8e4",
+              "on-tertiary": "#ffffff",
+              "secondary": "#775a19",
+              "primary-fixed-dim": "#b4cdb8",
+              "surface-variant": "#e4e2de",
+              "surface-container-highest": "#e4e2de",
+              "tertiary-container": "#2b2b2b",
+              "inverse-primary": "#b4cdb8",
+              "outline-variant": "#c3c8c1",
+              "on-secondary-container": "#785a1a",
+              "on-primary-fixed-variant": "#364c3c",
+              "background": "#fbf9f5",
+              "surface-container": "#efeeea",
+              "on-secondary": "#ffffff",
+              "error": "#ba1a1a",
+              "error-container": "#ffdad6",
+              "on-primary-fixed": "#0b2013",
+              "surface-tint": "#4d6453",
+              "on-surface": "#1b1c1a",
+              "outline": "#737973",
+              "primary-container": "#1b3022",
+              "on-secondary-fixed-variant": "#5d4201",
+              "on-primary": "#ffffff",
+              "on-error": "#ffffff",
+              "secondary-fixed": "#ffdea5",
+              "tertiary-fixed-dim": "#c8c6c5",
+              "primary": "#061b0e",
+              "on-tertiary-container": "#939292",
+              "secondary-container": "#fed488",
+              "on-surface-variant": "#434843",
+              "on-tertiary-fixed": "#1b1c1c",
+              "surface": "#fbf9f5",
+              "inverse-surface": "#30312e",
+              "tertiary": "#161717",
+              "primary-fixed": "#d0e9d4",
+              "surface-dim": "#dbdad6",
+              "on-background": "#1b1c1a",
+              "surface-bright": "#fbf9f5",
+              "on-error-container": "#93000a",
+              "surface-container-low": "#f5f3ef",
+              "inverse-on-surface": "#f2f0ed",
+              "secondary-fixed-dim": "#e9c176",
+              "surface-container-lowest": "#ffffff",
+              "tertiary-fixed": "#e4e2e1",
+              "on-tertiary-fixed-variant": "#474747",
+              "on-primary-container": "#819986"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .glass-nav {
+            background: rgba(251, 249, 245, 0.8);
+            backdrop-filter: blur(24px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-secondary-container">
+<div class="flex min-h-screen">
+<!-- SideNavBar - Identity: Shared Component -->
+<aside class="hidden md:flex flex-col h-screen p-6 w-64 bg-surface-container-low border-r border-outline-variant/20 sticky top-0 shrink-0">
+<div class="mb-10">
+<span class="font-headline text-2xl font-bold tracking-tighter text-primary">Paklet</span>
+<p class="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant mt-1 opacity-60">Admin Atelier</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-surface-container-highest text-primary font-bold transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label uppercase tracking-[0.1em] text-xs">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface/60 hover:bg-surface-container transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+<span class="font-label uppercase tracking-[0.1em] text-xs">Orders</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface/60 hover:bg-surface-container transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-label uppercase tracking-[0.1em] text-xs">Products</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface/60 hover:bg-surface-container transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label uppercase tracking-[0.1em] text-xs">Customers</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface/60 hover:bg-surface-container transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label uppercase tracking-[0.1em] text-xs">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface/60 hover:bg-surface-container transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label uppercase tracking-[0.1em] text-xs">Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-outline-variant/20">
+<div class="flex items-center gap-3 px-2">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary font-headline italic">A</div>
+<div>
+<p class="text-xs font-bold text-primary">Atelier Manager</p>
+<p class="text-[10px] text-on-surface-variant opacity-70">Premium Access</p>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 min-w-0 overflow-x-hidden">
+<!-- TopAppBar - Identity: Shared Component -->
+<header class="glass-nav sticky top-0 z-50 px-6 py-4 flex justify-between items-center w-full">
+<div class="flex items-center gap-8 flex-1">
+<h1 class="md:hidden font-headline font-bold text-xl text-primary">Paklet</h1>
+<div class="relative max-w-md w-full hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant opacity-50 text-sm" data-icon="search">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-1 focus:ring-secondary/30 placeholder:text-on-surface-variant/40" placeholder="Search Atelier Database..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="h-8 w-[1px] bg-outline-variant/30"></div>
+<button class="flex items-center gap-3 py-2 px-4 bg-primary text-on-primary rounded-full text-sm font-medium hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+<span class="hidden sm:inline">Add New Product</span>
+</button>
+</div>
+</header>
+<div class="p-6 md:p-10 space-y-10">
+<!-- Welcome Section -->
+<section>
+<h2 class="font-headline text-3xl italic text-primary">Dashboard Overview</h2>
+<p class="text-on-surface-variant mt-2 tracking-wide text-sm opacity-80">Curating the performance of the Digital Atelier.</p>
+</section>
+<!-- Stats Section: Asymmetric Grid -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface-container-low p-8 rounded-full flex flex-col justify-between border-none">
+<div>
+<p class="font-label uppercase tracking-widest text-[10px] text-secondary font-bold">Total Revenue</p>
+<h3 class="font-headline text-4xl mt-2 text-primary tracking-tighter">PKR 2.4M</h3>
+</div>
+<div class="mt-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-emerald-600 text-sm" data-icon="trending_up">trending_up</span>
+<p class="text-xs text-on-surface-variant font-medium">+12.5% from last month</p>
+</div>
+</div>
+<div class="bg-surface-container p-8 rounded-full flex flex-col justify-between">
+<div>
+<p class="font-label uppercase tracking-widest text-[10px] text-secondary font-bold">Active Orders</p>
+<h3 class="font-headline text-4xl mt-2 text-primary tracking-tighter">142</h3>
+</div>
+<div class="mt-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-sm" data-icon="schedule">schedule</span>
+<p class="text-xs text-on-surface-variant font-medium">12 pending shipment</p>
+</div>
+</div>
+<div class="bg-surface-container-highest p-8 rounded-full flex flex-col justify-between">
+<div>
+<p class="font-label uppercase tracking-widest text-[10px] text-secondary font-bold">New Customers</p>
+<h3 class="font-headline text-4xl mt-2 text-primary tracking-tighter">89</h3>
+</div>
+<div class="mt-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-emerald-600 text-sm" data-icon="trending_up">trending_up</span>
+<p class="text-xs text-on-surface-variant font-medium">+4.2% daily growth</p>
+</div>
+</div>
+</section>
+<!-- Product Table: Editorial List Style -->
+<section class="space-y-6">
+<div class="flex items-center justify-between">
+<h3 class="font-headline text-xl text-primary">Inventory Archive</h3>
+<button class="text-xs font-label uppercase tracking-widest text-secondary underline underline-offset-4 hover:opacity-70 transition-opacity">View All Stock</button>
+</div>
+<div class="overflow-x-auto no-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant border-b border-outline-variant/30">
+<th class="pb-4 font-medium pl-2">Product Name</th>
+<th class="pb-4 font-medium">Stock</th>
+<th class="pb-4 font-medium">Price</th>
+<th class="pb-4 font-medium">Status</th>
+<th class="pb-4 font-medium text-right pr-2">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- Row 1 -->
+<tr class="group hover:bg-surface-container/50 transition-colors">
+<td class="py-6 pl-2">
+<div class="flex items-center gap-4">
+<div class="w-12 h-16 bg-surface-container-highest rounded overflow-hidden flex-shrink-0">
+<img alt="Silk Shawl" class="w-full h-full object-cover grayscale opacity-80" data-alt="Close up of fine silk textile weave" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAT7jriBjj7Og6VcbT-pJq5o83ANlHEoSEgmSE4UdihN-i6IiwztMMQvr4ZlR2yXOR59j6oZLb94pSBF9x8ziEHVjatPYfOHsVRLLLbtatJVc1EnAmggnse5djVjfm6bePv3QSTjcGOSEIIDvYjuMCmFKastHh5-FEDroCSQqjIzNPoUG9V4EyDhKo6Ca8kOGbPRC9PrQwCyFwCiHMcbyX_KlP7xVDW-mrlihPRIhBhCmHU_CScE-YhlYwgUMzrd0u1Ng5PA73FBLE"/>
+</div>
+<div>
+<p class="font-headline text-primary">Heritage Silk Shawl</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest mt-1">Loom-Woven • Charcoal</p>
+</div>
+</div>
+</td>
+<td class="py-6 text-sm text-on-surface font-medium">24 units</td>
+<td class="py-6 text-sm text-on-surface">PKR 18,500</td>
+<td class="py-6">
+<span class="px-3 py-1 bg-emerald-50 text-emerald-700 text-[10px] uppercase tracking-widest font-bold rounded-full">In Stock</span>
+</td>
+<td class="py-6 text-right pr-2">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="more_vert">more_vert</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-surface-container/50 transition-colors">
+<td class="py-6 pl-2">
+<div class="flex items-center gap-4">
+<div class="w-12 h-16 bg-surface-container-highest rounded overflow-hidden flex-shrink-0">
+<img alt="Ceramic Vase" class="w-full h-full object-cover grayscale opacity-80" data-alt="Artisanal ceramic vase with textured surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAMD1ecvw74FIRdL8-XFFSlp70Ae7nfv8UauPIUJ0EwiaS9nb1QamNsLwqDHUkyy0kJz2jE5Fcq-z-qJ96yOvkQ-uLG2PdYpPUg1EoKzxobBRjp6hxpt5gGADnXcj8pWS-w0wS-jc0irIOYI8AzrGml8xutdTqbU6xm8TAzWyFXlQpk1QUWmBJQ2vECwKEGBluHUHaYdYEgNgrNSnzI1rg3jyy_OUAOvxw9pihzGwBhgJv6yPVzeXAJDnWpXfM3J0CEFuF2uy6kbM"/>
+</div>
+<div>
+<p class="font-headline text-primary">Peshawar Clay Vessel</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest mt-1">Hand-Fired • Sand</p>
+</div>
+</div>
+</td>
+<td class="py-6 text-sm text-on-surface font-medium">8 units</td>
+<td class="py-6 text-sm text-on-surface">PKR 12,200</td>
+<td class="py-6">
+<span class="px-3 py-1 bg-amber-50 text-amber-700 text-[10px] uppercase tracking-widest font-bold rounded-full">Low Stock</span>
+</td>
+<td class="py-6 text-right pr-2">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="more_vert">more_vert</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="group hover:bg-surface-container/50 transition-colors">
+<td class="py-6 pl-2">
+<div class="flex items-center gap-4">
+<div class="w-12 h-16 bg-surface-container-highest rounded overflow-hidden flex-shrink-0">
+<img alt="Linen Shirt" class="w-full h-full object-cover grayscale opacity-80" data-alt="Minimalist linen fabric texture in off-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChVRa5DndmYgT87JawuzhQJPTK_eekWg6pb7xC4D26mFtfgXB8h1qv4S0DFWtP7h98NilS7_5aDtjtZbvAIkwaPgdRlO0d5JN-qYIeFcdHarPXCB2kTqUPj4B8f7guD3rckkHpywqQ7SinAke9hqFkW6XjQCaxv4zFHLLk7iuuOf_DVKQLX8MkAV8xn5DIoIkSaBXlUev8c_L0IdTPpTY72LWly92blQbrrFD-B0Xb8me8ugp-N-QLPy0FIkCT2sKbiJAPcmn7hLw"/>
+</div>
+<div>
+<p class="font-headline text-primary">Raw Linen Kurta</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest mt-1">Bespoke Fit • Ivory</p>
+</div>
+</div>
+</td>
+<td class="py-6 text-sm text-on-surface font-medium">42 units</td>
+<td class="py-6 text-sm text-on-surface">PKR 9,800</td>
+<td class="py-6">
+<span class="px-3 py-1 bg-emerald-50 text-emerald-700 text-[10px] uppercase tracking-widest font-bold rounded-full">In Stock</span>
+</td>
+<td class="py-6 text-right pr-2">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="more_vert">more_vert</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Bottom Analytics Glance: Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="md:col-span-3 bg-surface-container-low rounded-xl p-8 border border-outline-variant/10">
+<div class="flex justify-between items-start mb-10">
+<div>
+<h3 class="font-headline text-lg text-primary italic">Audience Engagement</h3>
+<p class="text-xs text-on-surface-variant tracking-wider mt-1 uppercase">Monthly unique visitors</p>
+</div>
+<select class="bg-transparent border-none text-[10px] uppercase tracking-widest font-bold text-secondary focus:ring-0">
+<option>Last 30 Days</option>
+<option>Last 6 Months</option>
+</select>
+</div>
+<!-- Placeholder for a sleek chart -->
+<div class="h-48 w-full flex items-end gap-2 px-2">
+<div class="flex-1 bg-surface-container-highest rounded-t-sm h-[40%]"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-sm h-[60%]"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-sm h-[45%]"></div>
+<div class="flex-1 bg-secondary/20 rounded-t-sm h-[85%]"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-sm h-[55%]"></div>
+<div class="flex-1 bg-primary/80 rounded-t-sm h-[95%]"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-sm h-[70%]"></div>
+</div>
+</div>
+<div class="bg-primary text-on-primary rounded-xl p-8 flex flex-col justify-center text-center">
+<span class="material-symbols-outlined text-4xl mb-4 text-secondary-fixed" data-icon="stars" style="font-variation-settings: 'FILL' 1;">stars</span>
+<h4 class="font-headline text-2xl italic mb-2">Member Plus</h4>
+<p class="text-xs text-on-primary-container leading-relaxed opacity-80">You have achieved 15% more sales than previous quarter. Top tier seller status active.</p>
+<button class="mt-6 py-2 px-4 border border-on-primary/20 rounded-full text-[10px] uppercase tracking-[0.2em] hover:bg-on-primary hover:text-primary transition-colors">Perks</button>
+</div>
+</section>
+</div>
+<!-- Footer - Identity: Shared Component -->
+<footer class="bg-surface-container mt-12 py-10 px-8 border-t border-outline-variant/10">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<span class="font-headline text-2xl opacity-10 select-none">Paklet</span>
+<div class="flex gap-8">
+<a class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant hover:text-secondary transition-colors" href="#">Internal Privacy</a>
+<a class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant hover:text-secondary transition-colors" href="#">System Status</a>
+<a class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant hover:text-secondary transition-colors" href="#">Artisan Support</a>
+</div>
+<p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant opacity-50">© 2024 Paklet. Designed for the Digital Atelier.</p>
+</div>
+</footer>
+</main>
+</div>
+<!-- BottomNavBar for Mobile - Identity: Shared Component -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full glass-nav flex justify-around items-center px-4 pt-3 pb-6 z-50 rounded-t-3xl shadow-[0_-4px_24px_rgba(0,0,0,0.04)]">
+<a class="flex flex-col items-center text-secondary scale-110" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label text-[10px] uppercase tracking-widest mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center text-on-surface/40 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-label text-[10px] uppercase tracking-widest mt-1">Shop</span>
+</a>
+<a class="flex flex-col items-center text-on-surface/40 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-label text-[10px] uppercase tracking-widest mt-1">Search</span>
+</a>
+<a class="flex flex-col items-center text-on-surface/40 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="font-label text-[10px] uppercase tracking-widest mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-secondary-fixed": "#261900",
+              "surface-container-high": "#eae8e4",
+              "on-tertiary": "#ffffff",
+              "secondary": "#775a19",
+              "primary-fixed-dim": "#b4cdb8",
+              "surface-variant": "#e4e2de",
+              "surface-container-highest": "#e4e2de",
+              "tertiary-container": "#2b2b2b",
+              "inverse-primary": "#b4cdb8",
+              "outline-variant": "#c3c8c1",
+              "on-secondary-container": "#785a1a",
+              "on-primary-fixed-variant": "#364c3c",
+              "background": "#fbf9f5",
+              "surface-container": "#efeeea",
+              "on-secondary": "#ffffff",
+              "error": "#ba1a1a",
+              "error-container": "#ffdad6",
+              "on-primary-fixed": "#0b2013",
+              "surface-tint": "#4d6453",
+              "on-surface": "#1b1c1a",
+              "outline": "#737973",
+              "primary-container": "#1b3022",
+              "on-secondary-fixed-variant": "#5d4201",
+              "on-primary": "#ffffff",
+              "on-error": "#ffffff",
+              "secondary-fixed": "#ffdea5",
+              "tertiary-fixed-dim": "#c8c6c5",
+              "primary": "#061b0e",
+              "on-tertiary-container": "#939292",
+              "secondary-container": "#fed488",
+              "on-surface-variant": "#434843",
+              "on-tertiary-fixed": "#1b1c1c",
+              "surface": "#fbf9f5",
+              "inverse-surface": "#30312e",
+              "tertiary": "#161717",
+              "primary-fixed": "#d0e9d4",
+              "surface-dim": "#dbdad6",
+              "on-background": "#1b1c1a",
+              "surface-bright": "#fbf9f5",
+              "on-error-container": "#93000a",
+              "surface-container-low": "#f5f3ef",
+              "inverse-on-surface": "#f2f0ed",
+              "secondary-fixed-dim": "#e9c176",
+              "surface-container-lowest": "#ffffff",
+              "tertiary-fixed": "#e4e2e1",
+              "on-tertiary-fixed-variant": "#474747",
+              "on-primary-container": "#819986"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .jali-watermark {
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-secondary-container">
+<!-- TopNavBar from JSON -->
+<nav class="fixed top-0 w-full z-50 bg-[#fbf9f5]/80 dark:bg-[#061b0e]/80 backdrop-blur-xl flex justify-between items-center w-full px-6 py-4 max-w-none">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-serif font-bold tracking-tighter text-[#061b0e] dark:text-[#fbf9f5]">Paklet</span>
+<div class="hidden md:flex gap-6">
+<a class="text-[#775a19] border-b border-[#775a19] pb-1 Headlines: font-serif italic. Body: font-sans tracking-wide text-sm" href="#">Shop</a>
+<a class="text-[#061b0e] dark:text-[#fbf9f5] opacity-70 hover:opacity-100 hover:text-[#775a19] transition-all duration-300 Headlines: font-serif italic. Body: font-sans tracking-wide text-sm" href="#">Collections</a>
+<a class="text-[#061b0e] dark:text-[#fbf9f5] opacity-70 hover:opacity-100 hover:text-[#775a19] transition-all duration-300 Headlines: font-serif italic. Body: font-sans tracking-wide text-sm" href="#">Heritage</a>
+<a class="text-[#061b0e] dark:text-[#fbf9f5] opacity-70 hover:opacity-100 hover:text-[#775a19] transition-all duration-300 Headlines: font-serif italic. Body: font-sans tracking-wide text-sm" href="#">About</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-[#061b0e] dark:text-[#fbf9f5]">person</button>
+<button class="material-symbols-outlined text-[#061b0e] dark:text-[#fbf9f5]">shopping_bag</button>
+</div>
+</nav>
+<main class="pt-24 min-h-screen">
+<!-- Header Section -->
+<header class="px-6 md:px-12 py-12 max-w-7xl mx-auto">
+<nav class="mb-4">
+<ol class="flex text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60">
+<li><a class="hover:text-secondary" href="#">Home</a></li>
+<li class="mx-2">/</li>
+<li><a class="hover:text-secondary" href="#">Collections</a></li>
+<li class="mx-2">/</li>
+<li class="text-on-surface">The Silk Route</li>
+</ol>
+</nav>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h1 class="text-5xl md:text-7xl font-headline italic text-primary leading-tight">The Silk Route</h1>
+<p class="text-on-surface-variant max-w-lg mt-4 font-light leading-relaxed">Hand-loomed heritage meets modern silhouettes. A curation of pieces defined by centuries-old craft and contemporary utility.</p>
+</div>
+<div class="relative inline-block text-left group">
+<button class="flex items-center gap-4 py-2 border-b border-outline-variant/30 text-xs uppercase tracking-widest font-medium">
+                        Sort By: Recommended
+                        <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+<!-- Dropdown would go here in interaction -->
+</div>
+</div>
+</header>
+<section class="max-w-7xl mx-auto px-6 md:px-12 pb-32 flex gap-12">
+<!-- SideNavBar for Filters -->
+<aside class="hidden lg:block w-64 flex-shrink-0 sticky top-32 h-fit">
+<div class="space-y-10">
+<div>
+<h3 class="font-sans uppercase tracking-[0.1em] text-xs font-bold text-primary mb-6">Categories</h3>
+<ul class="space-y-3">
+<li><a class="text-xs uppercase tracking-widest text-secondary font-bold flex items-center gap-2" href="#"><span class="w-1 h-1 bg-secondary rounded-full"></span>Apparel</a></li>
+<li><a class="text-xs uppercase tracking-widest text-on-surface/60 hover:text-primary transition-colors" href="#">Home &amp; Living</a></li>
+<li><a class="text-xs uppercase tracking-widest text-on-surface/60 hover:text-primary transition-colors" href="#">Jewelry</a></li>
+<li><a class="text-xs uppercase tracking-widest text-on-surface/60 hover:text-primary transition-colors" href="#">Heritage Archive</a></li>
+</ul>
+</div>
+<div class="pt-8 border-t border-outline-variant/20">
+<h3 class="font-sans uppercase tracking-[0.1em] text-xs font-bold text-primary mb-6">Price Range</h3>
+<div class="space-y-3">
+<label class="flex items-center gap-3 text-xs uppercase tracking-widest text-on-surface/60 cursor-pointer">
+<input class="rounded-none border-outline-variant text-primary focus:ring-0" type="checkbox"/> $100 - $500
+                            </label>
+<label class="flex items-center gap-3 text-xs uppercase tracking-widest text-on-surface/60 cursor-pointer">
+<input class="rounded-none border-outline-variant text-primary focus:ring-0" type="checkbox"/> $500 - $1500
+                            </label>
+<label class="flex items-center gap-3 text-xs uppercase tracking-widest text-on-surface/60 cursor-pointer">
+<input class="rounded-none border-outline-variant text-primary focus:ring-0" type="checkbox"/> $1500+
+                            </label>
+</div>
+</div>
+<div class="pt-8 border-t border-outline-variant/20">
+<h3 class="font-sans uppercase tracking-[0.1em] text-xs font-bold text-primary mb-6">Craft Type</h3>
+<div class="flex flex-wrap gap-2">
+<button class="px-3 py-1 bg-surface-container text-[10px] uppercase tracking-tighter border border-outline-variant/30 hover:bg-surface-container-highest transition-colors">Zardozi</button>
+<button class="px-3 py-1 bg-surface-container text-[10px] uppercase tracking-tighter border border-outline-variant/30 hover:bg-surface-container-highest transition-colors">Hand-Loomed</button>
+<button class="px-3 py-1 bg-surface-container text-[10px] uppercase tracking-tighter border border-outline-variant/30 hover:bg-surface-container-highest transition-colors">Block Print</button>
+<button class="px-3 py-1 bg-surface-container text-[10px] uppercase tracking-tighter border border-outline-variant/30 hover:bg-surface-container-highest transition-colors">Indigo Dye</button>
+</div>
+</div>
+</div>
+</aside>
+<!-- Product Grid -->
+<div class="flex-grow">
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-16">
+<!-- Product Card 1 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-[3/4] overflow-hidden bg-surface-container-low mb-6">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Elegant cream colored silk tunic detailed embroidery" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyC27IjtaBG3WPf6itBkrV4ps8iLpVG_L7cgdLOWmwXDzOayhrIrFs3NW4jQSz7LxbG14CeSREzN59ZRh6W614ZYDl8kmrt5flopmbeUB3u9a5Y8QXObnjp_haQkLOvH-xy8bRgfLOZAqSOD2_lPqstz-WaUChLmHSP7jyyW014nL_QbSuZTB_pgDRtkWoQ_RnMxnBJ4hfoTpHD9lLP7hYkVHl3BmVsCiZkr1incqYaa0G-dPnCP9vOqvu1Xi1OxRi8JF2n0Ff0J0"/>
+<!-- Alternate Image Overlay on Hover (Simulated) -->
+<div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-surface-container-highest/20 backdrop-blur-[2px] flex items-end justify-center pb-8">
+<button class="bg-primary text-on-primary px-8 py-3 text-xs uppercase tracking-widest font-medium rounded-xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                    Quick Add
+                                </button>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h4 class="text-sm font-medium tracking-tight text-primary">Kashmiri Wool Kaftan</h4>
+<p class="text-[10px] uppercase tracking-[0.15em] text-on-surface-variant mt-1">Hand-Embroidered</p>
+</div>
+<span class="text-sm font-headline italic">$850</span>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group cursor-pointer pt-8 md:pt-0">
+<div class="relative aspect-[3/4] overflow-hidden bg-surface-container-low mb-6">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Handcrafted geometric pattern silk shawl in deep emerald" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTrtWE7Nqjw_Z5s-8Tg3q20KzBGByXXNgfNNpD2Kb_hBcHhp1VL6Md6puSLJIMkT1O23iJ58fT-6VoALJk7Eij61iv4No2OJj7I9SXtCHeJyX41ba2JOMh0U2Jp_cUIV1CjiWRG5fuZyyp7kzcIXmfTSlOGHxaXfF5LSkx1CH3lrk3dz4EQwJeTIIX9Q1MDCyZF9ezvEDCBJnJAqWwk1wvOORbF93dAlbxKmIiqJb6KYuxWrNH9PvrOzdXH5b2JTamkOvp3xmSSak"/>
+<div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-surface-container-highest/20 backdrop-blur-[2px] flex items-end justify-center pb-8">
+<button class="bg-primary text-on-primary px-8 py-3 text-xs uppercase tracking-widest font-medium rounded-xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                    Quick Add
+                                </button>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h4 class="text-sm font-medium tracking-tight text-primary">Emerald Jali Wrap</h4>
+<p class="text-[10px] uppercase tracking-[0.15em] text-on-surface-variant mt-1">Limited Edition</p>
+</div>
+<span class="text-sm font-headline italic">$420</span>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-[3/4] overflow-hidden bg-surface-container-low mb-6">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Minimalist architectural pottery piece in matte charcoal" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8wI76r10VDXPglUDEBSG1Qf6MU6i5oz1O9q0YksiDtR2ACNdxq0qnVsHvMuRyWkKekxHgT-ihZYfyxQI2rncV4zZysWP5GHKerz2u87aYHQt49_eGDtBBt6Q0H_1yVUCa0KtAsPy7K_FYsYj3x_qWxYhe7b0SzeUysHqIkf-Fw4D5fgyYWI7JtCAgBcgAG7BZr-XRJ6k_pdSaN0947tUFj5NFg49VqV9dh0nb4aAx9pdemSeNfHmyAj0VZK1MJi7jm-xs0Tc68i0"/>
+<div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-surface-container-highest/20 backdrop-blur-[2px] flex items-end justify-center pb-8">
+<button class="bg-primary text-on-primary px-8 py-3 text-xs uppercase tracking-widest font-medium rounded-xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                    Quick Add
+                                </button>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h4 class="text-sm font-medium tracking-tight text-primary">Indus Vessel No. 04</h4>
+<p class="text-[10px] uppercase tracking-[0.15em] text-on-surface-variant mt-1">Artisan Pottery</p>
+</div>
+<span class="text-sm font-headline italic">$310</span>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-[3/4] overflow-hidden bg-surface-container-low mb-6">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Woven textile art piece with gold thread accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArL2_vzRkTDOcF73nBTZrMyYAmXprkszY0f-xYLSAEJC_nf9Y0BRed5Wz3N2P_RZI3W-rmSIy-oysECLcBC042kCP1RHyAcmuGBXT2nXsg6y2Iufoi-FKdpTX-Io-Mm8mNGx85F6zQudSKP--i8XAtuxHzEWfU3k6RLPeL-98-A2ve4plzuaM4dvsBm9OiQi9g6rrauF4lZpFf8_5iyiYxBwLHsNqqAQPlGfLKSilQHf31Y6yBUMD4C8FqaSqdNGm2O31sUSgnIfg"/>
+<div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-surface-container-highest/20 backdrop-blur-[2px] flex items-end justify-center pb-8">
+<button class="bg-primary text-on-primary px-8 py-3 text-xs uppercase tracking-widest font-medium rounded-xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                    Quick Add
+                                </button>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h4 class="text-sm font-medium tracking-tight text-primary">Gilded Loom Tunic</h4>
+<p class="text-[10px] uppercase tracking-[0.15em] text-on-surface-variant mt-1">Signature Craft</p>
+</div>
+<span class="text-sm font-headline italic">$1,200</span>
+</div>
+</div>
+<!-- Product Card 5 (Asymmetric Shift) -->
+<div class="group cursor-pointer md:mt-12">
+<div class="relative aspect-[3/4] overflow-hidden bg-surface-container-low mb-6">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Collection of handmade linen fabrics in earthy tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_4x7xzMPE0oPZEYn_xe0bL1TE8jTgUJvzvYdn6fEcPcCCX5OtXppKO7GxkAg0Wd_I7331DSiYszpCgbHfp2q-03WbdQZT7R4ALcBWZb_FQzYYQOEf11ujuHLV3pkfgxAGwqMP5OAxquNgq_OpAA2-XFPq-ZU-WrOJRGqq7VKSifisz6eYYkSK7k8dzxZAAdc_uyc4QvvcK8l55slXVrLkZlk18WLOApcAFagrl3hht4gKTiOlxUEwLL1TfmakOaYB-TuMbu7OlYo"/>
+<div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-surface-container-highest/20 backdrop-blur-[2px] flex items-end justify-center pb-8">
+<button class="bg-primary text-on-primary px-8 py-3 text-xs uppercase tracking-widest font-medium rounded-xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                    Quick Add
+                                </button>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h4 class="text-sm font-medium tracking-tight text-primary">Lahore Linen Trouser</h4>
+<p class="text-[10px] uppercase tracking-[0.15em] text-on-surface-variant mt-1">Summer Capsule</p>
+</div>
+<span class="text-sm font-headline italic">$285</span>
+</div>
+</div>
+<!-- Product Card 6 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-[3/4] overflow-hidden bg-surface-container-low mb-6">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Delicate gold filigree earrings on white marble" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrCGexabCPxgA_Ke3iP8LMF_OJ5XSiMjs3PdgnCyGQ461zgdmksoDHR7P8uZ8mh1HmgwSH5pmFtPWTC5qWwjtiuEm6Ner7a3ogDoYKhZL3aEHk0Mniof_HUsHEEK_3nliDh2HpZVhjpiKLGlv1lhbZJOfVyNgmnMlH_5P_gg_Hq2569wnvODhSDGGanxKeikyPUZcZnExRxYcoJy1hqAEJ88-URQuAMx_vwI5IkKJmIrlgz8gMvp2-vdIU-mxrcyXCFrhEd4gNqQI"/>
+<div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-surface-container-highest/20 backdrop-blur-[2px] flex items-end justify-center pb-8">
+<button class="bg-primary text-on-primary px-8 py-3 text-xs uppercase tracking-widest font-medium rounded-xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                    Quick Add
+                                </button>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h4 class="text-sm font-medium tracking-tight text-primary">Sun-Drop Filigree</h4>
+<p class="text-[10px] uppercase tracking-[0.15em] text-on-surface-variant mt-1">22k Gold Plated</p>
+</div>
+<span class="text-sm font-headline italic">$550</span>
+</div>
+</div>
+</div>
+<!-- Load More Button -->
+<div class="mt-32 text-center">
+<button class="group relative px-12 py-4 bg-surface-container hover:bg-surface-container-highest transition-colors duration-500">
+<span class="text-xs uppercase tracking-[0.3em] font-semibold text-primary">Load More Artisanal Pieces</span>
+<div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-8 h-[1px] bg-secondary group-hover:w-full transition-all duration-500"></div>
+</button>
+<p class="text-[10px] uppercase tracking-widest text-on-surface/40 mt-8">Showing 6 of 48 Designs</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Heritage Watermark Decor -->
+<div class="fixed bottom-10 -right-20 pointer-events-none opacity-[0.03] select-none">
+<span class="font-headline text-[30rem] leading-none text-primary italic">P</span>
+</div>
+<!-- Footer from JSON -->
+<footer class="bg-[#efeeea] dark:bg-[#061b0e] w-full pt-20 pb-10 px-8">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
+<div class="col-span-1 md:col-span-1">
+<div class="font-serif text-3xl opacity-10 mb-8">Paklet</div>
+<p class="font-sans text-xs tracking-tighter opacity-80 text-[#061b0e] dark:text-[#fbf9f5] leading-relaxed">
+                    A digital atelier celebrating the convergence of ancestral Pakistani craft and contemporary global aesthetics.
+                </p>
+</div>
+<div>
+<h5 class="text-[10px] uppercase tracking-widest font-bold mb-6">Collections</h5>
+<ul class="space-y-3 font-sans text-xs tracking-tighter opacity-80">
+<li><a class="text-[#061b0e] dark:text-[#fbf9f5] hover:opacity-100 hover:text-[#775a19] transition-opacity" href="#">The Silk Route</a></li>
+<li><a class="text-[#061b0e] dark:text-[#fbf9f5] hover:opacity-100 hover:text-[#775a19] transition-opacity" href="#">Indus Vessels</a></li>
+<li><a class="text-[#061b0e] dark:text-[#fbf9f5] hover:opacity-100 hover:text-[#775a19] transition-opacity" href="#">Archive Pieces</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-[10px] uppercase tracking-widest font-bold mb-6">The Atelier</h5>
+<ul class="space-y-3 font-sans text-xs tracking-tighter opacity-80">
+<li><a class="text-[#061b0e] dark:text-[#fbf9f5] hover:opacity-100 hover:text-[#775a19] transition-opacity" href="#">Artisans</a></li>
+<li><a class="underline text-[#775a19] hover:opacity-100 hover:text-[#775a19] transition-opacity" href="#">Shipping</a></li>
+<li><a class="text-[#061b0e] dark:text-[#fbf9f5] hover:opacity-100 hover:text-[#775a19] transition-opacity" href="#">Contact</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-[10px] uppercase tracking-widest font-bold mb-6">Legal</h5>
+<ul class="space-y-3 font-sans text-xs tracking-tighter opacity-80">
+<li><a class="text-[#061b0e] dark:text-[#fbf9f5] hover:opacity-100 hover:text-[#775a19] transition-opacity" href="#">Privacy</a></li>
+<li><a class="text-[#061b0e] dark:text-[#fbf9f5] hover:opacity-100 hover:text-[#775a19] transition-opacity" href="#">Terms</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-7xl mx-auto border-t border-outline-variant/10 mt-20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+<span class="font-sans text-xs tracking-tighter opacity-80 text-[#061b0e] dark:text-[#fbf9f5]">© 2024 Paklet. Designed for the Digital Atelier.</span>
+<div class="flex gap-6">
+<span class="material-symbols-outlined text-lg opacity-40">language</span>
+<span class="material-symbols-outlined text-lg opacity-40">potted_plant</span>
+</div>
+</div>
+</footer>
+<!-- BottomNavBar for Mobile from JSON -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pt-3 pb-6 bg-[#fbf9f5]/90 dark:bg-[#061b0e]/90 backdrop-blur-md shadow-[0_-4px_24px_rgba(0,0,0,0.04)] z-50 rounded-t-3xl">
+<a class="flex flex-col items-center text-[#061b0e]/40 dark:text-[#fbf9f5]/40 hover:text-[#061b0e] dark:hover:text-white tap-highlight-transparent active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-sans text-[10px] uppercase tracking-widest mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center text-[#775a19] scale-110 tap-highlight-transparent active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">storefront</span>
+<span class="font-sans text-[10px] uppercase tracking-widest mt-1">Shop</span>
+</a>
+<a class="flex flex-col items-center text-[#061b0e]/40 dark:text-[#fbf9f5]/40 hover:text-[#061b0e] dark:hover:text-white tap-highlight-transparent active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="font-sans text-[10px] uppercase tracking-widest mt-1">Search</span>
+</a>
+<a class="flex flex-col items-center text-[#061b0e]/40 dark:text-[#fbf9f5]/40 hover:text-[#061b0e] dark:hover:text-white tap-highlight-transparent active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-sans text-[10px] uppercase tracking-widest mt-1">Cart</span>
+</a>
+</nav>
+</body></html>

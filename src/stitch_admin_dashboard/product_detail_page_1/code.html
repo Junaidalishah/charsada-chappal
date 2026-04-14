@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Paklet | Artisanal Detail</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .jali-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0l20 20-20 20L0 20z' fill='%23c3c8c1' fill-opacity='0.15' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary-fixed": "#261900",
+                        "surface-container-high": "#eae8e4",
+                        "on-tertiary": "#ffffff",
+                        "secondary": "#775a19",
+                        "primary-fixed-dim": "#b4cdb8",
+                        "surface-variant": "#e4e2de",
+                        "surface-container-highest": "#e4e2de",
+                        "tertiary-container": "#2b2b2b",
+                        "inverse-primary": "#b4cdb8",
+                        "outline-variant": "#c3c8c1",
+                        "on-secondary-container": "#785a1a",
+                        "on-primary-fixed-variant": "#364c3c",
+                        "background": "#fbf9f5",
+                        "surface-container": "#efeeea",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed": "#0b2013",
+                        "surface-tint": "#4d6453",
+                        "on-surface": "#1b1c1a",
+                        "outline": "#737973",
+                        "primary-container": "#1b3022",
+                        "on-secondary-fixed-variant": "#5d4201",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#ffdea5",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "primary": "#061b0e",
+                        "on-tertiary-container": "#939292",
+                        "secondary-container": "#fed488",
+                        "on-surface-variant": "#434843",
+                        "on-tertiary-fixed": "#1b1c1c",
+                        "surface": "#fbf9f5",
+                        "inverse-surface": "#30312e",
+                        "tertiary": "#161717",
+                        "primary-fixed": "#d0e9d4",
+                        "surface-dim": "#dbdad6",
+                        "on-background": "#1b1c1a",
+                        "surface-bright": "#fbf9f5",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f5f3ef",
+                        "inverse-on-surface": "#f2f0ed",
+                        "secondary-fixed-dim": "#e9c176",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed": "#e4e2e1",
+                        "on-tertiary-fixed-variant": "#474747",
+                        "on-primary-container": "#819986"
+                    },
+                    fontFamily: {
+                        "headline": ["Noto Serif"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-[#fbf9f5]/80 backdrop-blur-xl flex justify-between items-center px-6 py-4 max-w-none">
+<div class="text-2xl font-headline font-bold tracking-tighter text-primary">Paklet</div>
+<div class="hidden md:flex items-center gap-10">
+<a class="text-secondary border-b border-secondary pb-1 font-body tracking-wide text-sm" href="#">Shop</a>
+<a class="text-primary opacity-70 hover:opacity-100 hover:text-secondary transition-all duration-300 font-body tracking-wide text-sm" href="#">Collections</a>
+<a class="text-primary opacity-70 hover:opacity-100 hover:text-secondary transition-all duration-300 font-body tracking-wide text-sm" href="#">Heritage</a>
+<a class="text-primary opacity-70 hover:opacity-100 hover:text-secondary transition-all duration-300 font-body tracking-wide text-sm" href="#">About</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-primary hover:opacity-70 transition-opacity">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</button>
+<button class="text-primary hover:opacity-70 transition-opacity relative">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+<span class="absolute -top-1 -right-1 bg-secondary text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center">2</span>
+</button>
+</div>
+</nav>
+<main class="pt-24 pb-20 px-6 md:px-12 max-w-7xl mx-auto">
+<!-- Breadcrumbs -->
+<nav class="mb-12 flex gap-2 items-center text-xs uppercase tracking-widest text-on-surface-variant/60 font-label">
+<a class="hover:text-primary transition-colors" href="#">Home</a>
+<span class="text-[8px]">/</span>
+<a class="hover:text-primary transition-colors" href="#">Apparel</a>
+<span class="text-[8px]">/</span>
+<span class="text-primary">Heritage Silk Tunic</span>
+</nav>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+<!-- Left Column: Gallery -->
+<div class="lg:col-span-7 flex flex-col-reverse md:flex-row gap-6">
+<!-- Thumbnails -->
+<div class="flex md:flex-col gap-4 overflow-x-auto md:overflow-y-visible hide-scrollbar shrink-0">
+<div class="w-20 h-28 bg-surface-container-high relative overflow-hidden group cursor-pointer border border-outline-variant/20">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Close up fabric texture of silk garment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9GVZfUB2y2AkRp3dc3pUktzwxQbMsLK_AFeLxpNaGrONtaLIenyLzE0gW1eE4caDzXimCLccBfl6ooqhW_KHGUDd48HVcuo6bQwWwr4TBda7etHqzZt9MGEky478PozG5B9pt9Fac5YXuspoIOj6tKDZAmimBgyxewGJ6SkTo3Xj8PZY4QruD8ipKkFa0GizxQ5zvtc5e2UVpTyZ8jAy_aHHVNYSAw1MIyPgfEV3XpivsSDPgfn_FGg2uM3e8dAuXRD4QBOg2MGc"/>
+</div>
+<div class="w-20 h-28 bg-surface-container-high relative overflow-hidden group cursor-pointer opacity-40 hover:opacity-100">
+<img class="w-full h-full object-cover" data-alt="Model wearing heritage silk tunic lifestyle shot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfE8TeL0oguqud6SbM0TmK_eGXDGejSPWc7HGv9kh-xoBPW0wuxmfjfPhhl9aCtJHRo1t3apaHi3tsPNjRg1pSWU5UCTLaCTCljlq5JZ4nSmu3jFyt1sc7Lzorq9REQiE99ph-vaTLgWkgFR8ajCcL1ppxH4Ovr-a3RV2K1n8GvHcnviQoJ8Q9VZd1ZK86c_cKToYHdmTg2CFal6DPz0Dsz8tlJfSSHSEKPb9zEKnOqNJ2sE7MyZ_WtnDW2i6BKIR5Xn08gJ1RfWI"/>
+</div>
+<div class="w-20 h-28 bg-surface-container-high relative overflow-hidden group cursor-pointer opacity-40 hover:opacity-100">
+<img class="w-full h-full object-cover" data-alt="Side profile detail of artisanal embroidery" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBG4HdrBcBAIT4z9wQ98fxc292SRQmO3wPXNOu4Ug26DVz_2H_N26ElcK99uC_n0v3HrL0MFU2dxYoboN9dScP6B72ka_LBrAxZm9bI1zVBXSY3P4mOSRmD8_mmSYO6smDigdLd2CwLyyhd-paF9IOplS5rDPVNbGHosdhDeGz8exjA9xYRwW982_xUMAo7h_S_JgBmclnwUVhxZE8_5cziVLo0ONEfx-XMYjjW-IFmMmivgmznNCg24L3m2EKBtFGZp5R8ZsK9niY"/>
+</div>
+</div>
+<!-- Main Display -->
+<div class="relative w-full aspect-[4/5] bg-surface-container-low group overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" data-alt="High quality shot of Heritage Silk Tunic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5FP3ELCgN61swt3TpBOC-ck7-GcKZIRcfkfy98k_h4kGfMP-wnOpJjf8zlPpVhNI11F6wXphQHQA3RxAuQTWEasxAtXmXN9K93fXssRNAX-7LdtyeWirdvp0TlUHabsn7cREPxVKj45lpNayV_nTizii-HC4U4eHctsSQeGJEvm5mkekKLoJFwE_aVhktfwJWfkoFlcmoTF3jdIu08yZ6_7-eN_N4v7VRi9P3HuyFNRqXPnza5D38eIOxfym95PxlCXbz-_FFXTk"/>
+<button class="absolute bottom-6 right-6 bg-surface/80 backdrop-blur-md p-3 rounded-full text-primary hover:bg-surface transition-colors shadow-sm">
+<span class="material-symbols-outlined" data-icon="zoom_in">zoom_in</span>
+</button>
+<!-- Watermark Detail -->
+<div class="absolute top-10 left-10 text-[12rem] font-headline font-bold opacity-[0.03] select-none pointer-events-none">P</div>
+</div>
+</div>
+<!-- Right Column: Information -->
+<div class="lg:col-span-5 flex flex-col">
+<div class="mb-2 text-secondary font-label text-xs uppercase tracking-[0.2em] font-medium">Limited Edition</div>
+<h1 class="text-4xl md:text-5xl font-headline italic text-primary mb-4 leading-tight">Heritage Silk Tunic</h1>
+<div class="flex items-baseline gap-4 mb-8">
+<span class="text-2xl font-body text-primary font-light">PKR 24,500</span>
+<span class="text-on-surface-variant/40 line-through text-sm">PKR 32,000</span>
+</div>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm mb-10 max-w-md">
+                    Hand-loomed in the heart of Multan, this tunic features intricate Resham embroidery. A contemporary silhouette meets centuries-old craftsmanship, creating a piece that breathes with history.
+                </p>
+<!-- Selectors -->
+<div class="space-y-8 mb-10">
+<div>
+<span class="block text-[10px] uppercase tracking-widest text-on-surface-variant mb-4">Select Color</span>
+<div class="flex gap-4">
+<button class="w-8 h-8 rounded-full bg-[#061b0e] border-2 border-secondary ring-2 ring-offset-2 ring-transparent transition-all"></button>
+<button class="w-8 h-8 rounded-full bg-[#efeeea] border border-outline-variant/20 hover:scale-110 transition-transform"></button>
+<button class="w-8 h-8 rounded-full bg-[#775a19] border border-outline-variant/20 hover:scale-110 transition-transform"></button>
+</div>
+</div>
+<div>
+<div class="flex justify-between items-center mb-4">
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant">Select Size</span>
+<button class="text-[10px] uppercase tracking-widest text-secondary underline underline-offset-4">Size Guide</button>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-3 border border-outline-variant/20 text-xs font-label hover:border-primary transition-colors">XS</button>
+<button class="flex-1 py-3 border-2 border-primary text-xs font-label bg-primary text-white">S</button>
+<button class="flex-1 py-3 border border-outline-variant/20 text-xs font-label hover:border-primary transition-colors">M</button>
+<button class="flex-1 py-3 border border-outline-variant/20 text-xs font-label hover:border-primary transition-colors">L</button>
+<button class="flex-1 py-3 border border-outline-variant/20 text-xs font-label opacity-30 cursor-not-allowed">XL</button>
+</div>
+</div>
+</div>
+<!-- Psychology & CTA -->
+<div class="space-y-6">
+<div class="flex items-center gap-2 text-error text-xs font-medium italic">
+<span class="material-symbols-outlined text-sm" data-icon="local_fire_department">local_fire_department</span>
+                        Only 3 pieces left in stock
+                    </div>
+<button class="w-full py-5 bg-gradient-to-r from-primary to-primary-container text-white font-label uppercase tracking-widest text-sm rounded-xl hover:opacity-95 transition-opacity active:scale-[0.98] duration-200">
+                        Add to Cart
+                    </button>
+<!-- Trust Badges -->
+<div class="grid grid-cols-2 gap-4 pt-8">
+<div class="flex items-center gap-3 p-4 bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-secondary" data-icon="verified">verified</span>
+<span class="text-[10px] uppercase tracking-wider text-on-surface font-semibold">Authentic Craft</span>
+</div>
+<div class="flex items-center gap-3 p-4 bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-secondary" data-icon="lock">lock</span>
+<span class="text-[10px] uppercase tracking-wider text-on-surface font-semibold">Secure Checkout</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Reviews Section -->
+<section class="mt-32 p-12 bg-surface-container jali-pattern rounded-3xl relative overflow-hidden">
+<div class="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-12">
+<div class="md:col-span-4">
+<h2 class="text-3xl font-headline italic mb-4">Artisan Reviews</h2>
+<div class="flex items-center gap-2 mb-2">
+<div class="flex text-secondary">
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star_half" style="font-variation-settings: 'FILL' 1;">star_half</span>
+</div>
+<span class="text-lg font-headline">4.8 / 5.0</span>
+</div>
+<p class="text-on-surface-variant text-sm mb-6">Based on 124 verified purchases.</p>
+<button class="text-xs uppercase tracking-widest font-bold border-b border-primary pb-1">Write a Review</button>
+</div>
+<div class="md:col-span-8 space-y-8">
+<div class="border-b border-outline-variant/30 pb-8">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h4 class="font-headline text-lg italic">Exceptional Drape</h4>
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant/60">Zahra K. — Verified Buyer</span>
+</div>
+<span class="text-xs text-on-surface-variant/40">2 weeks ago</span>
+</div>
+<p class="text-sm leading-relaxed text-on-surface-variant">The quality of the silk is unlike anything I've purchased before. The embroidery has a beautiful weight to it. Truly a masterpiece for the modern wardrobe.</p>
+</div>
+<div class="pb-8">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h4 class="font-headline text-lg italic">Heritage in a Stitch</h4>
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant/60">Omar S. — Verified Buyer</span>
+</div>
+<span class="text-xs text-on-surface-variant/40">1 month ago</span>
+</div>
+<p class="text-sm leading-relaxed text-on-surface-variant">Bought this as a gift. The packaging and the story behind the Multan artisans made it even more special. Highly recommend.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Related Products -->
+<section class="mt-32">
+<div class="flex justify-between items-end mb-12">
+<div>
+<span class="block text-secondary font-label text-xs uppercase tracking-[0.2em] mb-2">Curated for You</span>
+<h3 class="text-4xl font-headline italic">You May Also Like</h3>
+</div>
+<a class="text-sm font-label uppercase tracking-widest hover:text-secondary transition-colors" href="#">View All</a>
+</div>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Product Card 1 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] bg-surface-container-low mb-6 overflow-hidden relative">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Modern embroidered shawl on model" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkDOkgBv4OwxC69VcFHWUDu8SjFJ8sO8GC3BUXQ0fuhydrAG7zJsP_iHPg_7sRp3X67jNHBpIWpwbFhO3oMx3NIqE9rAbTzWby25ZJor-cfcB4Eo0ei4sszUOCzWJzp2bLM_wfn3FyvrFbZtT23AhbqHv3fRG3rzo8yHeLhHPn_V9uPLQWDlK0W2fmfOHmzBmr9_fBlUjSBSxu86Qf2YJ-1ghNjqRHGDfy1s5qXBfwvP57UriBrECOrgRg36eNX7OVq3P1tghmmMI"/>
+</div>
+<h4 class="font-headline text-lg mb-2">Resham Shawl</h4>
+<span class="text-on-surface-variant font-light text-sm">PKR 12,000</span>
+</div>
+<!-- Product Card 2 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] bg-surface-container-low mb-6 overflow-hidden relative">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Artisanal handwoven cotton dress" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVbcXQzt-E18lvg1D_DSixpvlmxLo-a85VE9WTl-ZCERiP0oh2ZTN3mtsQEf2tu9zOy-5Jo5lM3GR1OaiumgdINTrULfoLhdGksLtjxicR6uY1M52SWwRAStsRQAwOqw8AyAuD0ZwK5lhwm4W-OWSGMVtiZcSJeQDYJ_csbijlaLMv4-zCo1KvXFYXPq2ouQ1P5jHMHWiabh19LN1T9CyIje92F2aLVQnnS-qBRU3vCHAWeqIprm9HAV_yzo1ecnYj6IzHIlW9jis"/>
+</div>
+<h4 class="font-headline text-lg mb-2">Linen Kaftan</h4>
+<span class="text-on-surface-variant font-light text-sm">PKR 18,500</span>
+</div>
+<!-- Product Card 3 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] bg-surface-container-low mb-6 overflow-hidden relative">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Minimalist silk trousers in cream" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZRsWtJnYR0C58xDUUoWS-VFpgT-FiGQkSIBJaICrSdYLz7muBNMnT8urSaiWVW6U3rNUrS6F8QWkGJMsqBs5V3Hn7WZAxe9rUMYcQ6Sb-Vqp4XobWK56NpUnNqyyDwRoZ6BwckjvAW4-gF7SKpNVhA-9EIMCpoWtWSSPueP4cPmttGhqN5nDKlLMkFZMEJgK0NOhDl0yXjPMN37lBwxEp3NYWEBjD5gdznW61X8B_0-C40fIqo1XLrn0suyeT8slKllQYUjdajXw"/>
+</div>
+<h4 class="font-headline text-lg mb-2">Classic Palazzo</h4>
+<span class="text-on-surface-variant font-light text-sm">PKR 9,200</span>
+</div>
+<!-- Product Card 4 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] bg-surface-container-low mb-6 overflow-hidden relative">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Handcrafted jewelry accessory" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8c93NRMcnR-BQ4bkh2TvWYHRmH1mNasnKJOp75B1Ek48ZdfSEruAtyJVf-cXjDEBpxj35q20y_qkn5CzDWWsszfOeBwutkJMYRJyCLI16srzj-0jwwYJpq33HW6xbouzqLstR6WpQiRjsHcqMPYIOtn_pPm5Ln_U7mo3nnZXqkd-tWn1jBSMMkItV6TUFIWQG3cR-h_kDUJJktzXbAk668r9hU7qw8mW3Y83W45LR4R4oPcpC3JNKisJZ08VCgto2jV7jiDRuYbE"/>
+</div>
+<h4 class="font-headline text-lg mb-2">Jali Earring</h4>
+<span class="text-on-surface-variant font-light text-sm">PKR 4,500</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container text-primary w-full pt-20 pb-10 px-8">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
+<div class="col-span-1 md:col-span-2">
+<div class="font-headline text-3xl opacity-10 mb-8 select-none">Paklet</div>
+<p class="max-w-xs text-xs tracking-tighter opacity-80 mb-6">Paklet is a digital atelier dedicated to the preservation of heritage crafts through a contemporary lens.</p>
+<div class="flex gap-6">
+<a class="opacity-60 hover:opacity-100 transition-opacity" href="#"><span class="material-symbols-outlined" data-icon="facebook">social_leaderboard</span></a>
+<a class="opacity-60 hover:opacity-100 transition-opacity" href="#"><span class="material-symbols-outlined" data-icon="camera">camera</span></a>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<span class="text-[10px] uppercase tracking-widest font-bold mb-2">Shop</span>
+<a class="text-xs tracking-tighter opacity-80 hover:opacity-100 hover:text-secondary transition-all" href="#">Apparel</a>
+<a class="text-xs tracking-tighter opacity-80 hover:opacity-100 hover:text-secondary transition-all" href="#">Collections</a>
+<a class="text-xs tracking-tighter opacity-80 hover:opacity-100 hover:text-secondary transition-all" href="#">Archive</a>
+</div>
+<div class="flex flex-col gap-4">
+<span class="text-[10px] uppercase tracking-widest font-bold mb-2">Atelier</span>
+<a class="text-xs tracking-tighter opacity-80 hover:opacity-100 hover:text-secondary transition-all" href="#">Privacy</a>
+<a class="text-xs tracking-tighter opacity-80 hover:opacity-100 hover:text-secondary transition-all" href="#">Terms</a>
+<a class="text-xs tracking-tighter opacity-80 hover:opacity-100 hover:text-secondary transition-all" href="#">Shipping</a>
+<a class="text-xs tracking-tighter opacity-80 hover:opacity-100 hover:text-secondary transition-all" href="#">Artisans</a>
+<a class="text-xs tracking-tighter opacity-80 hover:opacity-100 hover:text-secondary transition-all" href="#">Contact</a>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-20 pt-8 border-t border-outline-variant/10 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="font-label text-xs tracking-tighter opacity-80">© 2024 Paklet. Designed for the Digital Atelier.</p>
+<div class="flex gap-6">
+<span class="material-symbols-outlined opacity-30" data-icon="payments">payments</span>
+<span class="material-symbols-outlined opacity-30" data-icon="credit_card">credit_card</span>
+</div>
+</div>
+</footer>
+<!-- Mobile Bottom Nav -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pt-3 pb-6 bg-[#fbf9f5]/90 backdrop-blur-md shadow-[0_-4px_24px_rgba(0,0,0,0.04)] z-50 rounded-t-3xl">
+<a class="flex flex-col items-center text-primary/40 hover:text-primary transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label text-[10px] uppercase tracking-widest mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center text-secondary scale-110" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="font-label text-[10px] uppercase tracking-widest mt-1">Shop</span>
+</a>
+<a class="flex flex-col items-center text-primary/40 hover:text-primary transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-label text-[10px] uppercase tracking-widest mt-1">Search</span>
+</a>
+<a class="flex flex-col items-center text-primary/40 hover:text-primary transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="font-label text-[10px] uppercase tracking-widest mt-1">Cart</span>
+</a>
+</nav>
+</body></html>
