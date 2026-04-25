@@ -1,52 +1,72 @@
 import PersonIcon from "@mui/icons-material/Person";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import MenuIcon from "@mui/icons-material/Menu";
+import CartDrawer from "../components/CartDrawer";
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
+ 
+import { useCart } from "../context/CartContext";
+import { useState, useEffect } from "react";
 
 const Links = [
   { to: "/", label: "Home" },
   { to: "/shop", label: "Shop" },
+  { to: "/collections", label: "Collection" },
 ];
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
+  const { cart } = useCart();
+
+  const totalItems = cart.reduce(
+    (acc, item) => acc + item.quantity,
+    0
+  );
+  useEffect(() => {
+  const handleOpen = () => setCartOpen(true);
+
+  window.addEventListener("openCart", handleOpen);
+
+  return () => window.removeEventListener("openCart", handleOpen);
+}, []);
 
   return (
+    
     <>
-      {/* NAVBAR */}
-      <nav className="fixed top-0 w-full z-50 bg-[#fbf9f5]/80 backdrop-blur-xl border-b shadow-md">
-        <div className="container mx-auto flex justify-between items-center px-6 py-4 max-w-none">
-          {/* LOGO */}
-          <div className="text-2xl font-serif font-bold tracking-tighter text-[#061b0e]">
-            Paklet
-          </div>
 
-          {/* DESKTOP MENU */}
+    
+      <nav className="fixed top-0 w-full z-[9999] bg-[#fbf9f5]/80 backdrop-blur-xl border-b shadow-md">
+        <div className="container mx-auto flex justify-between items-center px-6 py-4">
+          
+          <NavLink to="/" className="text-2xl font-serif font-bold">
+            Paklet
+          </NavLink>
+
           <div className="hidden md:flex space-x-10">
             {Links.map((link) => (
-              <NavLink
-                key={link.to}
-                to={link.to}
-                className={({ isActive }) =>
-                  `font-serif italic tracking-wide text-sm ${
-                    isActive
-                      ? "text-[#775a19] border-b border-[#775a19] pb-1"
-                      : "text-[#061b0e] opacity-70"
-                  }`
-                }
-              >
+              <NavLink key={link.to} to={link.to}>
                 {link.label}
               </NavLink>
             ))}
           </div>
 
-          {/* RIGHT ICONS */}
-          <div className="flex items-center space-x-6 text-[#061b0e]">
+          <div className="flex items-center space-x-6">
             <PersonIcon />
-            <ShoppingBagIcon />
 
-            {/* MOBILE BUTTON */}
+            {/* CART */}
+            <div
+              className="relative cursor-pointer"
+              onClick={() => setCartOpen(true)}
+            >
+              <ShoppingBagIcon />
+
+              {totalItems > 0 && (
+                <span className="absolute -top-2 -right-2 bg-black text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                  {totalItems}
+                </span>
+              )}
+            </div>
+
             <button onClick={() => setOpen(!open)} className="md:hidden">
               <MenuIcon />
             </button>
@@ -54,27 +74,11 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* MOBILE MENU */}
-      {open && (
-        <div className="md:hidden fixed top-16 left-0 w-full bg-[#fbf9f5] border-t shadow-md z-40">
-          <div className="flex flex-col px-6 py-4 space-y-4">
-            {Links.map((link) => (
-              <NavLink
-                key={link.to}
-                to={link.to}
-                onClick={() => setOpen(false)}
-                className={({ isActive }) =>
-                  `font-serif italic text-base ${
-                    isActive ? "text-[#775a19]" : "text-[#061b0e] opacity-70"
-                  }`
-                }
-              >
-                {link.label}
-              </NavLink>
-            ))}
-          </div>
-        </div>
-      )}
+      {/* ✅ DRAWER (THIS WAS MISSING) */}
+      <CartDrawer 
+        isOpen={cartOpen} 
+        onClose={() => setCartOpen(false)} 
+      />
     </>
   );
 };

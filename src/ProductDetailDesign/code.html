@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed-variant": "#364c3c",
+                    "on-primary-container": "#819986",
+                    "on-background": "#1b1c1a",
+                    "surface": "#fbf9f5",
+                    "on-tertiary-fixed": "#1b1c1c",
+                    "secondary": "#775a19",
+                    "surface-container": "#efeeea",
+                    "inverse-surface": "#30312e",
+                    "secondary-fixed": "#ffdea5",
+                    "inverse-on-surface": "#f2f0ed",
+                    "on-secondary-fixed-variant": "#5d4201",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed": "#e4e2e1",
+                    "primary-fixed-dim": "#b4cdb8",
+                    "primary-fixed": "#d0e9d4",
+                    "on-tertiary-fixed-variant": "#474747",
+                    "on-primary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-primary-fixed": "#0b2013",
+                    "on-tertiary-container": "#939292",
+                    "inverse-primary": "#b4cdb8",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed-dim": "#c8c6c5",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#161717",
+                    "tertiary-container": "#2b2b2b",
+                    "surface-variant": "#e4e2de",
+                    "primary-container": "#1b3022",
+                    "surface-tint": "#4d6453",
+                    "primary": "#061b0e",
+                    "background": "#fbf9f5",
+                    "surface-container-high": "#eae8e4",
+                    "on-secondary-container": "#785a1a",
+                    "on-error": "#ffffff",
+                    "error": "#ba1a1a",
+                    "secondary-fixed-dim": "#e9c176",
+                    "secondary-container": "#fed488",
+                    "surface-dim": "#dbdad6",
+                    "on-surface": "#1b1c1a",
+                    "surface-bright": "#fbf9f5",
+                    "on-secondary-fixed": "#261900",
+                    "surface-container-highest": "#e4e2de",
+                    "outline-variant": "#c3c8c1",
+                    "on-surface-variant": "#434843",
+                    "surface-container-low": "#f5f3ef",
+                    "outline": "#737973"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Noto Serif"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fbf9f5;
+            color: #1b1c1a;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="font-body selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-[#fbf9f5]/80 dark:bg-stone-950/80 backdrop-blur-xl shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center w-full px-8 py-6 max-w-[1920px] mx-auto">
+<div class="text-2xl font-serif italic text-[#061b0e] dark:text-[#fbf9f5]">The Atelier</div>
+<div class="hidden md:flex items-center space-x-12 font-['Noto_Serif'] tracking-tight text-sm">
+<a class="text-[#061b0e] dark:text-white border-b border-[#775a19] pb-1" href="#">Collections</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-[#061b0e] transition-colors" href="#">Curation</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-[#061b0e] transition-colors" href="#">Heritage</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-[#061b0e] transition-colors" href="#">Journal</a>
+</div>
+<div class="flex items-center space-x-6 text-[#061b0e] dark:text-[#fbf9f5]">
+<button class="hover:opacity-70 transition-opacity duration-300">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+</button>
+<button class="hover:opacity-70 transition-opacity duration-300">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</button>
+</div>
+</div>
+</nav>
+<main class="pt-32 pb-24 px-8 max-w-[1920px] mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+<!-- Left: Product Image Gallery -->
+<div class="lg:col-span-7 flex flex-col md:flex-row gap-6">
+<!-- Vertical Thumbnails -->
+<div class="hidden md:flex flex-col gap-4 w-24 shrink-0">
+<div class="aspect-[3/4] overflow-hidden bg-surface-container cursor-pointer hover:opacity-80 transition-all border border-secondary">
+<img class="w-full h-full object-cover" data-alt="close-up studio shot of a luxurious dark forest green wool coat with exquisite tailoring and natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9T4lzg3Md4GooZWHI4710BNDjPJ1YfrUmsGm2pRJsXr2M_1LigHunnN8AOlSgpXchO4_iLsKtm41JhrpaFKeYt6uf2TVB3nT9cNENQaA6w6N4ebZpD1cwv_v6tqtCQH8iFdQvfPGFglk7LnGigFFZCpm2j_-J573wJ5UGaswOlB_gJZN_b7DSGDlklg44tJJdc4gyIU9Z0-N9cHgPf9koOcAeUtizk8foM-UHbUfknVhpGVG0SgbHTA7EjyqpokeOws0lvQiIP10"/>
+</div>
+<div class="aspect-[3/4] overflow-hidden bg-surface-container cursor-pointer hover:opacity-80 transition-all">
+<img class="w-full h-full object-cover" data-alt="side profile of a premium minimalist winter coat showing the texture of high-quality sustainable wool" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZVWHesnurNSn-1FZaUCyIVnoGYmZ8wyO-deKbahMzvSM1puInenTsMyLEZAwGdqxodITDSDaXo16COpHxOkGbHMwubMo0JLj6ab7yRvIB0qCK3HetC6tACSnxeigRc-jvt4EVtssio8IcZW6zEAuvAlGHFzRGOZWk3yxTl1iGD3fek6zCuHSPS9d1K70l_JphkGKF62jXMiqjegVCfOUMxFuw9OlocqYiAUdRaRMdKY3A9Cjb7_NqzWPrSmHAAki01dcUDrMokEc"/>
+</div>
+<div class="aspect-[3/4] overflow-hidden bg-surface-container cursor-pointer hover:opacity-80 transition-all">
+<img class="w-full h-full object-cover" data-alt="detailed macro shot of heritage brass buttons and seam construction on a luxury green coat" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGhVkWe2QCmMgDDwX61BCB-ShGy8n-FcQAeuvzbz3uQyr71_S-PgGlP-K-CEUeRUaKefQ0-XElf1PmzD2y-yD0Ht2kdkCgNr4kgMEz6Frx5wCvrbogViqRIeaBBZ2iWMKJUf-6VDwICO9in-7dfCXhVHRxSD4CFFotp4Z0wUs1hrEymotFQl_8EWVCHvlFBYOYvBS9P9_eaZm_-qqw2hCi7buefYdd-nZVYl3ydu2c6Ev5SkOvzoNJyOF1Y6P8Cdop1Y1025C_6sU"/>
+</div>
+<div class="aspect-[3/4] overflow-hidden bg-surface-container cursor-pointer hover:opacity-80 transition-all">
+<img class="w-full h-full object-cover" data-alt="lifestyle shot of a luxury garment draped over an antique wooden chair in a sunlit artist studio" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-soDy5rfoNPaV-hca6pxneJlj3aggFzNVDr1rmW7x7r71GVkNbqwzsmjd8mQdPtheRFFfvg67LDDaSXO8VkgfSDZ-6hHpjHDx7q3Db1F-r-OoPCEp-ZCsdU5Lam512rSzDVuC0DhqtaJDtdhx0hZ7JzNugL9P8VTvXgKRPV61rp9JR0GNhzejCQPn6oe_lMeeitM_nd70SdvbNVng-9OzYMOUdEIFzzPXrNAYA2SPDYVJkDmu013UhwmFi7GKmEWnSSqlwBl8GY0"/>
+</div>
+</div>
+<!-- Main Image -->
+<div class="flex-1 aspect-[3/4] overflow-hidden bg-surface-container-low relative">
+<img class="w-full h-full object-cover" data-alt="full length front view of a masterfully tailored dark forest green wool coat against a minimalist beige background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAr1LUQ8xjmrhpMP-E-Wz92h9of71qbKqGFIjhGoAriu31Qx50SvofWXFdTDUwOchPJ4LA-pcsvD1EesqnpvFD9DeXPI4ORkIsf9PBwhhZkjk8ksxM27kVP0-sq-_RnoqnXfKd1AwWOKkn8LFdHuThDNUc-iOiTZy5OdZUoDVH049MGnxB3PumvneGcd7oJiapk1CbRj-5R8_DvCzByqutx_0R94JiBSDp8UzGcTbSXc3txvuRfXY6NRGDyza7by-L6W0xAhjl97Og"/>
+<div class="absolute top-6 left-6 bg-white/40 backdrop-blur-md px-3 py-1 text-[10px] uppercase tracking-widest font-medium">Limited Edition</div>
+</div>
+</div>
+<!-- Right: Product Information -->
+<div class="lg:col-span-5 flex flex-col pt-4">
+<nav class="flex text-[10px] uppercase tracking-widest text-on-surface-variant mb-6 space-x-2">
+<a class="hover:text-primary transition-colors" href="#">Collections</a>
+<span>/</span>
+<a class="hover:text-primary transition-colors" href="#">Outerwear</a>
+<span>/</span>
+<span class="text-primary font-medium">The Heritage Overcoat</span>
+</nav>
+<h1 class="font-headline text-4xl lg:text-5xl text-primary leading-tight mb-4">The Heritage Overcoat</h1>
+<p class="font-headline italic text-xl text-secondary mb-8">$1,250.00</p>
+<div class="space-y-10">
+<!-- Colors -->
+<div>
+<h3 class="text-xs uppercase tracking-widest font-semibold mb-4 text-on-surface">Color — Forest Green</h3>
+<div class="flex gap-3">
+<button class="w-8 h-8 rounded-full bg-[#061b0e] ring-1 ring-offset-2 ring-primary"></button>
+<button class="w-8 h-8 rounded-full bg-[#2c2c2c] ring-1 ring-transparent ring-offset-2 hover:ring-outline-variant transition-all"></button>
+<button class="w-8 h-8 rounded-full bg-[#d2c2ad] ring-1 ring-transparent ring-offset-2 hover:ring-outline-variant transition-all"></button>
+</div>
+</div>
+<!-- Sizes -->
+<div>
+<div class="flex justify-between items-end mb-4">
+<h3 class="text-xs uppercase tracking-widest font-semibold text-on-surface">Size</h3>
+<button class="text-[10px] uppercase tracking-widest underline underline-offset-4 text-on-surface-variant hover:text-primary transition-colors">Size Guide</button>
+</div>
+<div class="grid grid-cols-4 gap-2">
+<button class="py-3 text-xs tracking-widest border border-outline-variant hover:border-primary transition-all uppercase">S</button>
+<button class="py-3 text-xs tracking-widest border border-primary bg-primary text-white uppercase">M</button>
+<button class="py-3 text-xs tracking-widest border border-outline-variant hover:border-primary transition-all uppercase">L</button>
+<button class="py-3 text-xs tracking-widest border border-outline-variant hover:border-primary transition-all uppercase opacity-40 cursor-not-allowed">XL</button>
+</div>
+</div>
+<!-- CTAs -->
+<div class="space-y-4">
+<button class="w-full py-5 bg-gradient-to-r from-primary to-primary-container text-on-primary font-medium tracking-widest uppercase text-xs hover:opacity-95 transition-all shadow-lg shadow-primary/10">
+                            Add to Cart
+                        </button>
+<button class="w-full py-5 text-primary font-medium tracking-widest uppercase text-xs flex items-center justify-center gap-2 hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="favorite">favorite</span>
+                            Add to Wishlist
+                        </button>
+</div>
+<!-- Accordion Sections -->
+<div class="border-t border-outline-variant/30 pt-4">
+<p class="text-sm leading-relaxed text-on-surface-variant mb-8 font-light">
+                            A timeless silhouette reimagined for the modern collector. Hand-finished in our London atelier using pure Australian Merino wool, this overcoat balances architectural structure with effortless drape.
+                        </p>
+<div class="space-y-2">
+<details class="group border-b border-outline-variant/20 pb-4" open="">
+<summary class="flex justify-between items-center list-none cursor-pointer">
+<span class="text-xs uppercase tracking-widest font-semibold">Details</span>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180" data-icon="expand_more">expand_more</span>
+</summary>
+<ul class="mt-4 space-y-2 text-sm text-on-surface-variant font-light pl-2 list-disc list-inside">
+<li>Double-breasted front with horn buttons</li>
+<li>Signature silk-blend interior lining</li>
+<li>Hidden internal passport pocket</li>
+<li>Hand-stitched lapel detailing</li>
+</ul>
+</details>
+<details class="group border-b border-outline-variant/20 py-4">
+<summary class="flex justify-between items-center list-none cursor-pointer">
+<span class="text-xs uppercase tracking-widest font-semibold">Materials</span>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180" data-icon="expand_more">expand_more</span>
+</summary>
+<p class="mt-4 text-sm text-on-surface-variant font-light">
+                                    Exterior: 100% Responsibly Sourced Virgin Wool. <br/>
+                                    Lining: 60% Silk, 40% Cupro. <br/>
+                                    Buttons: Ethically harvested Buffalo Horn.
+                                </p>
+</details>
+<details class="group border-b border-outline-variant/20 py-4">
+<summary class="flex justify-between items-center list-none cursor-pointer">
+<span class="text-xs uppercase tracking-widest font-semibold">Shipping &amp; Returns</span>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180" data-icon="expand_more">expand_more</span>
+</summary>
+<p class="mt-4 text-sm text-on-surface-variant font-light">
+                                    Complimentary express worldwide shipping. Returns accepted within 14 days of receipt. Items must be in original condition with all tags attached.
+                                </p>
+</details>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- You May Also Like Section -->
+<section class="mt-32 border-t border-outline-variant/30 pt-20">
+<h2 class="font-headline text-3xl text-primary mb-12">You may also like</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Product Card 1 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] overflow-hidden bg-surface-container mb-6 relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="minimalist charcoal cashmere scarf hanging in a clean architectural setting with soft shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBB0I_nSYn8iIKhdhdvmHVnQoWHe2biE3mIbV3b9CFLewkiN12F1454sjL9HP2igOapMh2WsMx7AjEJyPfLWdUth6fAY5I0yHxfNyXHkoXfIaLfdcnv6Xobq2ww5xLyVasc0NYBuTW6ithTBYAJCbUKecIlAuc6dSxqNJtmAD87EB7WTeZNdjNv5BcMv8JDC8ysAt0ovXYu_e8h2g7MmXRWPMLD-yU4zX48-PtpOhoDrZCm9weDeX2Zzo3qcZoeSK9mpGPEieXlttM"/>
+</div>
+<div class="space-y-1">
+<h3 class="text-sm font-medium tracking-tight text-primary">The Cashmere Wrap</h3>
+<p class="font-headline italic text-sm text-on-surface-variant">$340.00</p>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] overflow-hidden bg-surface-container mb-6 relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="elegant cream silk blouse on a minimalist mannequin in an airy high-end boutique" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCt7f_eca9N2u5sWSnGvwA4rZ5UQlQpYygS5H9PTriARXPuiaXT8ln4hLBKchP1ijO6qsewyyin_hFInDJzsMp_udhiErEs0wutSukP4YLYuGfmmRsRpeOolEcKUH_aMHpfEMo49ayHWaktuI-Rxo0XCxBXu6mLhiDyMyO-X87_Hytj4Qx_IzBMEYYhog4_xNsCZZfbdVvRKIaTQEV4iTVlPPUZx4pXuZCZVor6F-mM6w_cIt1kzKCV7AhijQhw04eiU8SZwCCH1o"/>
+</div>
+<div class="space-y-1">
+<h3 class="text-sm font-medium tracking-tight text-primary">Silk Atelier Blouse</h3>
+<p class="font-headline italic text-sm text-on-surface-variant">$480.00</p>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] overflow-hidden bg-surface-container mb-6 relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="luxury leather Chelsea boots handcrafted from premium tan hide on a stone plinth" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIbJz7x8r6iCK_fBK_Xdlltms9vjItwqcBJyGGanJuArnS6x0RoKhtxtHQNF4YZaiORToA4VuoM_HF5s80R4IwpVOXwZC5yqYmmEhePWVsrdzzCPbFBiLaxchYtM-BYvbeKKMOUdAnqzo1uPYw6Olre--ianT4hTrM-6-oBbbZXX1YAvuMNrOJ5X99s_U087OqQr8anxREcSVoSWyL4mv-HCsJVzmQo1xGVwN_PEuX-RgODfJQsVSYawKqkTryC74r_ygJQZACpLM"/>
+</div>
+<div class="space-y-1">
+<h3 class="text-sm font-medium tracking-tight text-primary">Handcrafted Tan Boot</h3>
+<p class="font-headline italic text-sm text-on-surface-variant">$820.00</p>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] overflow-hidden bg-surface-container mb-6 relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="architectural wide-leg wool trousers in light grey draped elegantly over a white backdrop" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCA1svC-9JBjCMvTX_y-W7F_2bbDCdonAqRn7bmvWSdr8EfRUAqzXZOR85GoHzAHHe94gZOzuQBklM8LQo2rIlvcC-IPWdPm0s4FXRTfTDrXRLJS5dEVlC8ho1pv9LgsbkTMvTLZF89wNhRpl_q4RVMq5zVVjKEAZXoRmi0OZY7dkWLPAzfuIhKRDbC06cArMgCAegZnNRs1SQF0rDmzC2vHi03PWYS8KxEfShPOEoMJgS_L9cRsE4eEUO3OcMHX-vQueBd2L98FI"/>
+</div>
+<div class="space-y-1">
+<h3 class="text-sm font-medium tracking-tight text-primary">Structural Wool Trouser</h3>
+<p class="font-headline italic text-sm text-on-surface-variant">$550.00</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#efeeea] dark:bg-stone-900 w-full border-t border-[#e4e2de] dark:border-stone-800">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-12 py-20 w-full">
+<div class="space-y-6">
+<div class="text-lg font-serif text-[#061b0e] dark:text-white">The Atelier</div>
+<p class="text-[10px] uppercase tracking-[0.15em] leading-relaxed text-stone-500">Curating the finest heritage craftsmanship for the modern lifestyle.</p>
+</div>
+<div class="space-y-4">
+<h4 class="font-sans text-xs uppercase tracking-[0.15em] font-semibold text-[#061b0e] dark:text-[#fbf9f5]">Customer Care</h4>
+<ul class="font-sans text-xs uppercase tracking-[0.15em] space-y-3">
+<li><a class="text-stone-500 hover:text-[#061b0e] transition-all underline-offset-4 hover:underline" href="#">Contact Us</a></li>
+<li><a class="text-stone-500 hover:text-[#061b0e] transition-all underline-offset-4 hover:underline" href="#">Shipping &amp; Returns</a></li>
+<li><a class="text-stone-500 hover:text-[#061b0e] transition-all underline-offset-4 hover:underline" href="#">Size Guide</a></li>
+<li><a class="text-stone-500 hover:text-[#061b0e] transition-all underline-offset-4 hover:underline" href="#">Care Instructions</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h4 class="font-sans text-xs uppercase tracking-[0.15em] font-semibold text-[#061b0e] dark:text-[#fbf9f5]">Information</h4>
+<ul class="font-sans text-xs uppercase tracking-[0.15em] space-y-3">
+<li><a class="text-stone-500 hover:text-[#061b0e] transition-all underline-offset-4 hover:underline" href="#">Privacy Policy</a></li>
+<li><a class="text-stone-500 hover:text-[#061b0e] transition-all underline-offset-4 hover:underline" href="#">Terms of Service</a></li>
+<li><a class="text-stone-500 hover:text-[#061b0e] transition-all underline-offset-4 hover:underline" href="#">Heritage</a></li>
+<li><a class="text-stone-500 hover:text-[#061b0e] transition-all underline-offset-4 hover:underline" href="#">Sustainability</a></li>
+</ul>
+</div>
+<div class="space-y-6">
+<h4 class="font-sans text-xs uppercase tracking-[0.15em] font-semibold text-[#061b0e] dark:text-[#fbf9f5]">Newsletter</h4>
+<div class="flex border-b border-stone-300 dark:border-stone-700 pb-2">
+<input class="bg-transparent border-none text-[10px] uppercase tracking-[0.15em] focus:ring-0 w-full" placeholder="YOUR EMAIL" type="email"/>
+<button class="material-symbols-outlined text-stone-500 hover:text-[#061b0e]" data-icon="arrow_forward">arrow_forward</button>
+</div>
+</div>
+</div>
+<div class="px-12 py-8 border-t border-[#e4e2de] dark:border-stone-800 flex flex-col md:flex-row justify-between items-center gap-4">
+<span class="font-sans text-[10px] uppercase tracking-[0.15em] text-stone-400">© 2024 The Cultural Curator. All rights reserved.</span>
+<div class="flex gap-6 text-stone-400">
+<span class="material-symbols-outlined text-lg cursor-pointer hover:text-[#061b0e]" data-icon="public">public</span>
+<span class="material-symbols-outlined text-lg cursor-pointer hover:text-[#061b0e]" data-icon="share">share</span>
+</div>
+</div>
+</footer>
+</body></html>
