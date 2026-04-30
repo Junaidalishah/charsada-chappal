@@ -2,7 +2,7 @@ const products = [
   {
     id: 1,
     title: "Shirt",
-    price: "$1,250",
+    price: 850,
     description: "A timeless silhouette reimagined for the modern collector.",
 
     colors: [
@@ -18,22 +18,24 @@ const products = [
 
     sizes: ["S", "M", "L"],
     disabledSizes: ["XL"],
+
     details: [
       "Double-breasted front",
       "Signature silk-blend lining",
       "Hand-stitched lapel",
     ],
   },
+
   {
     id: 2,
     title: "Coat",
-    price: "$1,250",
+    price: 420,
     description: "A timeless silhouette reimagined for the modern collector.",
 
     colors: [
       {
         name: "Deep green",
-        images: ["/images/coat1.png", "/images/coat2.png", "/images/coat4.png"],
+        images: ["/images/coat1.png", "/images/coat2.png"],
       },
       {
         name: "Dark gray",
@@ -43,6 +45,7 @@ const products = [
 
     sizes: ["S", "M", "L"],
     disabledSizes: ["XL"],
+
     details: [
       "Double-breasted front",
       "Signature silk-blend lining",

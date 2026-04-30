@@ -12,21 +12,18 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  // ✅ ADD TO CART (MERGE LOGIC)
   const addToCart = (item) => {
     setCart((prev) => {
       const existing = prev.find(
         (p) =>
-          p.id === item.id &&
-          p.size === item.size &&
-          p.color === item.color
+          p.id === item.id && p.size === item.size && p.color === item.color,
       );
 
       if (existing) {
         return prev.map((p) =>
-          p === existing
-            ? { ...p, quantity: p.quantity + 1 }
-            : p
+          p.id === item.id && p.size === item.size && p.color === item.color
+            ? { ...p, quantity: (p.quantity || 1) + 1 }
+            : p,
         );
       }
 
@@ -34,22 +31,19 @@ export const CartProvider = ({ children }) => {
     });
   };
 
-  // ✅ UPDATE QUANTITY
   const updateQuantity = (item, newQty) => {
-    if (newQty < 1) return;
-
     setCart((prev) =>
       prev.map((p) =>
-        p.id === item.id &&
-        p.size === item.size &&
-        p.color === item.color
-          ? { ...p, quantity: newQty }
-          : p
-      )
+        p.id === item.id && p.size === item.size && p.color === item.color
+          ? {
+              ...p,
+              quantity: Math.max(1, Number(newQty) || 1),
+            }
+          : p,
+      ),
     );
   };
 
-  // ✅ REMOVE (CORRECT)
   const removeFromCart = (itemToRemove) => {
     setCart((prev) =>
       prev.filter(
@@ -58,8 +52,8 @@ export const CartProvider = ({ children }) => {
             p.id === itemToRemove.id &&
             p.size === itemToRemove.size &&
             p.color === itemToRemove.color
-          )
-      )
+          ),
+      ),
     );
   };
 

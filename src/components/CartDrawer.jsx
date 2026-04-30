@@ -1,14 +1,16 @@
 import { useCart } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
+import { formatCurrency } from "../utils/formatCurrency";
 
 const CartDrawer = ({ isOpen, onClose }) => {
   const { cart, removeFromCart } = useCart();
   const navigate = useNavigate();
 
-  const subtotal = cart.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
+  const subtotal = cart.reduce((sum, item) => {
+    const price = Number(item.price) || 0;
+    const qty = Number(item.quantity) || 1;
+    return sum + price * qty;
+  }, 0);
 
   return (
     <>
@@ -30,7 +32,9 @@ const CartDrawer = ({ isOpen, onClose }) => {
         {/* HEADER */}
         <div className="flex justify-between items-center p-6 border-b">
           <h2 className="text-lg font-medium">Your Bag</h2>
-          <button onClick={onClose} className="text-xl cursor-pointer">✕</button>
+          <button onClick={onClose} className="text-xl cursor-pointer">
+            ✕
+          </button>
         </div>
 
         {/* ITEMS */}
@@ -43,17 +47,22 @@ const CartDrawer = ({ isOpen, onClose }) => {
                 <img
                   src={item.image}
                   className="w-20 h-24 object-cover"
+                  alt={item.title}
                 />
 
                 <div className="flex-1">
                   <h3 className="text-sm">{item.title}</h3>
+
                   <p className="text-xs opacity-60">
                     {item.color} • {item.size}
                   </p>
 
                   <div className="flex justify-between mt-2">
                     <span className="text-sm">
-                      ${item.price * item.quantity}
+                      {formatCurrency(
+                        (Number(item.price) || 0) *
+                          (Number(item.quantity) || 1),
+                      )}
                     </span>
 
                     <button
@@ -73,7 +82,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
         <div className="absolute bottom-0 w-full p-6 border-t bg-white">
           <div className="flex justify-between mb-4 text-sm">
             <span>Subtotal</span>
-            <span>${subtotal}</span>
+            <span>{formatCurrency(subtotal)}</span>
           </div>
 
           <button

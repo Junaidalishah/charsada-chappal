@@ -120,26 +120,29 @@ const ProductDetail = () => {
 
             {/* BUTTON */}
             <button
-  onClick={() => {
-    addToCart({
-      id: product.id,
-      title: product.title,
-      price: Number(product.price.replace("$", "")), // FIX PRICE
-      image: selectedColor.images[0],
-      color: selectedColor.name,
-      size: selectedSize,
-    });
+              onClick={() => {
+                addToCart({
+                  id: product.id,
+                  title: product.title,
+                  price: parseFloat(
+                    product.price.toString().replace(/[^0-9.]/g, ""),
+                  ),
+                  quantity: 1,
+                  image: selectedColor.images[0],
+                  color: selectedColor.name,
+                  size: selectedSize,
+                });
 
-    // ✅ OPEN DRAWER AFTER ADD
-    window.dispatchEvent(new Event("openCart"));
-  }}
-  className="w-full py-4 bg-black text-white text-xs uppercase cursor-pointer 
+                // ✅ OPEN DRAWER AFTER ADD
+                window.dispatchEvent(new Event("openCart"));
+              }}
+              className="w-full py-4 bg-black text-white text-xs uppercase cursor-pointer 
   transition duration-200 ease-in-out
   hover:bg-gray-800 
   active:scale-95"
->
-  Add to Bag
-</button>
+            >
+              Add to Bag
+            </button>
             {/* ACCORDION */}
             <div className="border-t pt-6 space-y-4">
               {/* DESCRIPTION */}
