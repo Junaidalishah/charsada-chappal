@@ -1,17 +1,18 @@
 const products = [
   {
     id: 1,
-    img: "/images/shirt1.png",
-    title: "Shirt",
-    subtitle: "Artisanal Raw Silk Shirt",
-    price: 850,
+    img: "/images/chappal2.png",
+    title: "zardari chappal",
+    subtitle:
+      "Artisanal Raw Silk chappal, handwoven by master craftsmen in the heart of charsadda.",
+    price: 3000,
   },
   {
     id: 2,
-    img: "/images/coat1.png",
-    title: "The Heritage Overcoat",
+    img: "/images/chappal4.png",
+    title: "Golti chappal",
     subtitle: "A timeless silhouette reimagined for the modern collector.",
-    price: 420,
+    price: 4000,
   },
   {
     id: 3,

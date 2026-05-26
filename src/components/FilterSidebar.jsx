@@ -1,91 +1,78 @@
-function FilterSidebar() {
+const FilterSidebar = ({
+  categories,
+  selectedCategory,
+  setSelectedCategory,
+  priceRange,
+  setPriceRange,
+}) => {
   return (
-    <aside className="hidden lg:block w-64 flex-shrink-0 sticky top-32 h-fit">
-      <div className="space-y-10">
-        {/* Categories */}
+    <aside className="hidden w-72 xl:block">
+      <div className="sticky top-32 space-y-10 rounded-3xl border border-black/5 bg-white p-8">
+        {/* CATEGORY */}
         <div>
-          <h3 className="font-sans uppercase tracking-[0.1em] text-xs font-bold text-primary mb-6">
+          <h3 className="mb-5 text-sm font-semibold uppercase tracking-[0.2em] text-[#061b0e]">
             Categories
           </h3>
-          <ul className="space-y-3">
-            <li>
-              <a
-                className="text-xs uppercase tracking-widest text-secondary font-bold flex items-center gap-2"
-                href="#"
-              >
-                <span className="w-1 h-1 bg-secondary rounded-full" />
-                Apparel
-              </a>
-            </li>
-            <li>
-              <a
-                className="text-xs uppercase tracking-widest text-on-surface/60 hover:text-primary transition-colors"
-                href="#"
-              >
-                Home & Living
-              </a>
-            </li>
-            <li>
-              <a
-                className="text-xs uppercase tracking-widest text-on-surface/60 hover:text-primary transition-colors"
-                href="#"
-              >
-                Jewelry
-              </a>
-            </li>
-            <li>
-              <a
-                className="text-xs uppercase tracking-widest text-on-surface/60 hover:text-primary transition-colors"
-                href="#"
-              >
-                Heritage Archive
-              </a>
-            </li>
-          </ul>
-        </div>
 
-        {/* Price Range */}
-        <div className="pt-8 border-t border-outline-variant/20">
-          <h3 className="font-sans uppercase tracking-[0.1em] text-xs font-bold text-primary mb-6">
-            Price Range
-          </h3>
           <div className="space-y-3">
-            {["$100 - $500", "$500 - $1500", "$1500+"].map((range) => (
-              <label
-                key={range}
-                className="flex items-center gap-3 text-xs uppercase tracking-widest text-on-surface/60 cursor-pointer"
+            <button
+              onClick={() => setSelectedCategory("")}
+              className={`block text-sm transition ${
+                selectedCategory === ""
+                  ? "font-semibold text-[#061b0e]"
+                  : "text-gray-500"
+              }`}
+            >
+              All Products
+            </button>
+
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`block text-sm transition ${
+                  selectedCategory === category
+                    ? "font-semibold text-[#061b0e]"
+                    : "text-gray-500"
+                }`}
               >
-                <input
-                  type="checkbox"
-                  className="rounded-none border-outline-variant text-primary focus:ring-0"
-                />
-                {range}
-              </label>
+                {category}
+              </button>
             ))}
           </div>
         </div>
 
-        {/* Craft Type */}
-        <div className="pt-8 border-t border-outline-variant/20">
-          <h3 className="font-sans uppercase tracking-[0.1em] text-xs font-bold text-primary mb-6">
-            Craft Type
+        {/* PRICE */}
+        <div>
+          <h3 className="mb-5 text-sm font-semibold uppercase tracking-[0.2em] text-[#061b0e]">
+            Price Range
           </h3>
-          <div className="flex flex-wrap gap-2">
-            {["Zardozi", "Hand-Loomed", "Block Print", "Indigo Dye"].map(
-              (type) => (
-                <button
-                  key={type}
-                  className="px-3 py-1 bg-surface-container text-[10px] uppercase tracking-tighter border border-outline-variant/30 hover:bg-surface-container-highest transition-colors"
-                >
-                  {type}
-                </button>
-              ),
-            )}
+
+          <div className="space-y-4">
+            <input
+              type="range"
+              min="0"
+              max="50000"
+              value={priceRange.max}
+              onChange={(e) =>
+                setPriceRange({
+                  ...priceRange,
+                  max: e.target.value,
+                })
+              }
+              className="w-full"
+            />
+
+            <div className="flex items-center justify-between text-sm text-gray-500">
+              <span>PKR 0</span>
+
+              <span>PKR {priceRange.max}</span>
+            </div>
           </div>
         </div>
       </div>
     </aside>
   );
-}
+};
 
 export default FilterSidebar;

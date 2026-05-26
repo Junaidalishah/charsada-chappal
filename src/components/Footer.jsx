@@ -1,117 +1,126 @@
+import { Link } from "react-router-dom";
+
+import { FaInstagram, FaFacebookF } from "react-icons/fa";
+
 const Footer = () => {
   return (
-    <footer className="w-full pt-20 pb-10 px-8 bg-[#efeeea] text-[#061b0e]">
+    <footer className="w-full bg-[#efeeea] px-8 pb-10 pt-20 text-[#061b0e]">
       {/* TOP GRID */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto text-center justify-items-center">
-        {/* Paklet */}
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 md:grid-cols-4">
+        {/* BRAND */}
         <div>
-          <div className="font-serif text-3xl opacity-10 mb-8">Paklet</div>
-          <p className="font-sans text-xs tracking-tighter opacity-80 leading-relaxed">
-            A destination for those who value the story as much as the object.
-            Celebrating the cultural soul of Pakistan through sustainable
-            luxury.
+          <h2 className="mb-6 font-serif text-xl font-light uppercase tracking-[0.5em] text-[#061b0e]/60">
+            Charsadda Chappal
+          </h2>
+
+          <p className="text-sm leading-relaxed opacity-70 max-w-sm">
+            Premium handmade Charsadda Chappals crafted with traditional
+            Pakistani craftsmanship, timeless comfort, and modern elegance.
           </p>
         </div>
 
-        {/* Collections */}
+        {/* IMPORTANT LINKS */}
         <div>
-          <h6 className="font-label text-xs uppercase tracking-widest font-bold mb-6">
-            Collections
+          <h6 className="mb-6 text-xs font-bold uppercase tracking-widest">
+            Important Links
           </h6>
+
           <ul className="space-y-4">
             <li>
-              <a className="footer-link" href="#">
-                Autumn Silk '24
-              </a>
+              <Link
+                to="/returns-refunds"
+                className="transition hover:opacity-60"
+              >
+                Return & Refunds
+              </Link>
             </li>
+
             <li>
-              <a className="footer-link" href="#">
-                The Indigo Room
-              </a>
+              <Link
+                to="/privacy-policy"
+                className="transition hover:opacity-60"
+              >
+                Privacy Policy
+              </Link>
             </li>
+
             <li>
-              <a className="footer-link" href="#">
-                Signature Gold
-              </a>
+              <Link to="/contact" className="transition hover:opacity-60">
+                Contact Us
+              </Link>
             </li>
           </ul>
         </div>
 
-        {/* Atelier */}
+        {/* CONTACT */}
         <div>
-          <h6 className="font-label text-xs uppercase tracking-widest font-bold mb-6">
-            The Atelier
+          <h6 className="mb-6 text-xs font-bold uppercase tracking-widest">
+            Contact Us
           </h6>
-          <ul className="space-y-4">
-            <li>
-              <a className="footer-link" href="#">
-                Our Artisans
-              </a>
-            </li>
-            <li>
-              <a className="footer-link" href="#">
-                Heritage Mission
-              </a>
-            </li>
-            <li>
-              <a className="footer-link" href="#">
-                Sustainability
-              </a>
-            </li>
-          </ul>
+
+          <div className="space-y-4 text-sm">
+            <a
+              href="tel:+923335742086"
+              className="block transition hover:opacity-60"
+            >
+              +92 333 574 2086
+            </a>
+
+            <a
+              href="tel:+923055102308"
+              className="block transition hover:opacity-60"
+            >
+              +92 305 510 2308
+            </a>
+
+            <a
+              href="mailto:info@charsaddachappal.com"
+              className="block transition hover:opacity-60"
+            >
+              info@charsaddachappal.com
+            </a>
+          </div>
         </div>
 
-        {/* Support */}
+        {/* SOCIAL */}
         <div>
-          <h6 className="font-label text-xs uppercase tracking-widest font-bold mb-6">
-            Support
+          <h6 className="mb-6 text-xs font-bold uppercase tracking-widest">
+            Follow Us
           </h6>
-          <ul className="space-y-4">
-            <li>
-              <a className="footer-link" href="#">
-                Shipping
-              </a>
-            </li>
-            <li>
-              <a className="footer-link" href="#">
-                Privacy
-              </a>
-            </li>
-            <li>
-              <a className="footer-link" href="#">
-                Contact
-              </a>
-            </li>
-          </ul>
+
+          <div className="flex items-center gap-5">
+            {/* INSTAGRAM */}
+            <a
+              href="https://instagram.com/"
+              target="_blank"
+              rel="noreferrer"
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-black/10 bg-white transition hover:-translate-y-1"
+            >
+              <FaInstagram size={20} />
+            </a>
+
+            {/* FACEBOOK */}
+            <a
+              href="https://facebook.com/"
+              target="_blank"
+              rel="noreferrer"
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-black/10 bg-white transition hover:-translate-y-1"
+            >
+              <FaFacebookF size={18} />
+            </a>
+          </div>
         </div>
       </div>
 
-      {/* BOTTOM SECTION (SEPARATE) */}
-      <div className="max-w-7xl mx-auto mt-20 pt-8 border-t border-outline-variant/20 flex flex-col items-center gap-4 text-center">
-        <p className="font-sans text-xs tracking-tighter opacity-80">
-          © 2024 Paklet. Designed for the Digital Atelier.
+      {/* BOTTOM */}
+      <div className="mx-auto mt-20 flex max-w-7xl flex-col items-center justify-between gap-4 border-t border-black/10 pt-8 text-center md:flex-row">
+        <p className="text-xs opacity-70">
+          © 2026 Charsadda Chappal. All Rights Reserved.
         </p>
 
-        <div className="flex gap-6 justify-center">
-          <a
-            className="material-symbols-outlined text-xl opacity-60 hover:opacity-100 transition-opacity"
-            href="#"
-          >
-            facebook
-          </a>
-          <a
-            className="material-symbols-outlined text-xl opacity-60 hover:opacity-100 transition-opacity"
-            href="#"
-          >
-            camera_enhance
-          </a>
-          <a
-            className="material-symbols-outlined text-xl opacity-60 hover:opacity-100 transition-opacity"
-            href="#"
-          >
-            share
-          </a>
-        </div>
+        <p className="text-xs uppercase tracking-[0.2em] opacity-50">
+          Handmade in Pakistan
+        </p>
       </div>
     </footer>
   );

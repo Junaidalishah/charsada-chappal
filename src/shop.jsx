@@ -1,6 +1,6 @@
 import React from "react";
 
-const Shop: React.FC = () => {
+const Shop = () => {
   return (
     <div className="font-body bg-background text-on-surface selection:bg-secondary-container">
       {/* Top NavBar – already exists globally, but we keep the markup for a self‑contained demo */}
@@ -173,19 +173,16 @@ const Shop: React.FC = () => {
                   Craft Type
                 </h3>
                 <div className="flex flex-wrap gap-2">
-                  {[
-                    "Zardozi",
-                    "Hand-Loomed",
-                    "Block Print",
-                    "Indigo Dye",
-                  ].map((type) => (
-                    <button
-                      key={type}
-                      className="px-3 py-1 bg-surface-container text-[10px] uppercase tracking-tighter border border-outline-variant/30 hover:bg-surface-container-highest transition-colors"
-                    >
-                      {type}
-                    </button>
-                  ))}
+                  {["Zardozi", "Hand-Loomed", "Block Print", "Indigo Dye"].map(
+                    (type) => (
+                      <button
+                        key={type}
+                        className="px-3 py-1 bg-surface-container text-[10px] uppercase tracking-tighter border border-outline-variant/30 hover:bg-surface-container-highest transition-colors"
+                      >
+                        {type}
+                      </button>
+                    ),
+                  )}
                 </div>
               </div>
             </div>
@@ -198,48 +195,42 @@ const Shop: React.FC = () => {
               {[
                 {
                   id: 1,
-                  img:
-                    "https://lh3.googleusercontent.com/aida-public/AB6AXuAyC27IjtaBG3WPf6itBkrV4ps8iLpVG_L7cgdLOWmwXDzOayhrIrFs3NW4jQSz7LxbG14CeSREzN59ZRh6W614ZYDl8kmrt5flopmbeUB3u9a5Y8QXObnjp_haQkLOvH-xy8bRgfLOZAqSOD2_lPqstz-WaUChLmHSP7jyyW014nL_QbSuZTB_pgDRtkWoQ_RnMxnBJ4hfoTpHD9lLP7hYkVHl3BmVsCiZkr1incqYaa0G-dPnCP9vOqvu1Xi1OxRi8JF2n0Ff0J0",
+                  img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAyC27IjtaBG3WPf6itBkrV4ps8iLpVG_L7cgdLOWmwXDzOayhrIrFs3NW4jQSz7LxbG14CeSREzN59ZRh6W614ZYDl8kmrt5flopmbeUB3u9a5Y8QXObnjp_haQkLOvH-xy8bRgfLOZAqSOD2_lPqstz-WaUChLmHSP7jyyW014nL_QbSuZTB_pgDRtkWoQ_RnMxnBJ4hfoTpHD9lLP7hYkVHl3BmVsCiZkr1incqYaa0G-dPnCP9vOqvu1Xi1OxRi8JF2n0Ff0J0",
                   title: "Kashmiri Wool Kaftan",
                   subtitle: "Hand-Embroidered",
                   price: "$850",
                 },
                 {
                   id: 2,
-                  img:
-                    "https://lh3.googleusercontent.com/aida-public/AB6AXuBTrtWE7Nqjw_Z5s-8Tg3q20KzBGByXXNgfNNpD2Kb_hBcHhp1VL6Md6puSLJIMkT1O23iJ58fT-6VoALJk7Eij61iv4No2OJj7I9SXtCHeJyX41ba2JOMh0U2Jp_cUIV1CjiWRG5fuZyyp7kzcIXmfTSlOGHxaXfF5LSkx1CH3lrk3dz4EQwJeTIIX9Q1MDCyZF9ezvEDCBJnJAqWwk1wvOORbF93dAlbxKmIiqJb6KYuxWrNH9PvrOzdXH5b2JTamkOvp3xmSSak",
+                  img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBTrtWE7Nqjw_Z5s-8Tg3q20KzBGByXXNgfNNpD2Kb_hBcHhp1VL6Md6puSLJIMkT1O23iJ58fT-6VoALJk7Eij61iv4No2OJj7I9SXtCHeJyX41ba2JOMh0U2Jp_cUIV1CjiWRG5fuZyyp7kzcIXmfTSlOGHxaXfF5LSkx1CH3lrk3dz4EQwJeTIIX9Q1MDCyZF9ezvEDCBJnJAqWwk1wvOORbF93dAlbxKmIiqJb6KYuxWrNH9PvrOzdXH5b2JTamkOvp3xmSSak",
                   title: "Emerald Jali Wrap",
                   subtitle: "Limited Edition",
                   price: "$420",
                 },
                 {
                   id: 3,
-                  img:
-                    "https://lh3.googleusercontent.com/aida-public/AB6AXuA8wI76r10VDXPglUDEBSG1Qf6MU6i5oz1O9q0YksiDtR2ACNdxq0qnVsHvMuRyWkKekxHgT-ihZYfyxQI2rncV4zZysWP5GHKerz2u87aYHQt49_eGDtBBt6Q0H_1yVUCa0KtAsPy7K_FYsYj3x_qWxYhe7b0SzeUysHqIkf-Fw4D5fgyYWI7JtCAgBcgAG7BZr-XRJ6k_pdSaN0947tUFj5NFg49VqV9dh0nb4aAx9pdemSeNfHmyAj0VZK1MJi7jm-xs0Tc68i0",
+                  img: "https://lh3.googleusercontent.com/aida-public/AB6AXuA8wI76r10VDXPglUDEBSG1Qf6MU6i5oz1O9q0YksiDtR2ACNdxq0qnVsHvMuRyWkKekxHgT-ihZYfyxQI2rncV4zZysWP5GHKerz2u87aYHQt49_eGDtBBt6Q0H_1yVUCa0KtAsPy7K_FYsYj3x_qWxYhe7b0SzeUysHqIkf-Fw4D5fgyYWI7JtCAgBcgAG7BZr-XRJ6k_pdSaN0947tUFj5NFg49VqV9dh0nb4aAx9pdemSeNfHmyAj0VZK1MJi7jm-xs0Tc68i0",
                   title: "Indus Vessel No. 04",
                   subtitle: "Artisan Pottery",
                   price: "$310",
                 },
                 {
                   id: 4,
-                  img:
-                    "https://lh3.googleusercontent.com/aida-public/AB6AXuArL2_vzRkTDOcF73nBTZrMyYAmXprkszY0f-xYLSAEJC_nf9Y0BRed5Wz3N2P_RZI3W-rmSIy-oysECLcBC042kCP1RHyAcmuGBXT2nXsg6y2Iufoi-FKdpTX-Io-Mm8mNGx85F6zQudSKP--i8XAtuxHzEWfU3k6RLPeL-98-A2ve4plzuaM4dvsBm9OiQi9g6rrauF4lZpFf8_5iyiYxBwLHsNqqAQPlGfLKSilQHf31Y6yBUMD4C8FqaSqdNGm2O31sUSgnIfg",
+                  img: "https://lh3.googleusercontent.com/aida-public/AB6AXuArL2_vzRkTDOcF73nBTZrMyYAmXprkszY0f-xYLSAEJC_nf9Y0BRed5Wz3N2P_RZI3W-rmSIy-oysECLcBC042kCP1RHyAcmuGBXT2nXsg6y2Iufoi-FKdpTX-Io-Mm8mNGx85F6zQudSKP--i8XAtuxHzEWfU3k6RLPeL-98-A2ve4plzuaM4dvsBm9OiQi9g6rrauF4lZpFf8_5iyiYxBwLHsNqqAQPlGfLKSilQHf31Y6yBUMD4C8FqaSqdNGm2O31sUSgnIfg",
                   title: "Gilded Loom Tunic",
                   subtitle: "Signature Craft",
                   price: "$1,200",
                 },
                 {
                   id: 5,
-                  img:
-                    "https://lh3.googleusercontent.com/aida-public/AB6AXuA_4x7xzMPE0oPZEYn_xe0bL1TE8jTgUJvzvYdn6fEcPcCCX5OtXppKO7GxkAg0Wd_I7331DSiYszpCgbHfp2q-03WbdQZT7R4ALcBWZb_FQzYYQOEf11ujuHLV3pkfgxAGwqMP5OAxquNgq_OpAA2-XFPq-ZU-WrOJRGqq7VKSifisz6eYYkSK7k8dzxZAAdc_uyc4QvvcK8l55slXVrLkZlk18WLOApcAFagrl3hht4gKTiOlxUEwLL1TfmakOaYB-TuMbu7OlYo",
+                  img: "https://lh3.googleusercontent.com/aida-public/AB6AXuA_4x7xzMPE0oPZEYn_xe0bL1TE8jTgUJvzvYdn6fEcPcCCX5OtXppKO7GxkAg0Wd_I7331DSiYszpCgbHfp2q-03WbdQZT7R4ALcBWZb_FQzYYQOEf11ujuHLV3pkfgxAGwqMP5OAxquNgq_OpAA2-XFPq-ZU-WrOJRGqq7VKSifisz6eYYkSK7k8dzxZAAdc_uyc4QvvcK8l55slXVrLkZlk18WLOApcAFagrl3hht4gKTiOlxUEwLL1TfmakOaYB-TuMbu7OlYo",
                   title: "Lahore Linen Trouser",
                   subtitle: "Summer Capsule",
                   price: "$285",
                 },
                 {
                   id: 6,
-                  img:
-                    "https://lh3.googleusercontent.com/aida-public/AB6AXuBrCGexabCPxgA_Ke3iP8LMF_OJ5XSiMjs3PdgnCyGQ461zgdmksoDHR7P8uZ8mh1HmgwSH5pmFtPWTC5qWwjtiuEm6Ner7a3ogDoYKhZL3aEHk0Mniof_HUsHEEK_3nliDh2HpZVhjpiKLGlv1lhbZJOfVyNgmnMlH_5P_gg_Hq2569wnvODhSDGGanxKeikyPUZcZnExRxYcoJy1hqAEJ88-URQuAMx_vwI5IkKJmIrlgz8gMvp2-vdIU-mxrcyXCFrhEd4gNqQI",
+                  img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBrCGexabCPxgA_Ke3iP8LMF_OJ5XSiMjs3PdgnCyGQ461zgdmksoDHR7P8uZ8mh1HmgwSH5pmFtPWTC5qWwjtiuEm6Ner7a3ogDoYKhZL3aEHk0Mniof_HUsHEEK_3nliDh2HpZVhjpiKLGlv1lhbZJOfVyNgmnMlH_5P_gg_Hq2569wnvODhSDGGanxKeikyPUZcZnExRxYcoJy1hqAEJ88-URQuAMx_vwI5IkKJmIrlgz8gMvp2-vdIU-mxrcyXCFrhEd4gNqQI",
                   title: "Sun‑Drop Filigree",
                   subtitle: "22k Gold Plated",
                   price: "$550",

@@ -13,14 +13,14 @@ function ShopHeader() {
         </div>
 
         {/* Sort Dropdown */}
-        <div className="relative inline-block text-left group">
+        {/* <div className="relative inline-block text-left group">
           <button className="flex items-center gap-4 py-2 border-b border-outline-variant/30 text-xs uppercase tracking-widest font-medium">
             Sort By: Recommended
             <span className="material-symbols-outlined text-sm">
               expand_more
             </span>
           </button>
-        </div>
+        </div> */}
       </div>
     </header>
   );

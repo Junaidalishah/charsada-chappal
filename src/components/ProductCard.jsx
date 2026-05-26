@@ -4,34 +4,31 @@ const ProductCard = ({ product }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/product/${product.id}`);
+    navigate(`/product/${product._id}`);
   };
 
   return (
     <div onClick={handleClick} className="group cursor-pointer">
-      {/* Image */}
-      <div className="relative aspect-[3/4] overflow-hidden bg-surface-container-low mb-6">
+      {/* IMAGE */}
+      <div className="relative mb-3 aspect-[3/4] overflow-hidden rounded-3xl bg-gray-100">
         <img
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-          src={product.img}
-          alt={product.title}
+          src={product.image}
+          alt={product.name}
+          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
 
-        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300" />
+        <div className="absolute inset-0 bg-black/0 transition-all duration-300 group-hover:bg-black/10" />
       </div>
 
-      {/* Info */}
-      <div className="flex justify-between items-start">
-        <div>
-          <h4 className="text-sm font-medium tracking-tight text-primary">
-            {product.title}
-          </h4>
-          <p className="text-[10px] uppercase tracking-[0.15em] text-on-surface-variant mt-1">
-            {product.subtitle}
-          </p>
-        </div>
+      {/* INFO */}
+      <div className="text-center">
+        <h4 className="line-clamp-2 text-lg font-semibold text-[#061b0e]">
+          {product.name}
+        </h4>
 
-        <span className="text-sm font-headline italic">{product.price}</span>
+        <p className="mt-1 text-lg font-bold text-[#061b0e]">
+          PKR {Number(product.price).toLocaleString()}
+        </p>
       </div>
     </div>
   );

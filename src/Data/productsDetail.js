@@ -1,18 +1,18 @@
 const products = [
   {
     id: 1,
-    title: "Shirt",
-    price: 850,
+    title: "zardari chappal",
+    price: 3000,
     description: "A timeless silhouette reimagined for the modern collector.",
 
     colors: [
       {
-        name: "Dark gray",
-        images: ["/images/shirt1.png", "/images/shirt3.png"],
+        name: "BLACK",
+        images: ["/images/chappal2.png", "/images/chappal3.png"],
       },
       {
-        name: "Light peach",
-        images: ["/images/shirt2.png"],
+        name: "RED",
+        images: ["/images/chappal4.png"],
       },
     ],
 
@@ -28,18 +28,18 @@ const products = [
 
   {
     id: 2,
-    title: "Coat",
-    price: 420,
+    title: "Golti chappal",
+    price: 400,
     description: "A timeless silhouette reimagined for the modern collector.",
 
     colors: [
       {
-        name: "Deep green",
-        images: ["/images/coat1.png", "/images/coat2.png"],
+        name: "RED",
+        images: ["/images/chappal4.png", "/images/chappal4.png"],
       },
       {
-        name: "Dark gray",
-        images: ["/images/coat3.png"],
+        name: "RED",
+        images: ["/images/chappal4.png"],
       },
     ],
 

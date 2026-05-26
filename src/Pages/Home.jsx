@@ -1,9 +1,8 @@
 import Hero from "../components/hero";
 import Navbar from "../components/Navbar";
-import CategorySection from "../components/CategorySection";
-import FeaturedProducts from "../components/FeaturedProducts";
+import TopSelling from "../components/TopSelling";
+import HeritageSection from "../components/HeritageSection";
 import WhyChooseUs from "../components/WhyChooseUs";
-import Testimonials from "../components/Testimonials";
 import CtaBanner from "../components/CtaBanner";
 import Footer from "../components/Footer";
 
@@ -12,10 +11,9 @@ function Home() {
     <div>
       <Navbar />
       <Hero />
-      <CategorySection />
-      <FeaturedProducts />
+      <TopSelling />
+      <HeritageSection />
       <WhyChooseUs />
-      <Testimonials />
       <CtaBanner />
       <Footer />
     </div>

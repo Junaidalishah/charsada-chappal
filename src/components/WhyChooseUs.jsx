@@ -1,42 +1,74 @@
 const features = [
   {
-    icon: "brush",
-    title: "Handpicked Artisanship",
+    icon: "local_shipping",
+    title: "Express Delivery",
     description:
-      "Each piece is meticulously created by master craftsmen who have inherited skills passed down through generations.",
+      "Free and express delivery available across Pakistan with fast and reliable shipping.",
   },
+
   {
-    icon: "eco",
-    title: "Sustainable Practices",
+    icon: "verified",
+    title: "Guaranteed Quality",
     description:
-      "We prioritize ethical sourcing and sustainable manufacturing to preserve both heritage and our planet.",
+      "Every Charsadda Chappal is handcrafted with premium materials for long-lasting comfort and durability.",
   },
+
   {
-    icon: "auto_stories",
-    title: "Authentic Cultural Heritage",
+    icon: "support_agent",
+    title: "24/7 Support Service",
     description:
-      "Every creation carries the soul of ancient techniques, bringing timeless stories into modern wardrobes.",
+      "Have a question or need help with your order? Our support team is always ready to assist you.",
+  },
+
+  {
+    icon: "lock",
+    title: "Secure Payment",
+    description:
+      "All transactions are encrypted and protected for a safe and secure shopping experience.",
   },
 ];
 
 const WhyChooseUs = () => {
   return (
-    <section className="bg-surface-container py-32 px-6">
+    <section className="bg-[#f8f6f1] py-28 px-6">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-10">
           {features.map((feature, index) => (
-            <div key={index} className="text-center group">
-              <div className="w-20 h-20 mx-auto mb-8 rounded-full bg-secondary-container flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <span className="material-symbols-outlined text-secondary text-3xl">
+            <div
+              key={index}
+              className="
+                group rounded-3xl
+                border border-black/5
+                bg-white
+                p-10
+                text-center
+                shadow-sm
+                transition duration-300
+                hover:-translate-y-2
+              "
+            >
+              {/* ICON */}
+              <div
+                className="
+                  mx-auto mb-7
+                  flex h-20 w-20
+                  items-center justify-center
+                  rounded-full
+                  bg-[#f4f1e8]
+                "
+              >
+                <span className="material-symbols-outlined text-4xl text-[#061b0e]">
                   {feature.icon}
                 </span>
               </div>
-              <h3 className="font-headline text-2xl text-primary mb-4">
+
+              {/* TITLE */}
+              <h3 className="mb-4 text-2xl font-bold text-[#061b0e]">
                 {feature.title}
               </h3>
-              <p className="font-body text-on-surface-variant leading-relaxed">
-                {feature.description}
-              </p>
+
+              {/* DESC */}
+              <p className="leading-7 text-gray-600">{feature.description}</p>
             </div>
           ))}
         </div>
