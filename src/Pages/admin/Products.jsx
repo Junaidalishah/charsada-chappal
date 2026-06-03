@@ -27,20 +27,30 @@ const Products = () => {
     description: "",
     details: [],
     sizes: [],
-    disabledSizes: [],
     colors: [
       {
         name: "",
         images: [],
       },
     ],
-    featured: false, // Added featured field
+    featured: false,
   };
+
+  const ALL_SIZES = [
+    "PAK 6 / EU 39",
+    "PAK 7 / EU 40",
+    "PAK 8 / EU 41",
+    "PAK 9 / EU 42",
+    "PAK 10 / EU 43",
+    "PAK 11 / EU 44",
+    "PAK 12 / EU 45",
+    "PAK 13 / EU 46",
+  ];
 
   const [formData, setFormData] = useState(initialFormState);
 
   // ================= FETCH PRODUCTS =================
-  // ================= FETCH PRODUCTS =================
+
   const fetchProducts = async () => {
     try {
       // STOP if not admin
@@ -109,12 +119,9 @@ const Products = () => {
       const finalData = {
         ...formData,
         image: formData.colors?.[0]?.images?.[0] || "",
-        sizes: formData.sizes.filter((size) => size.trim() !== ""),
-        disabledSizes: formData.disabledSizes.filter(
-          (size) => size.trim() !== "",
-        ),
+        sizes: formData.sizes,
         details: formData.details.filter((detail) => detail.trim() !== ""),
-        featured: formData.featured, // Ensure featured is included
+        featured: formData.featured,
       };
 
       if (editingProduct) {
@@ -284,8 +291,6 @@ const Products = () => {
 
                               sizes: product.sizes || [],
 
-                              disabledSizes: product.disabledSizes || [],
-
                               colors: product.colors || [
                                 {
                                   name: "",
@@ -428,36 +433,34 @@ const Products = () => {
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Sizes</label>
 
-                  <input
-                    type="text"
-                    placeholder="Example: 39,40,41,42"
-                    value={formData.sizes.join(",")}
-                    className="w-full rounded-2xl border border-black/10 p-4 outline-none"
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        sizes: e.target.value.split(","),
-                      })
-                    }
-                  />
-                </div>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    {ALL_SIZES.map((size) => (
+                      <label
+                        key={size}
+                        className="flex items-center gap-2 rounded-xl border p-3 cursor-pointer"
+                      >
+                        <input
+                          type="checkbox"
+                          checked={formData.sizes.includes(size)}
+                          onChange={(e) => {
+                            if (e.target.checked) {
+                              setFormData({
+                                ...formData,
+                                sizes: [...formData.sizes, size],
+                              });
+                            } else {
+                              setFormData({
+                                ...formData,
+                                sizes: formData.sizes.filter((s) => s !== size),
+                              });
+                            }
+                          }}
+                        />
 
-                {/* DISABLED SIZES */}
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Disabled Sizes</label>
-
-                  <input
-                    type="text"
-                    placeholder="Example: 39,42"
-                    value={formData.disabledSizes.join(",")}
-                    className="w-full rounded-2xl border border-black/10 p-4 outline-none"
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        disabledSizes: e.target.value.split(","),
-                      })
-                    }
-                  />
+                        <span className="text-sm">{size}</span>
+                      </label>
+                    ))}
+                  </div>
                 </div>
 
                 {/* PRODUCT DETAILS */}

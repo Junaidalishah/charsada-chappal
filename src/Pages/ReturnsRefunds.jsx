@@ -70,45 +70,34 @@ const ReturnsRefunds = () => {
             </h2>
 
             <p>
-              Once your return is received and inspected, we will send you an
-              email to notify you that we have received your returned item.
+              Once your returned item is received and inspected, we will notify
+              you through WhatsApp regarding the status of your return request.
             </p>
 
             <p className="mt-4">
-              We will also notify you of the approval or rejection of your
-              refund.
-            </p>
-
-            <p className="mt-4">
-              If approved, your refund will be processed, and a credit will
-              automatically be applied to your original method of payment within
-              a certain amount of days.
+              If your refund is approved, it will be processed and returned
+              through the original payment method or another mutually agreed
+              method.
             </p>
           </div>
-
           <div>
             <h2 className="font-semibold text-xl mb-4 text-[#061b0e]">
               Late or Missing Refunds
             </h2>
 
             <p>
-              If you haven’t received a refund yet, first check your bank
-              account again.
+              Refund processing times may vary depending on the payment method
+              used.
             </p>
 
             <p className="mt-4">
-              Then contact your credit card company — it may take some time
-              before your refund is officially posted.
+              If you have not received your refund within the expected
+              timeframe, please contact us on WhatsApp and our team will assist
+              you.
             </p>
 
-            <p className="mt-4">
-              Next contact your bank. There is often some processing time before
-              a refund is posted.
-            </p>
-
-            <p className="mt-4">
-              If you’ve done all of this and still have not received your
-              refund, please contact us.
+            <p className="mt-4 font-semibold text-[#061b0e]">
+              WhatsApp: +92 310 2991736
             </p>
           </div>
 
@@ -126,32 +115,26 @@ const ReturnsRefunds = () => {
               To exchange an item, send us a WhatsApp message at:
             </p>
 
-            <p className="mt-4 font-semibold text-[#061b0e]">0333 5742086</p>
+            <p className="mt-4 font-semibold text-[#061b0e]">0310 2991736</p>
           </div>
 
           <div>
             <h2 className="font-semibold text-xl mb-4 text-[#061b0e]">
-              Shipping Returns
+              Returns Process
             </h2>
 
             <p>
-              To return your product, you should mail your product to our Head
-              Quarters.
+              To request a return or exchange, please contact us on WhatsApp
+              with your order details and reason for return.
             </p>
 
             <p className="mt-4">
-              You will be responsible for paying your own shipping costs for
-              returning your item. Shipping costs are non-refundable.
+              Our team will guide you through the return process and provide the
+              necessary instructions.
             </p>
 
-            <p className="mt-4">
-              Depending on where you live, the time it may take for your
-              exchanged product to reach you may vary.
-            </p>
-
-            <p className="mt-4">
-              For expensive items, we recommend using a trackable shipping
-              service or purchasing shipping insurance.
+            <p className="mt-4 font-semibold text-[#061b0e]">
+              WhatsApp: +92 310 2991736
             </p>
           </div>
 
@@ -165,9 +148,7 @@ const ReturnsRefunds = () => {
               returns:
             </p>
 
-            <p className="mt-4 font-semibold text-[#061b0e]">
-              +92 333 574 2086
-            </p>
+            <p className="mt-4 font-semibold text-[#061b0e]">+92 310 2991736</p>
           </div>
         </div>
       </main>

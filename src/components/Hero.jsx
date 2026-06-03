@@ -79,7 +79,7 @@ const Hero = () => {
                 hover:scale-105
               "
             >
-              Shop Now
+              Shop No
             </button>
           </div>
 

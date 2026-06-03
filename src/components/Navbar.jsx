@@ -19,6 +19,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const { cart } = useCart();
+  const [profileOpen, setProfileOpen] = useState(false);
 
   const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
 
@@ -30,12 +31,29 @@ const Navbar = () => {
     return () => window.removeEventListener("openCart", handleOpen);
   }, []);
 
+  useEffect(() => {
+    const handleClickOutside = () => {
+      setProfileOpen(false);
+    };
+
+    if (profileOpen) {
+      document.addEventListener("click", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [profileOpen]);
+
   return (
     <>
       <nav className="fixed top-0 w-full z-[9999] bg-[#fbf9f5]/80 backdrop-blur-xl border-b shadow-md">
         <div className="container mx-auto flex justify-between items-center px-6 py-4">
           {/* LOGO */}
-          <NavLink to="/" className="text-2xl font-serif font-bold">
+          <NavLink
+            to="/"
+            className="text-lg md:text-2xl font-serif font-bold truncate"
+          >
             Charsadda Chappal
           </NavLink>
 
@@ -56,22 +74,67 @@ const Navbar = () => {
           {/* RIGHT SIDE */}
           <div className="flex items-center space-x-6">
             {/* USER */}
-            {userInfo ? (
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-medium">{userInfo.name}</span>
+            <div className="relative">
+              {userInfo ? (
+                <>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setProfileOpen(!profileOpen);
+                    }}
+                    className="flex items-center gap-2"
+                  >
+                    <PersonIcon />
 
-                <button
-                  onClick={logout}
-                  className="text-sm hover:text-red-500 transition"
-                >
-                  Logout
-                </button>
-              </div>
-            ) : (
-              <Link to="/login">
-                <PersonIcon />
-              </Link>
-            )}
+                    <span className="hidden md:block text-sm">
+                      {userInfo.name}
+                    </span>
+                  </button>
+
+                  {profileOpen && (
+                    <div className="absolute right-0 mt-3 w-56 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+                      <div className="px-4 py-3 border-b">
+                        <p className="font-semibold">{userInfo.name}</p>
+
+                        <p className="text-xs text-gray-500">
+                          {userInfo.email}
+                        </p>
+                      </div>
+
+                      <Link
+                        to="/profile"
+                        onClick={() => setProfileOpen(false)}
+                        className="block px-4 py-3 hover:bg-gray-50"
+                      >
+                        My Profile
+                      </Link>
+
+                      <Link
+                        to="/orders"
+                        onClick={() => setProfileOpen(false)}
+                        className="block px-4 py-3 hover:bg-gray-50"
+                      >
+                        My Orders
+                      </Link>
+
+                      <button
+                        onClick={() => {
+                          logout();
+                          setProfileOpen(false);
+                        }}
+                        className="w-full text-left px-4 py-3 text-red-500 hover:bg-red-50"
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <Link to="/login">
+                  <PersonIcon />
+                </Link>
+              )}
+            </div>
 
             {/* CART */}
             <div
@@ -93,6 +156,33 @@ const Navbar = () => {
             </button>
           </div>
         </div>
+        {/* MOBILE MENU */}
+        {open && (
+          <div className="md:hidden border-t bg-[#fbf9f5]">
+            <div className="flex flex-col px-6 py-4 space-y-4">
+              {Links.map((link) => (
+                <NavLink
+                  key={link.to}
+                  to={link.to}
+                  onClick={() => setOpen(false)}
+                  className="text-lg"
+                >
+                  {link.label}
+                </NavLink>
+              ))}
+
+              {userInfo?.isAdmin && (
+                <NavLink
+                  to="/admin/products"
+                  onClick={() => setOpen(false)}
+                  className="text-lg"
+                >
+                  Dashboard
+                </NavLink>
+              )}
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* CART DRAWER */}

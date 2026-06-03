@@ -134,11 +134,11 @@ const PrivacyPolicy = () => {
 
             <div className="mt-4 space-y-2">
               <p className="font-semibold text-[#061b0e]">
-                WhatsApp: +92 333 574 2086
+                WhatsApp: +92 310 2991736
               </p>
 
               <p className="font-semibold text-[#061b0e]">
-                WhatsApp: +92 305 510 2308
+                WhatsApp: +92 316 985 2047
               </p>
             </div>
           </div>

@@ -12,6 +12,10 @@ import Cart from "./Pages/cart";
 import Checkout from "./Pages/Checkout";
 import ReturnsRefunds from "./pages/ReturnsRefunds";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Contact from "./Pages/Contact";
+import ProfilePage from "./pages/ProfilePage";
+import OrdersPage from "./pages/OrdersPage";
+import OrderDetailsPage from "./Pages/admin/OrderDetailsPage";
 
 /* AUTH */
 import Login from "./Pages/Login";
@@ -25,6 +29,8 @@ import Orders from "./pages/admin/Orders";
 import Customers from "./pages/admin/Customers";
 import Analytics from "./pages/admin/Analytics";
 import Reviews from "./pages/admin/Reviews";
+import Messages from "./pages/admin/Messages";
+import AdminOrderDetailsPage from "./Pages/admin/AdminOrderDetailsPage";
 
 function App() {
   return (
@@ -41,6 +47,10 @@ function App() {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/returns-refunds" element={<ReturnsRefunds />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/orders" element={<OrdersPage />} />
+            <Route path="/orders/:id" element={<OrderDetailsPage />} />
             {/* ================= AUTH ================= */}
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
@@ -98,6 +108,19 @@ function App() {
                   <Reviews />
                 </AdminRoute>
               }
+            />
+
+            <Route
+              path="/admin/messages"
+              element={
+                <AdminRoute>
+                  <Messages />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="/admin/orders/:id"
+              element={<AdminOrderDetailsPage />}
             />
           </Routes>
         </BrowserRouter>

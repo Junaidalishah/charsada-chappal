@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { MessageSquare } from "lucide-react";
 
 import {
   LayoutDashboard,
@@ -46,6 +47,12 @@ const navItems = [
     title: "Reviews",
     icon: Star,
     path: "/admin/reviews",
+  },
+
+  {
+    title: "Messages",
+    icon: MessageSquare,
+    path: "/admin/messages",
   },
 ];
 

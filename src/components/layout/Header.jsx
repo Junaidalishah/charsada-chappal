@@ -1,6 +1,12 @@
 import { Bell, Search, Plus, ChevronDown } from "lucide-react";
 
-const Header = () => {
+const Header = ({
+  notifications,
+  unreadCount,
+  showNotifications,
+  setShowNotifications,
+  markAsRead,
+}) => {
   return (
     <header
       className="
@@ -69,26 +75,61 @@ const Header = () => {
           </button>
 
           {/* NOTIFICATIONS */}
-          <button
-            className="
-              relative flex h-11 w-11
-              items-center justify-center
-              rounded-2xl
-              border border-black/5
-              bg-white/70
-              transition hover:bg-white
-            "
-          >
-            <Bell size={20} className="text-[#061b0e]" />
-
-            <span
+          <div className="relative">
+            <button
+              onClick={() => setShowNotifications(!showNotifications)}
               className="
-                absolute right-3 top-3
-                h-2.5 w-2.5 rounded-full
-                bg-amber-500
-              "
-            />
-          </button>
+      relative flex h-11 w-11
+      items-center justify-center
+      rounded-2xl
+      border border-black/5
+      bg-white/70
+    "
+            >
+              <Bell size={20} />
+
+              {unreadCount > 0 && (
+                <span
+                  className="
+          absolute -top-1 -right-1
+          flex h-5 w-5 items-center justify-center
+          rounded-full bg-red-500
+          text-[10px] text-white
+        "
+                >
+                  {unreadCount}
+                </span>
+              )}
+            </button>
+
+            {showNotifications && (
+              <div
+                className="
+        absolute right-0 mt-3
+        w-80 rounded-2xl
+        border bg-white
+        shadow-xl z-50
+      "
+              >
+                <div className="border-b p-4 font-semibold">Notifications</div>
+
+                <div className="max-h-96 overflow-y-auto">
+                  {notifications.map((n) => (
+                    <div
+                      key={n._id}
+                      onClick={() => !n.isRead && markAsRead(n._id)}
+                      className={`border-b p-4 cursor-pointer transition hover:bg-gray-50 ${
+                        !n.isRead ? "bg-blue-50" : ""
+                      }`}
+                    >
+                      <p className="font-medium">{n.title}</p>
+                      <p className="text-sm text-gray-500">{n.message}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
 
           {/* PROFILE */}
           <button
@@ -109,7 +150,7 @@ const Header = () => {
 
             <div className="hidden md:block text-left">
               <p className="text-sm font-semibold text-[#061b0e]">
-                Junaid Shah
+                Junaid ali Shah
               </p>
 
               <p className="text-xs text-[#6b7280]">Super Admin</p>

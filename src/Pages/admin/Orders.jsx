@@ -4,6 +4,7 @@ import { useAuth } from "../../context/AuthContext";
 
 import DashboardLayout from "../../components/layout/DashboardLayout";
 import API_URL from "../../config/api";
+import { Link } from "react-router-dom";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -30,6 +31,7 @@ const Orders = () => {
 
   // ================= UPDATE STATUS =================
   const updateStatus = async (id, status) => {
+    console.log("Updating:", id, status);
     try {
       await axios.put(
         `${API_URL}/orders/${id}`,
@@ -68,16 +70,16 @@ const Orders = () => {
         {/* TABLE */}
         <div className="rounded-3xl border border-black/5 bg-white p-6 shadow-sm">
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[1000px]">
+            <table className="w-full min-w-[700px]">
               <thead>
                 <tr className="border-b border-black/5 text-left text-sm text-gray-500">
                   <th className="pb-4">Order ID</th>
                   <th className="pb-4">Customer</th>
                   <th className="pb-4">Phone</th>
-                  <th className="pb-4">Products</th>
                   <th className="pb-4">Amount</th>
                   <th className="pb-4">Status</th>
                   <th className="pb-4">Change Status</th>
+                  <th className="pb-4">View</th>
                 </tr>
               </thead>
 
@@ -104,24 +106,19 @@ const Orders = () => {
                       <td>{order.customerName}</td>
                       <td>{order.phone}</td>
 
-                      <td>
-                        {order.items?.length} Product
-                        {order.items?.length > 1 ? "s" : ""}
-                      </td>
-
                       <td>PKR {order.totalAmount}</td>
 
                       <td>
                         <span
                           className={`rounded-full px-3 py-1 text-xs font-medium
-                            ${
-                              order.status === "Delivered"
-                                ? "bg-green-100 text-green-700"
-                                : order.status === "Processing"
-                                  ? "bg-yellow-100 text-yellow-700"
-                                  : "bg-red-100 text-red-700"
-                            }
-                          `}
+${
+  order.status === "Delivered"
+    ? "bg-green-100 text-green-700"
+    : order.status === "Cancelled"
+      ? "bg-red-100 text-red-700"
+      : "bg-yellow-100 text-yellow-700"
+}
+`}
                         >
                           {order.status}
                         </span>
@@ -136,9 +133,23 @@ const Orders = () => {
                           className="rounded-xl border border-black/10 px-3 py-2 outline-none"
                         >
                           <option value="Pending">Pending</option>
+                          <option value="Confirmed">Confirmed</option>
                           <option value="Processing">Processing</option>
+                          <option value="Shipped">Shipped</option>
+                          <option value="Out For Delivery">
+                            Out For Delivery
+                          </option>
                           <option value="Delivered">Delivered</option>
+                          <option value="Cancelled">Cancelled</option>
                         </select>
+                      </td>
+                      <td>
+                        <Link
+                          to={`/admin/orders/${order._id}`}
+                          className="rounded-xl bg-[#061b0e] px-4 py-2 text-white"
+                        >
+                          View
+                        </Link>
                       </td>
                     </tr>
                   ))

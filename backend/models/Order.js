@@ -15,6 +15,11 @@ const orderSchema = new mongoose.Schema(
       required: true,
     },
 
+    email: {
+      type: String,
+      required: true,
+    },
+
     phone: {
       type: String,
       required: true,
@@ -26,6 +31,11 @@ const orderSchema = new mongoose.Schema(
     },
 
     address: {
+      type: String,
+      required: true,
+    },
+
+    province: {
       type: String,
       required: true,
     },
@@ -68,7 +78,26 @@ const orderSchema = new mongoose.Schema(
     // ================= STATUS =================
     status: {
       type: String,
+      enum: [
+        "Pending",
+        "Confirmed",
+        "Processing",
+        "Shipped",
+        "Out For Delivery",
+        "Delivered",
+        "Cancelled",
+      ],
       default: "Pending",
+    },
+
+    courierCompany: {
+      type: String,
+      default: "",
+    },
+
+    trackingNumber: {
+      type: String,
+      default: "",
     },
   },
   {

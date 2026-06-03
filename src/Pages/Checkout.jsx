@@ -39,6 +39,7 @@ const Checkout = () => {
     city: "",
     province: "",
     address: "",
+    email: "",
   });
 
   // ================= HANDLE INPUT =================
@@ -70,7 +71,8 @@ const Checkout = () => {
       !formData.phone ||
       !formData.city ||
       !formData.province ||
-      !formData.address
+      !formData.address ||
+      !formData.email
     ) {
       showToast("Please fill all fields", "error");
 
@@ -84,6 +86,8 @@ const Checkout = () => {
         customerName: formData.customerName,
 
         phone: formData.phone,
+
+        email: formData.email,
 
         city: formData.city,
 
@@ -210,6 +214,15 @@ const Checkout = () => {
               rows="4"
               className="w-full rounded-xl border p-4 outline-none focus:border-black"
               placeholder="Full Address"
+              required
+            />
+            {/* EMAIL */}
+            <input
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              className="w-full rounded-xl border p-4 outline-none focus:border-black"
+              placeholder="Email Address"
               required
             />
           </div>
