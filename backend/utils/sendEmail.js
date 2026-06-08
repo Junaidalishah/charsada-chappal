@@ -1,4 +1,7 @@
 import dotenv from "dotenv";
+import dns from "dns";
+
+dns.setDefaultResultOrder("ipv4first");
 
 dotenv.config();
 
@@ -11,13 +14,12 @@ console.log("Inside sendEmail");
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
-  port: 587,
-  secure: false,
+  port: 465,
+  secure: true,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
-  family: 4,
 });
 
 transporter.verify((error, success) => {
