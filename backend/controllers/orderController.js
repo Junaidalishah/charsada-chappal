@@ -18,77 +18,75 @@ export const createOrder = async (req, res) => {
       totalAmount: req.body.totalAmount,
     });
 
-    // Send email without breaking order creation
-    try {
-      await sendEmail({
-        to: process.env.ADMIN_EMAIL,
-        subject: "New Order Received",
-        html: `
-<h2>🛒 New Order Received</h2>
-
-<table border="1" cellpadding="10" cellspacing="0">
-  <tr>
-    <td><strong>Order ID</strong></td>
-    <td>#${order._id.toString().slice(-6)}</td>
-  </tr>
-
-  <tr>
-    <td><strong>Customer</strong></td>
-    <td>${order.customerName}</td>
-  </tr>
-
-  <tr>
-    <td><strong>Phone</strong></td>
-    <td>${order.phone}</td>
-  </tr>
-
-  <tr>
-    <td><strong>Province</strong></td>
-    <td>${order.province}</td>
-  </tr>
-
-  <tr>
-    <td><strong>City</strong></td>
-    <td>${order.city}</td>
-  </tr>
-
-  <tr>
-    <td><strong>Address</strong></td>
-    <td>${order.address}</td>
-  </tr>
-
-  <tr>
-    <td><strong>Total</strong></td>
-    <td>PKR ${order.totalAmount}</td>
-  </tr>
-</table>
-`,
-      });
-
-      console.log(
-        `✅ Order email sent successfully for Order #${order._id
-          .toString()
-          .slice(-6)}`,
-      );
-    } catch (emailError) {
-      console.error(
-        `❌ Email Error for Order #${order._id.toString().slice(-6)}:`,
-        emailError.message,
-      );
-    }
-
-    // Create notification
-    try {
-      await Notification.create({
-        title: "New Order",
-        message: `Order #${order._id.toString().slice(-6)} received`,
-      });
-    } catch (notificationError) {
-      console.error("❌ Notification Error:", notificationError.message);
-    }
-
-    // Always return success if order was created
+    // Return success immediately
     res.status(201).json(order);
+
+    // ================= SEND EMAIL IN BACKGROUND =================
+    sendEmail({
+      to: process.env.ADMIN_EMAIL,
+      subject: "New Order Received",
+      html: `
+        <h2>🛒 New Order Received</h2>
+
+        <table border="1" cellpadding="10" cellspacing="0">
+          <tr>
+            <td><strong>Order ID</strong></td>
+            <td>#${order._id.toString().slice(-6)}</td>
+          </tr>
+
+          <tr>
+            <td><strong>Customer</strong></td>
+            <td>${order.customerName}</td>
+          </tr>
+
+          <tr>
+            <td><strong>Phone</strong></td>
+            <td>${order.phone}</td>
+          </tr>
+
+          <tr>
+            <td><strong>Province</strong></td>
+            <td>${order.province}</td>
+          </tr>
+
+          <tr>
+            <td><strong>City</strong></td>
+            <td>${order.city}</td>
+          </tr>
+
+          <tr>
+            <td><strong>Address</strong></td>
+            <td>${order.address}</td>
+          </tr>
+
+          <tr>
+            <td><strong>Total</strong></td>
+            <td>PKR ${order.totalAmount}</td>
+          </tr>
+        </table>
+      `,
+    })
+      .then(() => {
+        console.log(
+          `✅ Order email sent successfully for Order #${order._id
+            .toString()
+            .slice(-6)}`,
+        );
+      })
+      .catch((emailError) => {
+        console.error(
+          `❌ Email Error for Order #${order._id.toString().slice(-6)}:`,
+          emailError.message,
+        );
+      });
+
+    // ================= CREATE NOTIFICATION IN BACKGROUND =================
+    Notification.create({
+      title: "New Order",
+      message: `Order #${order._id.toString().slice(-6)} received`,
+    }).catch((notificationError) => {
+      console.error("❌ Notification Error:", notificationError.message);
+    });
   } catch (error) {
     console.error("❌ Create Order Error:", error.message);
 
@@ -97,7 +95,6 @@ export const createOrder = async (req, res) => {
     });
   }
 };
-
 // ================= GET ALL ORDERS =================
 export const getOrders = async (req, res) => {
   try {
