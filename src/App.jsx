@@ -11,31 +11,31 @@ import Collection from "./Pages/Collection";
 import ProductDetail from "./components/ProductDetail";
 import Cart from "./Pages/cart";
 import Checkout from "./Pages/Checkout";
-import ReturnsRefunds from "./pages/ReturnsRefunds";
+import ReturnsRefunds from "./Pages/ReturnsRefunds";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Contact from "./Pages/Contact";
-import ProfilePage from "./pages/ProfilePage";
-import OrdersPage from "./pages/OrdersPage";
+import ProfilePage from "./Pages/ProfilePage";
+import OrdersPage from "./Pages/OrdersPage";
 import OrderDetailsPage from "./Pages/admin/OrderDetailsPage";
 
 /* AUTH */
 import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUp";
 import ForgotPassword from "./Pages/ForgotPassword";
-import ResetPassword from "./pages/ResetPassword";
+import ResetPassword from "./Pages/ResetPassword";
 
 /* ADMIN PAGES */
 import AdminRoute from "./components/AdminRoute";
-import Dashboard from "./pages/admin/Dashboard";
-import Products from "./pages/admin/Products";
-import Orders from "./pages/admin/Orders";
-import Customers from "./pages/admin/Customers";
-import Analytics from "./pages/admin/Analytics";
-import Reviews from "./pages/admin/Reviews";
-import Messages from "./pages/admin/Messages";
+import Dashboard from "./Pages/admin/Dashboard";
+import Products from "./Pages/admin/Products";
+import Orders from "./Pages/admin/Orders";
+import Customers from "./Pages/admin/Customers";
+import Analytics from "./Pages/admin/Analytics";
+import Reviews from "./Pages/admin/Reviews";
+import Messages from "./Pages/admin/Messages";
 import AdminOrderDetailsPage from "./Pages/admin/AdminOrderDetailsPage";
 import AdminProfilePage from "./Pages/admin/ProfilePage";
-import AdminManagement from "./pages/admin/AdminManagement";
+import AdminManagement from "./Pages/admin/AdminManagement";
 
 function App() {
   return (
