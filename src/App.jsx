@@ -5,7 +5,7 @@ import { AuthProvider } from "./context/AuthContext";
 import WhatsAppButton from "./components/WhatsAppButton";
 
 /* STORE FRONT */
-import PakletHome from "./Pages/Home";
+import Home from "./Pages/Home";
 import Shop from "./Pages/Shop";
 import Collection from "./Pages/Collection";
 import ProductDetail from "./components/ProductDetail";
@@ -44,7 +44,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             {/* ================= STORE FRONT ================= */}
-            <Route path="/" element={<PakletHome />} />
+            <Route path="/" element={<Home />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/collections" element={<Collection />} />
             <Route path="/product/:id" element={<ProductDetail />} />
