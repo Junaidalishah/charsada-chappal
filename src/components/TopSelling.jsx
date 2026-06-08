@@ -37,14 +37,14 @@ const TopSelling = () => {
   };
 
   return (
-    <section className="bg-[#f8f6f1] py-24">
-      <div className="mx-auto max-w-7xl px-6">
+    <section className="bg-[#f8f6f1] py-16 md:py-20 lg:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="mb-14">
           <p className="mb-3 text-xs uppercase tracking-[0.3em] text-gray-500">
             Charsadda Heritage
           </p>
 
-          <h2 className="text-4xl font-bold text-[#061b0e]">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#061b0e]">
             🔥 Top Selling Charsadda Chappals
           </h2>
         </div>

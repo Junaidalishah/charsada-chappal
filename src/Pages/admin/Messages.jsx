@@ -1,39 +1,30 @@
 import { useEffect, useState } from "react";
+
+import api from "../../config/axios";
 import DashboardLayout from "../../components/layout/DashboardLayout";
-import API_URL from "../../config/api";
 import { useToast } from "../../context/ToastContext";
 
 const Messages = () => {
   const { showToast } = useToast();
   const [messages, setMessages] = useState([]);
 
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-
-  useEffect(() => {
-    fetchMessages();
-  }, []);
-
+  // ================= FETCH MESSAGES =================
   const fetchMessages = async () => {
     try {
-      const response = await fetch(`${API_URL}/contact`, {
-        headers: {
-          Authorization: `Bearer ${userInfo.token}`,
-        },
-      });
+      const { data } = await api.get("/contact");
 
-      const data = await response.json();
-
-      if (response.ok) {
-        setMessages(data);
-      } else {
-        showToast(data.message || "Failed to load messages", "error");
-      }
+      setMessages(data);
     } catch (error) {
       console.log(error);
       showToast("Failed to load messages", "error");
     }
   };
 
+  useEffect(() => {
+    fetchMessages();
+  }, []);
+
+  // ================= DELETE MESSAGE =================
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this message?",
@@ -42,24 +33,11 @@ const Messages = () => {
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch(`${API_URL}/contact/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${userInfo.token}`,
-        },
-      });
+      await api.delete(`/contact/${id}`);
 
-      const data = await response.json();
+      setMessages((prev) => prev.filter((msg) => msg._id !== id));
 
-      if (response.ok) {
-        setMessages((prevMessages) =>
-          prevMessages.filter((msg) => msg._id !== id),
-        );
-
-        showToast("Message deleted successfully");
-      } else {
-        showToast(data.message || "Failed to delete message", "error");
-      }
+      showToast("Message deleted successfully");
     } catch (error) {
       console.log(error);
       showToast("Failed to delete message", "error");

@@ -38,6 +38,13 @@ export const AuthProvider = ({ children }) => {
     setUserInfo(null);
   };
 
+  const forceLogout = () => {
+    localStorage.removeItem("userInfo");
+    setUserInfo(null);
+
+    window.location.href = "/login";
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -45,6 +52,7 @@ export const AuthProvider = ({ children }) => {
         login,
         logout,
         loading,
+        forceLogout,
       }}
     >
       {children}

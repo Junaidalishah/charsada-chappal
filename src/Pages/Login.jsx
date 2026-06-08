@@ -111,16 +111,16 @@ export default function Login() {
     <>
       {loading && <Loader />}
 
-      <div className="bg-background text-on-surface min-h-screen flex flex-col">
+      <div className="bg-background text-on-surface min-h-screen w-full overflow-x-hidden">
         <Navbar />
 
         <main className="flex flex-1 flex-col md:flex-row pt-16">
-          {/* LEFT PANEL */}
+          {/* LEFT PANEL (hidden on mobile) */}
           <section className="relative hidden md:flex md:w-1/2 lg:w-3/5 bg-primary overflow-hidden">
             <div className="absolute inset-0 bg-black/30 z-10" />
 
             <img
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrVC_7h--dcHx3O0jzM0-snYWVJ_CL_OH-necvpr7Tgty7oURmxrPy8AgPIMbkhg2_TPcXFvGbcP63-KzpOFkRb-PTsJGEUhssRDXJeYd0lyN7otXGZCcHQAVU7Gl6zlEGhtP2yqb2LXF28xA4CQt0QIAKxjMnW931jhxHp8ZFREFq7tGGjmO-qlom516B5udNapP3NrqO0zcPD5ZRMisJomiLVTKzATKQkCf63zDlih4K-FxUupgJp7ZEkvXwhps_KxKpDzU4op4"
+              src="/images/sign1.png"
               alt="Artisan"
               className="absolute inset-0 w-full h-full object-cover"
             />
@@ -141,37 +141,37 @@ export default function Login() {
             </div>
           </section>
 
-          {/* RIGHT PANEL */}
-          <section className="relative flex flex-1 items-center justify-center px-6 py-16 md:px-12 lg:px-20 bg-surface-container-low">
-            {/* Background blur */}
+          {/* RIGHT PANEL (FULL WIDTH ON MOBILE) */}
+          <section className="relative flex flex-1 items-center justify-center px-4 sm:px-6 py-10 sm:py-16 md:px-12 lg:px-20 bg-surface-container-low">
+            {/* background blur */}
             <div className="absolute -right-20 -top-20 w-56 h-56 bg-primary/10 rounded-full blur-3xl" />
             <div className="absolute -left-20 bottom-20 w-48 h-48 bg-secondary/10 rounded-full blur-3xl" />
 
             <div className="w-full max-w-md relative z-10">
-              {/* Logo */}
-              <div className="mb-10 text-center">
+              {/* LOGO */}
+              <div className="mb-8 sm:mb-10 text-center">
                 <Link
                   to="/"
-                  className="text-3xl font-serif italic text-primary"
+                  className="text-2xl sm:text-3xl font-serif italic text-primary"
                 >
                   Charsadda Chappal
                 </Link>
               </div>
 
-              {/* Heading */}
-              <div className="mb-10 text-center">
-                <h2 className="text-3xl md:text-4xl font-semibold text-primary mb-3">
+              {/* HEADING */}
+              <div className="mb-8 sm:mb-10 text-center">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-primary mb-3">
                   Welcome back
                 </h2>
 
-                <p className="text-on-surface-variant">
+                <p className="text-sm sm:text-base text-on-surface-variant">
                   Please enter your credentials to access your account.
                 </p>
               </div>
 
-              {/* Form */}
-              <form onSubmit={handleSubmit} className="space-y-7">
-                {/* Email */}
+              {/* FORM */}
+              <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-7">
+                {/* EMAIL */}
                 <div>
                   <label className="block text-sm mb-2 text-on-surface-variant">
                     Email Address
@@ -188,19 +188,19 @@ export default function Login() {
                   />
                 </div>
 
-                {/* Password */}
+                {/* PASSWORD */}
                 <div>
                   <div className="flex justify-between mb-2">
                     <label className="block text-sm text-on-surface-variant">
                       Password
                     </label>
 
-                    <button
-                      type="button"
+                    <Link
+                      to="/forgot-password"
                       className="text-sm text-primary hover:underline"
                     >
-                      Forgot?
-                    </button>
+                      Forgot Password?
+                    </Link>
                   </div>
 
                   <div className="relative">
@@ -224,7 +224,7 @@ export default function Login() {
                   </div>
                 </div>
 
-                {/* Submit */}
+                {/* SUBMIT */}
                 <button
                   type="submit"
                   disabled={loading}
@@ -233,18 +233,16 @@ export default function Login() {
                   {loading ? <ButtonLoader /> : "Sign In"}
                 </button>
 
-                {/* Divider */}
+                {/* DIVIDER */}
                 <div className="flex items-center gap-4">
                   <div className="h-px bg-outline flex-1" />
-
                   <span className="text-xs text-on-surface-variant uppercase">
                     Or continue with
                   </span>
-
                   <div className="h-px bg-outline flex-1" />
                 </div>
 
-                {/* GOOGLE BUTTON CENTERED */}
+                {/* GOOGLE */}
                 <div className="flex justify-center">
                   <button
                     type="button"
@@ -257,7 +255,6 @@ export default function Login() {
                       alt="Google"
                       className="w-5 h-5"
                     />
-
                     <span className="text-sm font-medium">
                       Continue with Google
                     </span>
@@ -265,8 +262,8 @@ export default function Login() {
                 </div>
               </form>
 
-              {/* Register */}
-              <p className="mt-10 text-center text-sm text-on-surface-variant">
+              {/* REGISTER */}
+              <p className="mt-8 sm:mt-10 text-center text-sm text-on-surface-variant">
                 Not a member yet?
                 <Link
                   to="/signup"

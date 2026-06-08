@@ -10,7 +10,7 @@ import {
 
 const router = express.Router();
 
-router.get("/", protect, admin, getNotifications);
+router.get("/", protect, getNotifications);
 
 router.put("/:id/read", protect, admin, markAsRead);
 

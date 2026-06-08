@@ -76,20 +76,22 @@ function Shop() {
       <main className="pt-24 min-h-screen">
         <ShopHeader />
 
-        <section className="max-w-7xl mx-auto px-6 md:px-12 pb-32 flex gap-12">
+        <section className="max-w-7xl mx-auto px-6 md:px-12 pb-32 flex flex-col lg:flex-row gap-12">
           {/* FILTER SIDEBAR */}
-          <FilterSidebar
-            categories={categories}
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
-            priceRange={priceRange}
-            setPriceRange={setPriceRange}
-          />
+          <div className="w-full lg:w-72">
+            <FilterSidebar
+              categories={categories}
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+              priceRange={priceRange}
+              setPriceRange={setPriceRange}
+            />
+          </div>
 
           {/* PRODUCTS */}
           <div className="flex-grow">
             {/* TOP */}
-            <div className="mb-10 flex items-center justify-between border-b border-black/5 pb-5">
+            <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-center md:justify-between border-b border-black/5 pb-5">
               <div>
                 <h2 className="text-2xl font-bold text-[#061b0e]">
                   {category || "All Products"}

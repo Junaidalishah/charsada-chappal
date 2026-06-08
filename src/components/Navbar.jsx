@@ -47,12 +47,12 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="fixed top-0 w-full z-[9999] bg-[#fbf9f5]/80 backdrop-blur-xl border-b shadow-md">
-        <div className="container mx-auto flex justify-between items-center px-6 py-4">
+      <nav className="fixed top-0 z-[9999] w-full border-b bg-[#fbf9f5]/80 shadow-md backdrop-blur-xl">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
           {/* LOGO */}
           <NavLink
             to="/"
-            className="text-lg md:text-2xl font-serif font-bold truncate"
+            className="font-serif text-base sm:text-lg md:text-2xl font-bold truncate max-w-[160px] sm:max-w-none"
           >
             Charsadda Chappal
           </NavLink>
@@ -72,7 +72,7 @@ const Navbar = () => {
           </div>
 
           {/* RIGHT SIDE */}
-          <div className="flex items-center space-x-6">
+          <div className="flex items-center gap-3 sm:gap-5 md:gap-6">
             {/* USER */}
             <div className="relative">
               {userInfo ? (
@@ -138,8 +138,8 @@ const Navbar = () => {
 
             {/* CART */}
             <div
-              className="relative cursor-pointer"
-              onClick={() => setCartOpen(true)}
+              className="relative cursor-pointer p-2 rounded-full hover:bg-black/5"
+              onClick={() => setCartOpen((prev) => !prev)}
             >
               <ShoppingBagIcon />
 
@@ -151,14 +151,21 @@ const Navbar = () => {
             </div>
 
             {/* MOBILE MENU */}
-            <button onClick={() => setOpen(!open)} className="md:hidden">
+            <button
+              onClick={() => setOpen(!open)}
+              className="rounded-lg p-2 transition hover:bg-black/5 md:hidden"
+            >
               <MenuIcon />
             </button>
           </div>
         </div>
         {/* MOBILE MENU */}
         {open && (
-          <div className="md:hidden border-t bg-[#fbf9f5]">
+          <div
+            className={`md:hidden overflow-hidden border-t bg-[#fbf9f5] transition-all duration-300 ${
+              open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+            }`}
+          >
             <div className="flex flex-col px-6 py-4 space-y-4">
               {Links.map((link) => (
                 <NavLink

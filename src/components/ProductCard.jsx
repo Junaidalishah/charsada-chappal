@@ -10,7 +10,7 @@ const ProductCard = ({ product }) => {
   return (
     <div onClick={handleClick} className="group cursor-pointer">
       {/* IMAGE */}
-      <div className="relative mb-3 aspect-[3/4] overflow-hidden rounded-3xl bg-gray-100">
+      <div className="relative mb-3 aspect-square overflow-hidden rounded-3xl bg-gray-100">
         <img
           src={product.image}
           alt={product.name}

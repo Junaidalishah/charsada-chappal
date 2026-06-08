@@ -4,7 +4,7 @@ import { FaInstagram, FaFacebookF } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-[#efeeea] px-8 pb-10 pt-20 text-[#061b0e]">
+    <footer className="w-full bg-[#efeeea] px-4 sm:px-6 lg:px-8 pb-10 pt-16 md:pt-20">
       {/* TOP GRID */}
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 md:grid-cols-4">
         {/* BRAND */}
@@ -77,7 +77,7 @@ const Footer = () => {
               href="mailto:info@charsaddachappal.com"
               className="block transition hover:opacity-60"
             >
-              info@charsaddachappal.com
+              infocharsaddachappal@gmail.com
             </a>
           </div>
         </div>
@@ -88,10 +88,10 @@ const Footer = () => {
             Follow Us
           </h6>
 
-          <div className="flex items-center gap-5">
+          <div className="flex justify-center md:justify-start items-center gap-5">
             {/* INSTAGRAM */}
             <a
-              href="https://instagram.com/"
+              href="https://www.instagram.com/infocharsaddachappal/"
               target="_blank"
               rel="noreferrer"
               className="flex h-12 w-12 items-center justify-center rounded-full border border-black/10 bg-white transition hover:-translate-y-1"
@@ -101,7 +101,7 @@ const Footer = () => {
 
             {/* FACEBOOK */}
             <a
-              href="https://facebook.com/"
+              href="https://www.facebook.com/people/Charsadda-Chappal/61590432431640/"
               target="_blank"
               rel="noreferrer"
               className="flex h-12 w-12 items-center justify-center rounded-full border border-black/10 bg-white transition hover:-translate-y-1"

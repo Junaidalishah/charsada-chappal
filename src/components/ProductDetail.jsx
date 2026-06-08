@@ -9,6 +9,9 @@ import Footer from "./Footer";
 
 import API_URL from "../config/api";
 import { useCart } from "../context/CartContext";
+import { createWhatsAppProductMessage } from "../utils/whatsapp";
+import { Phone } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -23,7 +26,9 @@ const ProductDetail = () => {
   const [selectedSize, setSelectedSize] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [relatedProducts, setRelatedProducts] = useState([]);
-
+  const [zoomStyle, setZoomStyle] = useState({});
+  const [isZooming, setIsZooming] = useState(false);
+  const phoneNumber = "923102991736";
   // Can Review
   const [canReview, setCanReview] = useState(false);
 
@@ -175,19 +180,105 @@ const ProductDetail = () => {
     }
   };
 
+  const handleMouseMove = (e) => {
+    const { left, top, width, height } =
+      e.currentTarget.getBoundingClientRect();
+
+    const x = ((e.clientX - left) / width) * 100;
+    const y = ((e.clientY - top) / height) * 100;
+
+    setZoomStyle({
+      transformOrigin: `${x}% ${y}%`,
+      transform: "scale(2)",
+    });
+  };
+
+  const handleMouseLeave = () => {
+    setZoomStyle({
+      transform: "scale(1)",
+    });
+
+    setIsZooming(false);
+  };
+
+  const handleMouseEnter = () => {
+    setIsZooming(true);
+  };
+
+  const handleBuyOnWhatsApp = () => {
+    const message = createWhatsAppProductMessage(product);
+
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+      message,
+    )}`;
+
+    window.open(url, "_blank");
+  };
+
   return (
     <div className="min-h-screen bg-[#f8f6f1] text-[#061b0e]">
+      {product && (
+        <Helmet>
+          <title>{product.name} | Charsadda Chappal</title>
+
+          <meta
+            name="description"
+            content={product.description?.slice(0, 150)}
+          />
+
+          <meta property="og:title" content={product.name} />
+          <meta property="og:description" content={product.description} />
+          <meta property="og:image" content={product.image} />
+          <meta property="og:type" content="product" />
+
+          <meta property="og:url" content={window.location.href} />
+
+          <script type="application/ld+json">
+            {JSON.stringify({
+              "@context": "https://schema.org/",
+              "@type": "Product",
+              name: product.name,
+              image: product.image,
+              description: product.description,
+              offers: {
+                "@type": "Offer",
+                price: product.price,
+                priceCurrency: "PKR",
+                availability:
+                  product.stock > 0
+                    ? "https://schema.org/InStock"
+                    : "https://schema.org/OutOfStock",
+              },
+            })}
+          </script>
+        </Helmet>
+      )}
+
       <Navbar />
 
-      <main className="max-w-7xl mx-auto px-6 md:px-12 pt-28 pb-20">
-        <div className="grid lg:grid-cols-2 gap-16">
+      <main className="max-w-[1600px] mx-auto px-6 md:px-10 lg:px-12 pt-28 pb-20">
+        <div className="grid lg:grid-cols-[1.3fr_0.7fr] gap-14">
           {/* LEFT SIDE - IMAGES */}
           <div className="space-y-6">
-            <div className="overflow-hidden rounded-3xl bg-white group border border-black/10">
+            <div
+              className="overflow-hidden rounded-3xl bg-white border border-black/10 cursor-zoom-in"
+              onMouseMove={handleMouseMove}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
               <img
                 src={selectedImage}
                 alt={product.name}
-                className="w-full h-[750px] object-cover transition duration-700 group-hover:scale-[1.15]"
+                style={zoomStyle}
+                className="
+    w-full
+    aspect-square
+    lg:h-[750px]
+    lg:aspect-auto
+    object-cover
+    transition-transform
+    duration-200
+  "
               />
             </div>
 
@@ -206,7 +297,14 @@ const ProductDetail = () => {
                       <img
                         src={img}
                         alt={`product-${index}`}
-                        className="w-full h-[750px] object-cover transition duration-700 hover:scale-[1.15]"
+                        className="
+    w-full
+    aspect-square
+    lg:h-[750px]
+    lg:aspect-auto
+    object-cover
+    transition duration-700 hover:scale-[1.15]
+  "
                       />
                     </div>
                   ))}
@@ -342,23 +440,41 @@ const ProductDetail = () => {
               </div>
             </div>
 
-            {/* ACTION BUTTONS */}
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <button
-                onClick={handleAddToCart}
-                disabled={product.stock === 0 || !selectedSize}
-                className="flex-1 rounded-2xl bg-[#061b0e] px-8 py-4 font-medium text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
-              >
-                Add To Cart
-              </button>
+            <div className="mt-10 space-y-4">
+              {/* First Row: Cart + Buy Now */}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <button
+                  onClick={handleAddToCart}
+                  disabled={product.stock === 0 || !selectedSize}
+                  className="flex-1 rounded-2xl bg-[#061b0e] px-8 py-4 font-medium text-white transition hover:opacity-90 disabled:opacity-50"
+                >
+                  Add To Cart
+                </button>
 
-              <button
-                onClick={handleBuyNow}
-                disabled={product.stock === 0 || !selectedSize}
-                className="rounded-2xl border border-[#061b0e] px-8 py-4 font-medium text-[#061b0e] transition hover:bg-[#061b0e] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                <button
+                  onClick={handleBuyNow}
+                  disabled={product.stock === 0 || !selectedSize}
+                  className="flex-1 rounded-2xl border border-[#061b0e] px-8 py-4 font-medium text-[#061b0e] transition hover:bg-[#061b0e] hover:text-white disabled:opacity-50"
+                >
+                  Buy Now
+                </button>
+              </div>
+
+              {/* Second Row: WhatsApp */}
+              {/* <button
+                onClick={handleBuyOnWhatsApp}
+                className="
+      w-full
+      bg-green-600 hover:bg-green-700
+      text-white font-semibold
+      py-4 rounded-2xl
+      flex items-center justify-center gap-2
+      transition
+    "
               >
-                Buy Now
-              </button>
+                <Phone size={18} />
+                Buy Now on WhatsApp
+              </button> */}
             </div>
           </div>
         </div>
@@ -397,6 +513,61 @@ const ProductDetail = () => {
           </div>
         )}
 
+        {canReview && (
+          <div className="mt-16 border-t border-black/10 pt-10">
+            <h2 className="text-3xl font-bold text-[#061b0e] mb-6">
+              Write a Review
+            </h2>
+
+            <div className="rounded-3xl bg-white p-6 border border-black/5">
+              <div className="mb-4">
+                <label className="block mb-2 font-medium">Rating</label>
+
+                <select
+                  value={reviewData.rating}
+                  onChange={(e) =>
+                    setReviewData({
+                      ...reviewData,
+                      rating: Number(e.target.value),
+                    })
+                  }
+                  className="w-full rounded-xl border p-3"
+                >
+                  <option value={5}>⭐⭐⭐⭐⭐</option>
+                  <option value={4}>⭐⭐⭐⭐</option>
+                  <option value={3}>⭐⭐⭐</option>
+                  <option value={2}>⭐⭐</option>
+                  <option value={1}>⭐</option>
+                </select>
+              </div>
+
+              <div className="mb-6">
+                <label className="block mb-2 font-medium">Comment</label>
+
+                <textarea
+                  rows="5"
+                  value={reviewData.comment}
+                  onChange={(e) =>
+                    setReviewData({
+                      ...reviewData,
+                      comment: e.target.value,
+                    })
+                  }
+                  className="w-full rounded-xl border p-3"
+                  placeholder="Write your review..."
+                />
+              </div>
+
+              <button
+                onClick={handleSubmitReview}
+                className="rounded-xl bg-[#061b0e] px-6 py-3 text-white"
+              >
+                Submit Review
+              </button>
+            </div>
+          </div>
+        )}
+
         {/* YOU MAY ALSO LIKE */}
         {relatedProducts.length > 0 && (
           <section className="mt-24 border-t border-black/10 pt-16">
@@ -417,11 +588,11 @@ const ProductDetail = () => {
                   to={`/product/${item._id}`}
                   className="group"
                 >
-                  <div className="overflow-hidden rounded-3xl bg-white border border-black/5">
+                  <div className="relative aspect-square overflow-hidden rounded-3xl bg-white border border-black/5">
                     <img
                       src={item.colors?.[0]?.images?.[0] || item.image}
                       alt={item.name}
-                      className="h-72 w-full object-cover transition duration-500 group-hover:scale-105"
+                      className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
                     />
                   </div>
 

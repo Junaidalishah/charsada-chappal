@@ -45,7 +45,7 @@ const OrdersPage = () => {
     <div className="min-h-screen bg-[#f8f6f1]">
       <Navbar />
 
-      <main className="max-w-6xl mx-auto px-6 pt-32 pb-20">
+      <main className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 pb-20">
         <h1 className="text-4xl font-bold mb-10">My Orders</h1>
 
         {orders.length === 0 ? (
@@ -102,7 +102,7 @@ const OrdersPage = () => {
                   <div>
                     <Link
                       to={`/orders/${order._id}`}
-                      className="px-5 py-2 rounded-xl bg-[#061b0e] text-white"
+                      className="inline-block rounded-xl bg-[#061b0e] px-5 py-2 text-white text-center"
                     >
                       View Details
                     </Link>

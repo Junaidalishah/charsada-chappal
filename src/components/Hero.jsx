@@ -10,7 +10,7 @@ const heroSlides = [
 
   {
     image: "/images/hero2.png",
-    title: "ZARDHERI",
+    title: "ZARDARI",
     subtitle: "Luxury handmade Charsadda craftsmanship.",
   },
 
@@ -36,7 +36,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative h-screen overflow-hidden">
+    <section className="relative min-h-screen overflow-hidden pt-28 sm:pt-32 lg:pt-40">
       {/* BACKGROUND IMAGE */}
       <div className="absolute inset-0">
         <img
@@ -50,7 +50,7 @@ const Hero = () => {
       </div>
 
       {/* CONTENT */}
-      <div className="relative z-10 flex h-full items-center justify-center px-6 text-center">
+      <div className="relative z-10 flex min-h-[80vh] items-center justify-center px-6 text-center">
         <div className="max-w-5xl">
           <p className="mb-4 text-sm uppercase tracking-[0.4em] text-white/70">
             Charsadda Heritage
@@ -69,17 +69,18 @@ const Hero = () => {
             <button
               onClick={() => navigate("/shop")}
               className="
-                rounded-2xl
-                bg-white
-                px-10 py-4
-                text-sm font-semibold
+      w-full sm:w-auto
+     rounded-2xl
+       bg-white
+          px-10 py-4
+           text-sm font-semibold
                 uppercase tracking-[0.25em]
-                text-black
-                transition
-                hover:scale-105
+             text-black
+             transition
+         hover:scale-105
               "
             >
-              Shop No
+              Shop Now
             </button>
           </div>
 
@@ -99,7 +100,7 @@ const Hero = () => {
       </div>
 
       {/* WATERMARK */}
-      <div className="pointer-events-none absolute bottom-0 right-10 select-none font-serif text-[12rem] font-bold text-white/5">
+      <div className="pointer-events-none absolute bottom-0 right-4 select-none font-serif text-[6rem] sm:text-[8rem] md:text-[12rem] font-bold text-white/5">
         P
       </div>
     </section>

@@ -7,6 +7,7 @@ import {
   getMyOrders,
   getOrderById,
   updateOrderStatus,
+  deleteOrder,
 } from "../controllers/orderController.js";
 const router = express.Router();
 
@@ -24,5 +25,8 @@ router.get("/:id", protect, getOrderById);
 
 // UPDATE ORDER STATUS
 router.put("/:id", protect, admin, updateOrderStatus);
+
+// DELETE ORDER
+router.delete("/:id", protect, admin, deleteOrder);
 
 export default router;

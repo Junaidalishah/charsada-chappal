@@ -2,7 +2,6 @@ import Order from "../models/Order.js";
 import Product from "../models/Product.js";
 import User from "../models/User.js";
 
-// ================= DASHBOARD STATS =================
 export const getDashboardStats = async (req, res) => {
   try {
     // TOTAL REVENUE

@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-
+import api from "../../config/axios";
 import { useAuth } from "../../context/AuthContext";
-
-import API_URL from "../../config/api";
 
 import DashboardLayout from "../../components/layout/DashboardLayout";
 
@@ -59,11 +56,7 @@ const Products = () => {
         return;
       }
 
-      const { data } = await axios.get(`${API_URL}/products`, {
-        headers: {
-          Authorization: `Bearer ${userInfo.token}`,
-        },
-      });
+      const { data } = await api.get("/products");
 
       setProducts(data);
     } catch (error) {
@@ -125,21 +118,13 @@ const Products = () => {
       };
 
       if (editingProduct) {
-        await axios.put(
-          `${API_URL}/products/${editingProduct._id}`,
-          finalData,
-          {
-            headers: {
-              Authorization: `Bearer ${userInfo.token}`,
-            },
-          },
-        );
-      } else {
-        await axios.post(`${API_URL}/products`, finalData, {
+        await api.put(`/products/${editingProduct._id}`, finalData, {
           headers: {
             Authorization: `Bearer ${userInfo.token}`,
           },
         });
+      } else {
+        await api.post("/products", finalData);
       }
 
       setShowModal(false);
@@ -157,11 +142,7 @@ const Products = () => {
   // ================= DELETE PRODUCT =================
   const deleteProduct = async (id) => {
     try {
-      await axios.delete(`${API_URL}/products/${id}`, {
-        headers: {
-          Authorization: `Bearer ${userInfo.token}`,
-        },
-      });
+      await api.delete(`/products/${id}`);
 
       fetchProducts();
     } catch (error) {
@@ -196,8 +177,87 @@ const Products = () => {
           </button>
         </div>
 
+        <div className="space-y-4 lg:hidden">
+          {loading ? (
+            <div className="rounded-2xl border bg-white p-6 text-center">
+              Loading Products...
+            </div>
+          ) : products.length === 0 ? (
+            <div className="rounded-2xl border bg-white p-6 text-center">
+              No Products Found
+            </div>
+          ) : (
+            products.map((product) => (
+              <div
+                key={product._id}
+                className="rounded-2xl border border-black/10 bg-white p-4 shadow-sm"
+              >
+                <div className="flex gap-4">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="h-20 w-20 rounded-xl object-cover"
+                  />
+
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-[#061b0e]">
+                      {product.name}
+                    </h3>
+
+                    <p className="text-sm text-gray-500">{product.category}</p>
+
+                    <p className="mt-1 font-medium">PKR {product.price}</p>
+
+                    <span
+                      className={`mt-2 inline-block rounded-full px-3 py-1 text-xs ${
+                        product.stock > 0
+                          ? "bg-green-100 text-green-700"
+                          : "bg-red-100 text-red-700"
+                      }`}
+                    >
+                      {product.stock > 0 ? "In Stock" : "Out Of Stock"}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="mt-4 grid grid-cols-2 gap-2">
+                  <button
+                    onClick={() => {
+                      setEditingProduct(product);
+
+                      setFormData({
+                        name: product.name || "",
+                        price: product.price || "",
+                        stock: product.stock || "",
+                        category: product.category || "",
+                        description: product.description || "",
+                        details: product.details || [],
+                        sizes: product.sizes || [],
+                        colors: product.colors || [],
+                        featured: product.featured || false,
+                      });
+
+                      setShowModal(true);
+                    }}
+                    className="rounded-xl bg-blue-500 py-2 text-white"
+                  >
+                    Edit
+                  </button>
+
+                  <button
+                    onClick={() => deleteProduct(product._id)}
+                    className="rounded-xl bg-red-500 py-2 text-white"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+
         {/* TABLE */}
-        <div className="rounded-3xl border border-black/5 bg-white p-6 shadow-sm">
+        <div className="rounded-3xl border border-black/5 bg-white p-6 shadow-sm hidden sm:block">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[900px]">
               <thead>
@@ -325,7 +385,7 @@ const Products = () => {
         {/* MODAL */}
         {showModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-            <div className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-3xl bg-white p-6">
+            <div className="max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-3xl bg-white p-6">
               <div className="mb-6 flex items-center justify-between">
                 <h2 className="text-2xl font-bold text-[#061b0e]">
                   {editingProduct ? "Edit Product" : "Add Product"}
@@ -343,7 +403,10 @@ const Products = () => {
                 </button>
               </div>
 
-              <form onSubmit={handleSubmit} className="grid gap-4">
+              <form
+                onSubmit={handleSubmit}
+                className="grid grid-cols-1 xl:grid-cols-2 gap-6"
+              >
                 {/* NAME */}
                 <input
                   type="text"
@@ -404,40 +467,45 @@ const Products = () => {
                 />
 
                 {/* DESCRIPTION */}
-                <textarea
-                  placeholder="Description"
-                  rows="4"
-                  className="rounded-2xl border border-black/10 p-4 outline-none"
-                  value={formData.description}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      description: e.target.value,
-                    })
-                  }
-                />
+                <div className="xl:col-span-2">
+                  <textarea
+                    placeholder="Product Description"
+                    rows={5}
+                    className="w-full rounded-2xl border border-black/10 p-4 outline-none"
+                    value={formData.description}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        description: e.target.value,
+                      })
+                    }
+                  />
+                </div>
 
-                {/* FEATURED PRODUCT CHECKBOX */}
+                {/* FEATURED PRODUCT */}
                 <label className="flex items-center gap-2">
                   <input
                     type="checkbox"
                     checked={formData.featured}
                     onChange={(e) =>
-                      setFormData({ ...formData, featured: e.target.checked })
+                      setFormData({
+                        ...formData,
+                        featured: e.target.checked,
+                      })
                     }
                   />
                   Featured Product
                 </label>
 
                 {/* SIZES */}
-                <div className="space-y-2">
+                <div className="space-y-2 xl:col-span-2">
                   <label className="text-sm font-medium">Sizes</label>
 
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
                     {ALL_SIZES.map((size) => (
                       <label
                         key={size}
-                        className="flex items-center gap-2 rounded-xl border p-3 cursor-pointer"
+                        className="flex cursor-pointer items-center gap-2 rounded-xl border p-3"
                       >
                         <input
                           type="checkbox"
@@ -464,11 +532,11 @@ const Products = () => {
                 </div>
 
                 {/* PRODUCT DETAILS */}
-                <div className="space-y-2">
+                <div className="space-y-2 xl:col-span-2">
                   <label className="text-sm font-medium">Product Details</label>
 
                   <textarea
-                    rows="4"
+                    rows={4}
                     placeholder="Each line becomes detail"
                     value={formData.details.join("\n")}
                     className="w-full rounded-2xl border border-black/10 p-4 outline-none"
@@ -482,7 +550,7 @@ const Products = () => {
                 </div>
 
                 {/* COLORS */}
-                <div className="space-y-6 rounded-3xl border border-black/10 p-5">
+                <div className="space-y-6 rounded-3xl border border-black/10 p-5 xl:col-span-2">
                   <h3 className="text-lg font-semibold">Product Colors</h3>
 
                   {formData.colors.map((color, index) => (
@@ -498,7 +566,6 @@ const Products = () => {
                         value={color.name}
                         onChange={(e) => {
                           const updatedColors = [...formData.colors];
-
                           updatedColors[index].name = e.target.value;
 
                           setFormData({
@@ -520,7 +587,6 @@ const Products = () => {
 
                           for (const file of files) {
                             const imageUrl = await uploadImage(file);
-
                             uploadedImages.push(imageUrl);
                           }
 
@@ -538,14 +604,14 @@ const Products = () => {
                         }}
                       />
 
-                      {/* PREVIEW */}
-                      <div className="flex flex-wrap gap-3">
+                      {/* IMAGE PREVIEW */}
+                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
                         {color.images.map((img, i) => (
                           <img
                             key={i}
                             src={img}
                             alt=""
-                            className="h-20 w-20 rounded-xl object-cover"
+                            className="h-20 w-full rounded-xl object-cover"
                           />
                         ))}
                       </div>
@@ -576,7 +642,7 @@ const Products = () => {
                 {/* SUBMIT */}
                 <button
                   type="submit"
-                  className="mt-2 rounded-2xl bg-[#061b0e] py-4 font-medium text-white"
+                  className="xl:col-span-2 mt-2 rounded-2xl bg-[#061b0e] py-4 font-medium text-white"
                 >
                   {editingProduct ? "Update Product" : "Create Product"}
                 </button>

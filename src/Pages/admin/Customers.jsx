@@ -81,7 +81,7 @@ const Customers = () => {
           </div>
 
           {/* SEARCH */}
-          <div className="w-full lg:w-[350px]">
+          <div className="w-full lg:w-[400px]">
             <input
               type="text"
               placeholder="Search customer..."
@@ -93,7 +93,7 @@ const Customers = () => {
         </div>
 
         {/* STATS */}
-        <div className="grid gap-5 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
           <div className="rounded-3xl border border-black/5 bg-white p-6">
             <p className="text-sm text-gray-500">Total Customers</p>
 
@@ -116,7 +116,7 @@ const Customers = () => {
           <div className="rounded-3xl border border-black/5 bg-white p-6">
             <p className="text-sm text-gray-500">Revenue From Customers</p>
 
-            <h2 className="mt-2 text-3xl font-bold text-[#061b0e]">
+            <h2 className="mt-2 text-2xl sm:text-3xl font-bold">
               PKR{" "}
               {customers
                 .reduce((acc, customer) => acc + customer.totalSpent, 0)
@@ -144,7 +144,7 @@ const Customers = () => {
                 {/* TOP */}
                 <div className="flex items-center justify-between">
                   <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#061b0e] text-2xl font-bold text-white">
-                    {customer.name.charAt(0)}
+                    {customer.name?.charAt(0)?.toUpperCase() || "C"}
                   </div>
 
                   <div className="rounded-full bg-[#f4f1ea] px-4 py-2 text-xs font-medium text-[#061b0e]">
@@ -154,7 +154,7 @@ const Customers = () => {
 
                 {/* INFO */}
                 <div className="mt-5">
-                  <h3 className="text-xl font-semibold text-[#061b0e]">
+                  <h3 className="truncate text-lg sm:text-xl font-semibold text-[#061b0e]">
                     {customer.name}
                   </h3>
 
@@ -162,7 +162,7 @@ const Customers = () => {
 
                   <p className="mt-1 text-sm text-gray-500">{customer.city}</p>
 
-                  <p className="mt-1 text-sm text-gray-500">
+                  <p className="mt-1 break-words text-sm text-gray-500">
                     {customer.address}
                   </p>
                 </div>

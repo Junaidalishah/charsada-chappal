@@ -12,8 +12,10 @@ const AdminRoute = ({ children }) => {
     return <Navigate to="/login" replace />;
   }
 
-  if (!userInfo.isAdmin) {
-    return <Navigate to="/" replace />;
+  if (!userInfo?.isAdmin) {
+    localStorage.removeItem("userInfo");
+
+    return <Navigate to="/login" replace />;
   }
 
   return children;

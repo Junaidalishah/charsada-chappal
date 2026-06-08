@@ -197,11 +197,13 @@ const Analytics = () => {
         </div>
 
         {/* SALES CHART */}
-        <div className="rounded-3xl border border-black/5 bg-white p-8 shadow-sm">
-          <div className="mb-8">
-            <h2 className="text-2xl font-bold text-[#061b0e]">Monthly Sales</h2>
+        <div className="rounded-3xl border border-black/5 bg-white p-4 sm:p-8 shadow-sm">
+          <div className="mb-6 sm:mb-8">
+            <h2 className="text-xl sm:text-2xl font-bold text-[#061b0e]">
+              Monthly Sales
+            </h2>
 
-            <p className="mt-1 text-sm text-gray-500">
+            <p className="mt-1 text-xs sm:text-sm text-gray-500">
               Revenue generated each month
             </p>
           </div>
@@ -211,29 +213,33 @@ const Analytics = () => {
               Loading analytics...
             </div>
           ) : (
-            <div className="flex h-[320px] items-end gap-4">
-              {analytics.monthlySales.map((item, index) => {
-                const height = (item.amount / maxSale) * 260;
+            <div className="overflow-x-auto">
+              <div className="flex h-[260px] sm:h-[320px] min-w-[600px] items-end gap-2 sm:gap-4">
+                {analytics.monthlySales.map((item, index) => {
+                  const height = (item.amount / maxSale) * 240;
 
-                return (
-                  <div
-                    key={index}
-                    className="flex w-full flex-col items-center"
-                  >
+                  return (
                     <div
-                      className="w-full rounded-t-3xl bg-[#061b0e]"
-                      style={{
-                        height: `${height}px`,
-                        minHeight: "12px",
-                      }}
-                    />
+                      key={index}
+                      className="flex flex-col items-center flex-1 min-w-[40px]"
+                    >
+                      {/* BAR */}
+                      <div
+                        className="w-full rounded-t-2xl bg-[#061b0e]"
+                        style={{
+                          height: `${height}px`,
+                          minHeight: "10px",
+                        }}
+                      />
 
-                    <span className="mt-4 text-sm text-gray-500">
-                      {item.month}
-                    </span>
-                  </div>
-                );
-              })}
+                      {/* LABEL */}
+                      <span className="mt-2 text-[10px] sm:text-sm text-gray-500">
+                        {item.month}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           )}
         </div>

@@ -120,16 +120,16 @@ export default function SignUp() {
     <>
       {loading && <Loader />}
 
-      <div className="bg-background text-on-surface min-h-screen flex flex-col">
+      <div className="bg-background text-on-surface min-h-screen w-full overflow-x-hidden">
         <Navbar />
 
-        <main className="flex flex-1 flex-col md:flex-row pt-16">
+        <main className="flex flex-col md:flex-row pt-16 w-full">
           {/* LEFT SIDE */}
-          <section className="relative hidden md:flex md:w-1/2 lg:w-3/5 bg-primary overflow-hidden">
+          <section className="relative hidden md:flex md:w-1/2 lg:w-3/5 bg-primary overflow-hidden min-h-screen">
             <div className="absolute inset-0 bg-black/30 z-10" />
 
             <img
-              src="https://lh3.googleusercontent.com/aida/ADBb0uiEKFwXSu7kxStND9B9V_NlCH3Ox7ElzBOAm0pbK-zOs0Plnm7NdSLypqE88PsSRMHKZtU3z2VWqDp-NDmCZZDXo5t0dM9OM10q0GpHGccEC_xfbHsfAa6X23qdduz4_49uFWVKYXZ7_Jtzm1C1Yjhjy7nCmp1eLLdDzxGCbN1nggeV-EoYRY6A_NWz87PgmwBhtZ0lyqnoYmLFyeDdX3gcTUYU_XdQCwURG3Oct8LLZQClLqY1iwJLEg"
+              src=" /images/sign.png"
               alt="Workshop"
               className="absolute inset-0 w-full h-full object-cover"
             />
@@ -150,7 +150,7 @@ export default function SignUp() {
           </section>
 
           {/* RIGHT SIDE */}
-          <section className="relative flex flex-1 items-center justify-center px-6 py-16 md:px-12 lg:px-20 bg-surface-container-low">
+          <section className="relative flex flex-1 items-center justify-center px-4 sm:px-6 py-10 sm:py-16 md:px-12 lg:px-20 bg-surface-container-low min-h-screen">
             {/* BLUR EFFECTS */}
             <div className="absolute -right-20 -top-20 w-56 h-56 bg-primary/10 rounded-full blur-3xl" />
 

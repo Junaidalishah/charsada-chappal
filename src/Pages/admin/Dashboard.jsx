@@ -1,25 +1,16 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../../config/axios";
 
 import DashboardLayout from "../../components/layout/DashboardLayout";
 
-import API_URL from "../../config/api";
-
 const Dashboard = () => {
   const [stats, setStats] = useState(null);
-
   const [loading, setLoading] = useState(true);
 
   // ================= FETCH DASHBOARD =================
   const fetchDashboard = async () => {
     try {
-      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-
-      const { data } = await axios.get(`${API_URL}/admin/dashboard`, {
-        headers: {
-          Authorization: `Bearer ${userInfo.token}`,
-        },
-      });
+      const { data } = await api.get("/admin/dashboard");
 
       setStats(data);
     } catch (error) {
@@ -37,6 +28,16 @@ const Dashboard = () => {
     return (
       <DashboardLayout>
         <div>Loading dashboard...</div>
+      </DashboardLayout>
+    );
+  }
+
+  if (!stats) {
+    return (
+      <DashboardLayout>
+        <div className="rounded-2xl bg-red-50 p-4 text-red-600">
+          Failed to load dashboard data.
+        </div>
       </DashboardLayout>
     );
   }
@@ -108,7 +109,7 @@ const Dashboard = () => {
             <h2 className="text-xl font-semibold">Top Cities</h2>
 
             <div className="mt-8 space-y-5">
-              {stats.cityStats.map((city) => (
+              {stats.cityStats?.map((city) => (
                 <div
                   key={city._id}
                   className="flex items-center justify-between"
@@ -135,17 +136,14 @@ const Dashboard = () => {
               <thead>
                 <tr className="border-b border-black/5 text-left text-sm text-gray-500">
                   <th className="pb-4">Customer</th>
-
                   <th className="pb-4">Products</th>
-
                   <th className="pb-4">Status</th>
-
                   <th className="pb-4">Amount</th>
                 </tr>
               </thead>
 
               <tbody>
-                {stats.recentOrders.map((order) => (
+                {stats.recentOrders?.map((order) => (
                   <tr key={order._id} className="border-b border-black/5">
                     <td className="py-5">{order.customerName}</td>
 

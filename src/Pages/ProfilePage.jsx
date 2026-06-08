@@ -77,10 +77,10 @@ const ProfilePage = () => {
     <div className="min-h-screen bg-[#f8f6f1]">
       <Navbar />
 
-      <main className="max-w-4xl mx-auto px-6 pt-32 pb-20">
-        <h1 className="text-4xl font-bold mb-10">My Profile</h1>
+      <main className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 pb-16 sm:pb-20">
+        <h1 className="mb-8 text-3xl sm:text-4xl font-bold">My Profile</h1>
 
-        <div className="bg-white rounded-3xl p-8 shadow-sm border">
+        <div className="rounded-3xl border bg-white p-5 sm:p-8 shadow-sm">
           <div className="space-y-6">
             <div>
               <label className="block mb-2 font-medium">Full Name</label>

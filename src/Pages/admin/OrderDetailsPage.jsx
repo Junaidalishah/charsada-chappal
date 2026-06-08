@@ -65,10 +65,12 @@ const OrderDetailsPage = () => {
     <div className="min-h-screen bg-[#f8f6f1]">
       <Navbar />
 
-      <main className="max-w-6xl mx-auto px-6 pt-32 pb-20">
+      <main className="max-w-6xl mx-auto px-6 pt-24 md:pt-32 pb-20">
         {/* Header */}
         <div className="mb-10">
-          <h1 className="text-4xl font-bold">Order #{order._id.slice(-6)}</h1>
+          <h1 className="text-3xl md:text-4xl font-bold">
+            Order #{order._id.slice(-6)}
+          </h1>
 
           <p className="text-gray-500 mt-2">
             Placed on {new Date(order.createdAt).toLocaleDateString()}
@@ -76,7 +78,7 @@ const OrderDetailsPage = () => {
         </div>
 
         {/* Status Tracker */}
-        <div className="bg-white rounded-3xl p-8 border mb-10">
+        <div className="bg-white rounded-3xl p-5 md:p-8 border mb-10">
           <h2 className="text-2xl font-semibold mb-8">Order Status</h2>
 
           {order.status === "Cancelled" && (
@@ -85,7 +87,7 @@ const OrderDetailsPage = () => {
             </div>
           )}
 
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3">
             {statuses.map((status, index) => (
               <div
                 key={status}
@@ -104,10 +106,10 @@ const OrderDetailsPage = () => {
         </div>
 
         {/* Shipping Info */}
-        <div className="bg-white rounded-3xl p-8 border mb-10">
+        <div className="bg-white rounded-3xl p-5 md:p-8 border mb-10">
           <h2 className="text-2xl font-semibold mb-6">Shipping Information</h2>
 
-          <div className="space-y-2">
+          <div className="space-y-3 break-words">
             <p>
               <strong>Name:</strong> {order.customerName}
             </p>
@@ -132,16 +134,23 @@ const OrderDetailsPage = () => {
         </div>
 
         {/* Products */}
-        <div className="bg-white rounded-3xl p-8 border mb-10">
+        <div className="bg-white rounded-3xl p-5 md:p-8 border mb-10">
           <h2 className="text-2xl font-semibold mb-6">Ordered Items</h2>
 
           <div className="space-y-6">
             {order.items.map((item, index) => (
-              <div key={index} className="flex gap-5 border-b pb-5">
+              <div
+                key={index}
+                className="flex flex-col sm:flex-row gap-5 border-b pb-5"
+              >
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-24 h-24 rounded-xl object-cover"
+                  className="w-full
+sm:w-24
+h-52
+sm:h-24
+rounded-xl object-cover"
                 />
 
                 <div className="flex-1">
@@ -154,14 +163,16 @@ const OrderDetailsPage = () => {
                   <p className="text-gray-500">Qty: {item.quantity}</p>
                 </div>
 
-                <div className="font-semibold">PKR {item.price}</div>
+                <div className="font-semibold sm:text-right">
+                  PKR {item.price}
+                </div>
               </div>
             ))}
           </div>
         </div>
 
         {/* Summary */}
-        <div className="bg-white rounded-3xl p-8 border">
+        <div className="bg-white rounded-3xl p-5 md:p-8 border">
           <h2 className="text-2xl font-semibold mb-6">Order Summary</h2>
 
           <div className="space-y-3">

@@ -24,10 +24,10 @@ const CartDrawer = ({ isOpen, onClose }) => {
 
       {/* DRAWER */}
       <div
-        className={`fixed top-0 right-0 h-full w-[380px] bg-white z-50 shadow-xl 
-        transform transition-transform duration-300 ${
-          isOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`fixed top-0 right-0 h-full w-full max-w-[380px] bg-white z-50 shadow-xl
+  transform transition-transform duration-300 ${
+    isOpen ? "translate-x-0" : "translate-x-full"
+  }`}
       >
         {/* HEADER */}
         <div className="flex justify-between items-center p-6 border-b">

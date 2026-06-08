@@ -17,6 +17,14 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+
+    resetPasswordToken: {
+      type: String,
+    },
+
+    resetPasswordExpire: {
+      type: Date,
+    },
     phone: {
       type: String,
       default: "",
@@ -30,6 +38,11 @@ const userSchema = new mongoose.Schema(
     isAdmin: {
       type: Boolean,
       default: false,
+    },
+    role: {
+      type: String,
+      enum: ["superadmin", "admin", "user"],
+      default: "user",
     },
   },
   {

@@ -13,21 +13,27 @@ const protect = async (req, res, next) => {
 
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-      req.user = await User.findById(decoded.id).select("-password");
+      const user = await User.findById(decoded.id).select("-password");
 
-      next();
+      if (!user) {
+        return res.status(401).json({
+          message: "Account no longer exists",
+        });
+      }
+
+      req.user = user;
+
+      return next();
     } catch (error) {
-      res.status(401).json({
+      return res.status(401).json({
         message: "Not authorized",
       });
     }
   }
 
-  if (!token) {
-    res.status(401).json({
-      message: "No token",
-    });
-  }
+  return res.status(401).json({
+    message: "No token",
+  });
 };
 
 export default protect;

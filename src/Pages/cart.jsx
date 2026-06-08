@@ -33,10 +33,12 @@ const Cart = () => {
           </button>
         </div>
 
-        <div className="grid lg:grid-cols-12 gap-16">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-16">
           {/* ================= LEFT SIDE ================= */}
           <div className="lg:col-span-7">
-            <h1 className="text-4xl font-serif mb-12 tracking-tight">BAG</h1>
+            <h1 className="text-3xl md:text-4xl font-serif mb-12 tracking-tight">
+              BAG
+            </h1>
 
             {cart.length === 0 ? (
               <p className="text-gray-500">Your cart is empty</p>
@@ -44,20 +46,27 @@ const Cart = () => {
               cart.map((item) => (
                 <div
                   key={`${item.id}-${item.size}-${item.color}`}
-                  className="flex gap-8 mb-12"
+                  className="flex flex-col sm:flex-row gap-6 mb-12"
                 >
                   {/* IMAGE */}
                   <img
                     src={item.image}
-                    className="w-32 h-40 object-cover rounded-lg"
+                    alt={item.title}
+                    className="
+w-full
+max-w-[260px]
+aspect-square
+object-cover
+rounded-lg
+"
                   />
 
                   {/* INFO */}
                   <div className="flex-1 flex flex-col justify-between">
                     {/* TITLE + PRICE */}
-                    <div className="flex justify-between">
+                    <div className="flex flex-col sm:flex-row sm:justify-between gap-3">
                       <div>
-                        <h3 className="text-xl font-serif mb-1">
+                        <h3 className="text-lg md:text-xl font-serif mb-1">
                           {item.title}
                         </h3>
 
@@ -79,28 +88,32 @@ const Cart = () => {
                     </div>
 
                     {/* CONTROLS */}
-                    <div className="flex justify-between items-center mt-6">
+                    <div className="flex flex-col sm:flex-row gap-4 sm:justify-between sm:items-center mt-6">
                       {/* QUANTITY */}
-                      <div className="flex items-center gap-4 border px-4 py-2 rounded-full">
-                        <button
-                          className="cursor-pointer"
-                          onClick={() =>
-                            updateQuantity(item, item.quantity - 1)
-                          }
-                        >
-                          -
-                        </button>
+                      <div className="w-full sm:w-auto border px-4 py-2 rounded-full flex justify-center">
+                        <div className="flex items-center gap-8">
+                          <button
+                            className="cursor-pointer"
+                            onClick={() =>
+                              updateQuantity(item, item.quantity - 1)
+                            }
+                          >
+                            -
+                          </button>
 
-                        <span className="w-4 text-center">{item.quantity}</span>
+                          <span className="text-center min-w-[20px]">
+                            {item.quantity}
+                          </span>
 
-                        <button
-                          className="cursor-pointer"
-                          onClick={() =>
-                            updateQuantity(item, item.quantity + 1)
-                          }
-                        >
-                          +
-                        </button>
+                          <button
+                            className="cursor-pointer"
+                            onClick={() =>
+                              updateQuantity(item, item.quantity + 1)
+                            }
+                          >
+                            +
+                          </button>
+                        </div>
                       </div>
 
                       {/* REMOVE */}
@@ -119,7 +132,16 @@ const Cart = () => {
 
           {/* ================= RIGHT SIDE ================= */}
           <div className="lg:col-span-5">
-            <div className="sticky top-28 bg-[#f7f5f1] p-10 rounded-2xl shadow-sm">
+            <div
+              className="
+lg:sticky
+lg:top-28
+bg-[#f7f5f1]
+p-6 md:p-10
+rounded-2xl
+shadow-sm
+"
+            >
               <h2 className="text-2xl font-serif mb-8">Order Summary</h2>
 
               {/* DETAILS */}

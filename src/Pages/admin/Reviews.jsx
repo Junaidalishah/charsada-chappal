@@ -1,21 +1,16 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { useAuth } from "../../context/AuthContext";
 
+import api from "../../config/axios";
 import DashboardLayout from "../../components/layout/DashboardLayout";
-
-import API_URL from "../../config/api";
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
-
   const [loading, setLoading] = useState(true);
-  const { userInfo } = useAuth();
 
   // ================= FETCH REVIEWS =================
   const fetchReviews = async () => {
     try {
-      const { data } = await axios.get(`${API_URL}/products`);
+      const { data } = await api.get("/products");
 
       const allReviews = [];
 
@@ -23,17 +18,11 @@ const Reviews = () => {
         product.reviews?.forEach((review) => {
           allReviews.push({
             productId: product._id,
-
             reviewId: review._id,
-
             productName: product.name,
-
             reviewer: review.name,
-
             rating: review.rating,
-
             comment: review.comment,
-
             createdAt: review.createdAt,
           });
         });
@@ -52,25 +41,17 @@ const Reviews = () => {
   }, []);
 
   // ================= DELETE REVIEW =================
-
   const handleDeleteReview = async (productId, reviewId) => {
     const confirmDelete = window.confirm("Delete this review?");
 
     if (!confirmDelete) return;
 
     try {
-      await axios.delete(
-        `${API_URL}/products/${productId}/reviews/${reviewId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${userInfo.token}`,
-          },
-        },
-      );
+      await api.delete(`/products/${productId}/reviews/${reviewId}`);
 
       fetchReviews();
     } catch (error) {
-      console.log(error);
+      console.log(error.response?.data || error.message);
     }
   };
   return (
@@ -85,9 +66,59 @@ const Reviews = () => {
           </p>
         </div>
 
+        <div className="space-y-4 lg:hidden">
+          {loading ? (
+            <div className="rounded-2xl border bg-white p-6 text-center">
+              Loading reviews...
+            </div>
+          ) : reviews.length === 0 ? (
+            <div className="rounded-2xl border bg-white p-6 text-center">
+              No Reviews Found
+            </div>
+          ) : (
+            reviews.map((review) => (
+              <div
+                key={review.reviewId}
+                className="rounded-2xl border border-black/10 bg-white p-4 shadow-sm"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <h3 className="font-semibold text-[#061b0e]">
+                      {review.productName}
+                    </h3>
+
+                    <p className="text-sm text-gray-500">{review.reviewer}</p>
+                  </div>
+
+                  <span className="text-yellow-500">
+                    {"⭐".repeat(review.rating)}
+                  </span>
+                </div>
+
+                <p className="mt-3 text-sm text-gray-600 break-words">
+                  {review.comment}
+                </p>
+
+                <p className="mt-3 text-xs text-gray-400">
+                  {new Date(review.createdAt).toLocaleDateString()}
+                </p>
+
+                <button
+                  onClick={() =>
+                    handleDeleteReview(review.productId, review.reviewId)
+                  }
+                  className="mt-4 w-full rounded-xl bg-red-500 py-2 text-white"
+                >
+                  Delete Review
+                </button>
+              </div>
+            ))
+          )}
+        </div>
+
         {/* TABLE */}
         <div className="rounded-3xl border border-black/5 bg-white p-6 shadow-sm">
-          <div className="overflow-x-auto">
+          <div className="hidden lg:block overflow-x-auto">
             <table className="w-full min-w-[1000px]">
               <thead>
                 <tr className="border-b border-black/5 text-left text-sm text-gray-500">

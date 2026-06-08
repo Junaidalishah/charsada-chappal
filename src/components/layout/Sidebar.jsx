@@ -1,19 +1,14 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
-import { MessageSquare } from "lucide-react";
+import { MessageSquare, Shield } from "lucide-react";
 
 import {
   LayoutDashboard,
   ShoppingBag,
   Users,
-  Package,
   ReceiptText,
   BarChart3,
   Star,
-  TicketPercent,
-  Settings,
-  LogOut,
   X,
 } from "lucide-react";
 
@@ -48,7 +43,6 @@ const navItems = [
     icon: Star,
     path: "/admin/reviews",
   },
-
   {
     title: "Messages",
     icon: MessageSquare,
@@ -57,18 +51,30 @@ const navItems = [
 ];
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
-  const { logout } = useAuth();
-
+  const { logout, userInfo } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
-
     navigate("/login");
   };
+
+  const sidebarItems = [
+    ...navItems,
+
+    ...(userInfo?.role === "superadmin"
+      ? [
+          {
+            title: "Admin Management",
+            path: "/admin/admins",
+            icon: Shield,
+          },
+        ]
+      : []),
+  ];
+
   return (
     <>
-      {/* MOBILE OVERLAY */}
       {sidebarOpen && (
         <div
           className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm lg:hidden"
@@ -76,7 +82,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
         />
       )}
 
-      {/* SIDEBAR */}
       <aside
         className={`
           fixed top-0 left-0 z-50
@@ -85,13 +90,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
           border-r border-white/10
           flex flex-col
           transition-transform duration-300
-
           ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
-
           lg:translate-x-0
         `}
       >
-        {/* TOP */}
+        {/* HEADER */}
         <div className="flex items-center justify-between border-b border-white/10 px-6 py-7">
           <div>
             <h1 className="font-serif text-2xl font-bold text-white">
@@ -103,7 +106,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             </p>
           </div>
 
-          {/* MOBILE CLOSE */}
           <button
             onClick={() => setSidebarOpen(false)}
             className="text-slate-400 lg:hidden"
@@ -114,7 +116,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
         {/* NAVIGATION */}
         <nav className="flex-1 space-y-2 overflow-y-auto p-4">
-          {navItems.map((item) => {
+          {sidebarItems.map((item) => {
             const Icon = item.icon;
 
             return (
@@ -127,7 +129,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   flex items-center gap-3
                   rounded-2xl px-4 py-3
                   transition-all duration-200
-
                   ${
                     isActive
                       ? "bg-white text-[#061b0e] shadow-lg"
@@ -137,7 +138,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 }
               >
                 <Icon size={20} />
-
                 <span className="font-medium">{item.title}</span>
               </NavLink>
             );
@@ -145,36 +145,52 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
         </nav>
 
         {/* USER SECTION */}
-        <div className="border-t border-white/10 p-4">
-          <div className="mb-4 flex items-center gap-3 rounded-2xl bg-white/5 p-3">
+        <div className="mt-auto border-t border-white/10 p-4">
+          <div className="flex items-center gap-3 rounded-2xl bg-white/5 p-3">
             <img
               src="https://i.pravatar.cc/100"
               alt="Admin"
               className="h-11 w-11 rounded-full object-cover"
             />
 
-            <div>
-              <h3 className="text-sm font-semibold text-white">Admin User</h3>
+            <div className="min-w-0">
+              <h3 className="truncate text-sm font-semibold text-white">
+                {userInfo?.name}
+              </h3>
 
-              <p className="text-xs text-slate-400">Super Admin</p>
+              <p className="truncate text-xs text-slate-400">
+                {userInfo?.email}
+              </p>
+
+              <p className="text-[10px] text-green-400 capitalize">
+                {userInfo?.role}
+              </p>
             </div>
           </div>
 
-          {/* LOGOUT */}
-          <button
-            onClick={handleLogout}
-            className="
-    flex w-full items-center gap-3
-    rounded-2xl px-4 py-3
-    text-slate-300
-    transition
-    hover:bg-red-500/10
-    hover:text-red-400
-  "
-          >
-            <LogOut size={20} />
-            <span className="font-medium">Logout</span>
-          </button>
+          <div className="mt-3 flex gap-2">
+            <NavLink
+              to="/admin/profile"
+              className="
+                flex-1 rounded-xl bg-white/10
+                px-3 py-2 text-center text-sm text-white
+                hover:bg-white/20 transition
+              "
+            >
+              Profile
+            </NavLink>
+
+            <button
+              onClick={handleLogout}
+              className="
+                flex-1 rounded-xl bg-red-500
+                px-3 py-2 text-sm text-white
+                hover:bg-red-600 transition
+              "
+            >
+              Logout
+            </button>
+          </div>
         </div>
       </aside>
     </>

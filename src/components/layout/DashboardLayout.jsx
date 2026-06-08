@@ -72,6 +72,8 @@ const DashboardLayout = ({ children }) => {
           showNotifications={showNotifications}
           setShowNotifications={setShowNotifications}
           markAsRead={markAsRead}
+          userInfo={userInfo}
+          setSidebarOpen={setSidebarOpen}
         />
 
         {/* Page Content */}

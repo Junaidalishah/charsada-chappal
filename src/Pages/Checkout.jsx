@@ -14,7 +14,7 @@ import { formatCurrency } from "../utils/formatCurrency";
 import API_URL from "../config/api";
 
 const Checkout = () => {
-  const { cart } = useCart();
+  const { cart, clearCart } = useCart();
 
   const { userInfo } = useAuth();
 
@@ -26,10 +26,23 @@ const Checkout = () => {
   useEffect(() => {
     if (!userInfo) {
       navigate("/login");
+      return;
     }
-  }, [userInfo, navigate]);
 
-  const [paymentMethod, setPaymentMethod] = useState("easypaisa");
+    if (cart.length === 0) {
+      navigate("/cart");
+    }
+  }, [userInfo, cart, navigate]);
+
+  useEffect(() => {
+    if (userInfo) {
+      setFormData((prev) => ({
+        ...prev,
+        customerName: userInfo.name || "",
+        email: userInfo.email || "",
+      }));
+    }
+  }, [userInfo]);
 
   const [loading, setLoading] = useState(false);
 
@@ -65,7 +78,14 @@ const Checkout = () => {
 
   // ================= PLACE ORDER =================
   const handlePlaceOrder = async () => {
-    // VALIDATION
+    // EMPTY CART PROTECTION
+    if (cart.length === 0) {
+      showToast("Your cart is empty", "error");
+      navigate("/cart");
+      return;
+    }
+
+    // REQUIRED FIELDS
     if (
       !formData.customerName ||
       !formData.phone ||
@@ -75,7 +95,21 @@ const Checkout = () => {
       !formData.email
     ) {
       showToast("Please fill all fields", "error");
+      return;
+    }
 
+    // PHONE VALIDATION
+    if (!/^03\d{9}$/.test(formData.phone)) {
+      showToast(
+        "Please enter a valid Pakistani phone number (03XXXXXXXXX)",
+        "error",
+      );
+      return;
+    }
+
+    // EMAIL VALIDATION
+    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      showToast("Please enter a valid email address", "error");
       return;
     }
 
@@ -94,8 +128,6 @@ const Checkout = () => {
         province: formData.province,
 
         address: formData.address,
-
-        paymentMethod,
 
         items: cart.map((item) => ({
           product: item.id,
@@ -134,6 +166,7 @@ const Checkout = () => {
 
       if (response.ok) {
         showToast("Order placed successfully");
+        clearCart();
 
         navigate("/");
       } else {
@@ -154,7 +187,7 @@ const Checkout = () => {
 
       <Navbar />
 
-      <main className="mx-auto grid max-w-7xl gap-16 px-6 pb-24 pt-32 lg:grid-cols-12 md:px-12">
+      <main className="mx-auto grid max-w-7xl gap-16 px-6 pb-24 pt-24 md:pt-32 lg:grid-cols-12 md:px-12">
         {/* LEFT */}
         <div className="lg:col-span-7">
           <h1 className="mb-12 font-serif text-4xl tracking-tight">Checkout</h1>
@@ -228,281 +261,66 @@ const Checkout = () => {
           </div>
 
           {/* PAYMENT */}
-          <div className="space-y-6">
-            <h2 className="text-sm uppercase tracking-widest opacity-60">
-              Payment Method
-            </h2>
+          <div className="rounded-2xl border bg-gray-50 p-5 md:p-6">
+            <h3 className="font-semibold text-lg mb-4">
+              EasyPaisa / JazzCash Payment
+            </h3>
 
-            {/* OPTIONS */}
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-              {/* EASYPAISA */}
-              <div
-                onClick={() => setPaymentMethod("easypaisa")}
-                className={`cursor-pointer rounded-2xl border p-5 transition ${
-                  paymentMethod === "easypaisa"
-                    ? "border-black shadow-md"
-                    : "hover:border-black"
-                }`}
-              >
-                <div className="flex flex-col items-center gap-3">
-                  <img
-                    src="/images/Easypaisa-logo.png"
-                    alt="Easypaisa"
-                    className="h-10 object-contain"
-                  />
+            <p className="text-gray-600 mb-4">Send the payment to:</p>
 
-                  <span className="text-xs uppercase tracking-wider">
-                    Easypaisa
-                  </span>
-                </div>
-              </div>
+            <div className="bg-white rounded-xl p-4 border">
+              <p>
+                <strong>Account Title:</strong> Junaid Ali Shah
+              </p>
 
-              {/* JAZZCASH */}
-              <div
-                onClick={() => setPaymentMethod("jazzcash")}
-                className={`cursor-pointer rounded-2xl border p-5 transition ${
-                  paymentMethod === "jazzcash"
-                    ? "border-black shadow-md"
-                    : "hover:border-black"
-                }`}
-              >
-                <div className="flex flex-col items-center gap-3">
-                  <img
-                    src="/images/jazzcash.png"
-                    alt="JazzCash"
-                    className="h-10 object-contain"
-                  />
-
-                  <span className="text-xs uppercase tracking-wider">
-                    JazzCash
-                  </span>
-                </div>
-              </div>
-
-              {/* CARD */}
-              <div
-                onClick={() => setPaymentMethod("card")}
-                className={`cursor-pointer rounded-2xl border p-5 transition ${
-                  paymentMethod === "card"
-                    ? "border-black shadow-md"
-                    : "hover:border-black"
-                }`}
-              >
-                <div className="flex flex-col items-center gap-3">
-                  <div className="flex items-center gap-3">
-                    <img
-                      src="/images/visa-logo-02.png"
-                      alt="Visa"
-                      className="h-5"
-                    />
-
-                    <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg"
-                      alt="Mastercard"
-                      className="h-8"
-                    />
-                  </div>
-
-                  <span className="text-xs uppercase tracking-wider">
-                    Credit / Debit Card
-                  </span>
-                </div>
-              </div>
+              <p>
+                <strong>EasyPaisa / JazzCash Number:</strong>
+                03102991726
+              </p>
             </div>
 
-            {/* EASYPAISA */}
-            {paymentMethod === "easypaisa" && (
-              <div className="mt-6 rounded-2xl border bg-gray-50 p-6">
-                <div className="space-y-4 text-sm leading-7 text-gray-700">
-                  <p className="font-semibold text-black">
-                    Experience easy payments with Easypaisa
-                  </p>
+            <div className="mt-4 rounded-xl bg-yellow-50 border border-yellow-200 p-4 text-sm">
+              After sending payment, please share your payment screenshot on
+              WhatsApp.
+            </div>
 
-                  <p>
-                    Please ensure your Easypaisa account is Active and has
-                    sufficient balance.
-                  </p>
+            <div className="mt-3">
+              <a
+                href="https://wa.me/923102991726"
+                target="_blank"
+                rel="noreferrer"
+                className="
+                 w-full
+                  sm:w-auto
+                inline-flex
+               justify-center
+             items-center
+            rounded-xl
+         bg-green-600
+      px-5 py-3
+       text-white
+"
+              >
+                Send Screenshot on WhatsApp
+              </a>
+            </div>
 
-                  <div className="space-y-2">
-                    <p className="font-medium text-black">
-                      ➊ FOR Telenor USERS
-                    </p>
-
-                    <p>
-                      ↳ Unlock your phone and approve payment using your PIN
-                    </p>
-                  </div>
-
-                  <div className="space-y-2">
-                    <p className="font-medium text-black">
-                      ➋ FOR OTHER NETWORKS
-                    </p>
-
-                    <p>
-                      ↳ Login to your Easypaisa App and approve the transaction
-                    </p>
-                  </div>
-
-                  <div className="pt-4">
-                    <label className="mb-2 block text-sm font-medium text-black">
-                      Easypaisa Account Number
-                    </label>
-
-                    <input
-                      type="text"
-                      placeholder="03XX XXXXXXX"
-                      className="w-full rounded-xl border bg-white p-4 outline-none focus:border-black"
-                    />
-                  </div>
-
-                  <p className="text-xs text-gray-500">
-                    We will save this account for your convenience. You can
-                    remove it later from your account settings.
-                  </p>
-
-                  <button className="mt-4 w-full rounded-xl bg-[#00a651] py-4 font-medium text-white transition hover:opacity-90">
-                    Pay Now
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* JAZZCASH */}
-            {paymentMethod === "jazzcash" && (
-              <div className="mt-6 rounded-2xl border bg-gray-50 p-6">
-                <div className="space-y-4 text-sm leading-7 text-gray-700">
-                  <div className="space-y-2">
-                    <p className="font-medium text-black">➊ FOR JAZZ/WARID</p>
-
-                    <p>
-                      ↳ Unlock your phone and you will receive a MPIN Input
-                      Prompt
-                    </p>
-                  </div>
-
-                  <div className="space-y-2">
-                    <p className="font-medium text-black">
-                      ➋ FOR OTHER NETWORKS
-                    </p>
-
-                    <p>↳ Log-in to your JazzCash App and enter your MPIN</p>
-                  </div>
-
-                  <p>
-                    Note: Ensure your JazzCash account is Active and has
-                    sufficient balance.
-                  </p>
-
-                  <div className="pt-4">
-                    <label className="mb-2 block text-sm font-medium text-black">
-                      JazzCash Account Number
-                    </label>
-
-                    <input
-                      type="text"
-                      placeholder="03XX XXXXXXX"
-                      className="w-full rounded-xl border bg-white p-4 outline-none focus:border-black"
-                    />
-                  </div>
-
-                  <p className="text-xs text-gray-500">
-                    We will save this account for your convenience. If required,
-                    you can remove the account later from account settings.
-                  </p>
-
-                  <button className="mt-4 w-full rounded-xl bg-[#f22053] py-4 font-medium text-white transition hover:opacity-90">
-                    Pay Now
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* CARD */}
-            {paymentMethod === "card" && (
-              <div className="mt-6 rounded-2xl border bg-gray-50 p-6">
-                <div className="space-y-5">
-                  {/* CARD NUMBER */}
-                  <div>
-                    <label className="mb-2 block text-sm font-medium text-black">
-                      Card Number
-                    </label>
-
-                    <input
-                      type="text"
-                      placeholder="Card Number"
-                      className="w-full rounded-xl border bg-white p-4 outline-none focus:border-black"
-                    />
-                  </div>
-
-                  {/* NAME */}
-                  <div>
-                    <label className="mb-2 block text-sm font-medium text-black">
-                      Name on card
-                    </label>
-
-                    <input
-                      type="text"
-                      placeholder="Name on card"
-                      className="w-full rounded-xl border bg-white p-4 outline-none focus:border-black"
-                    />
-                  </div>
-
-                  {/* EXPIRY + CVV */}
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label className="mb-2 block text-sm font-medium text-black">
-                        Expiry date
-                      </label>
-
-                      <input
-                        type="text"
-                        placeholder="MM/YY"
-                        className="w-full rounded-xl border bg-white p-4 outline-none focus:border-black"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="mb-2 block text-sm font-medium text-black">
-                        CVV
-                      </label>
-
-                      <input
-                        type="password"
-                        placeholder="CVV"
-                        className="w-full rounded-xl border bg-white p-4 outline-none focus:border-black"
-                      />
-                    </div>
-                  </div>
-
-                  {/* SAVE CARD */}
-                  <div className="flex items-start gap-3 pt-2">
-                    <input type="checkbox" className="mt-1 h-4 w-4" />
-
-                    <p className="text-xs leading-6 text-gray-500">
-                      We will save this card for your convenience. If required,
-                      you can remove the card later from account settings.
-                    </p>
-                  </div>
-
-                  <button className="mt-4 w-full rounded-xl bg-black py-4 font-medium text-white transition hover:opacity-90">
-                    Pay Now
-                  </button>
-                </div>
-              </div>
-            )}
+            <p className="mt-4 text-sm text-gray-500">
+              Your order will be processed after payment verification.
+            </p>
           </div>
         </div>
 
         {/* RIGHT */}
         <div className="lg:col-span-5">
-          <div className="sticky top-28 rounded-3xl bg-[#f7f5f1] p-10 shadow-sm">
+          <div className="sticky top-28 rounded-3xl bg-[#f7f5f1] p-5 md:p-10 shadow-sm">
             <h2 className="mb-8 font-serif text-2xl">Order Summary</h2>
 
             {/* ITEMS */}
             <div className="mb-6 max-h-48 space-y-4 overflow-y-auto">
               {cart.map((item, i) => (
                 <div key={i} className="flex justify-between text-sm">
-                  <span>
+                  <span className="pr-3 break-words">
                     {item.title} × {item.quantity}
                   </span>
 
@@ -542,8 +360,15 @@ const Checkout = () => {
             {/* PLACE ORDER */}
             <button
               onClick={handlePlaceOrder}
-              disabled={loading}
-              className="flex w-full items-center justify-center rounded-xl bg-black py-4 text-white transition hover:opacity-90"
+              disabled={loading || cart.length === 0}
+              className={`
+    flex w-full items-center justify-center rounded-xl py-4 text-white transition
+    ${
+      cart.length === 0
+        ? "bg-gray-400 cursor-not-allowed"
+        : "bg-black hover:opacity-90"
+    }
+  `}
             >
               {loading ? <ButtonLoader /> : "Place Order"}
             </button>

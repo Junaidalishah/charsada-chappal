@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { CartProvider } from "./context/CartContext";
 import { AuthProvider } from "./context/AuthContext";
+import WhatsAppButton from "./components/WhatsAppButton";
 
 /* STORE FRONT */
 import PakletHome from "./Pages/Home";
@@ -20,6 +21,8 @@ import OrderDetailsPage from "./Pages/admin/OrderDetailsPage";
 /* AUTH */
 import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUp";
+import ForgotPassword from "./Pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 
 /* ADMIN PAGES */
 import AdminRoute from "./components/AdminRoute";
@@ -31,6 +34,8 @@ import Analytics from "./pages/admin/Analytics";
 import Reviews from "./pages/admin/Reviews";
 import Messages from "./pages/admin/Messages";
 import AdminOrderDetailsPage from "./Pages/admin/AdminOrderDetailsPage";
+import AdminProfilePage from "./Pages/admin/ProfilePage";
+import AdminManagement from "./pages/admin/AdminManagement";
 
 function App() {
   return (
@@ -54,7 +59,8 @@ function App() {
             {/* ================= AUTH ================= */}
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
-
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password/:token" element={<ResetPassword />} />
             {/* ================= ADMIN ================= */}
             <Route
               path="/admin"
@@ -122,7 +128,24 @@ function App() {
               path="/admin/orders/:id"
               element={<AdminOrderDetailsPage />}
             />
+            <Route
+              path="/admin/profile"
+              element={
+                <AdminRoute>
+                  <AdminProfilePage />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="/admin/admins"
+              element={
+                <AdminRoute>
+                  <AdminManagement />
+                </AdminRoute>
+              }
+            />
           </Routes>
+          <WhatsAppButton />
         </BrowserRouter>
       </CartProvider>
     </AuthProvider>

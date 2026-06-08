@@ -63,7 +63,7 @@ const CollectionPage = () => {
             Charsadda Craftsmanship
           </p>
 
-          <h1 className="mt-4 text-5xl md:text-7xl font-bold">
+          <h1 className="mt-4 text-4xl sm:text-5xl md:text-7xlfont-bold">
             Our Collections
           </h1>
 
@@ -83,18 +83,30 @@ const CollectionPage = () => {
                   `/shop?category=${encodeURIComponent(collection.category)}`,
                 )
               }
-              className="group cursor-pointer overflow-hidden rounded-3xl bg-white border border-black/10 hover:shadow-xl transition-all duration-300"
+              className="
+group
+cursor-pointer
+overflow-hidden
+rounded-3xl
+bg-white
+border
+border-black/10
+hover:shadow-xl
+transition-all
+duration-300
+active:scale-[0.98]
+"
             >
               <div className="overflow-hidden">
                 <img
                   src={collection.image}
                   alt={collection.category}
-                  className="w-full h-[420px] object-cover transition duration-700 group-hover:scale-110"
+                  className="w-full h-[280px] sm:h-[350px] md:h-[420px] object-cover transition duration-700 group-hover:scale-110"
                 />
               </div>
 
               <div className="p-6">
-                <div className="flex justify-between items-center">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
                   <h2 className="text-2xl font-bold">{collection.category}</h2>
 
                   <span className="text-sm text-gray-500">

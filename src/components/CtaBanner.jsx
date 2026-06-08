@@ -35,18 +35,18 @@ const CtaBanner = () => {
 
   return (
     <section className="m-6 md:m-12">
-      <div className="relative overflow-hidden rounded-3xl bg-[#061b0e] py-24 px-8 md:px-24">
+      <div className="relative overflow-hidden rounded-3xl bg-[#061b0e] py-16 md:py-24 px-6 md:px-24">
         {/* PATTERN */}
         <div className="absolute inset-0 opacity-10 jali-pattern pointer-events-none"></div>
 
         <div className="relative z-10 flex flex-col items-center justify-between gap-12 md:flex-row">
           {/* LEFT */}
-          <div className="max-w-xl">
+          <div className="max-w-xl text-center md:text-left">
             <p className="mb-3 text-xs uppercase tracking-[0.3em] text-white/60">
               Charsadda Chappal
             </p>
 
-            <h2 className="mb-6 font-serif text-4xl md:text-5xl text-white">
+            <h2 className="mb-6 font-serif text-3xl sm:text-4xl md:text-5xl text-white">
               Subscribe to our emails
             </h2>
 
@@ -95,7 +95,11 @@ const CtaBanner = () => {
             </div>
 
             {/* MESSAGE */}
-            {message && <p className="mt-4 text-sm text-white/70">{message}</p>}
+            {message && (
+              <p className="mt-4 text-sm text-white/70 text-center sm:text-left">
+                {message}
+              </p>
+            )}
           </div>
         </div>
       </div>
