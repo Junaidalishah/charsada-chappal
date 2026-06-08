@@ -12,7 +12,7 @@ import ProductDetail from "./components/ProductDetail";
 import Cart from "./Pages/cart";
 import Checkout from "./Pages/Checkout";
 import ReturnsRefunds from "./Pages/ReturnsRefunds";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
+import PrivacyPolicy from "./Pages/PrivacyPolicy";
 import Contact from "./Pages/Contact";
 import ProfilePage from "./Pages/ProfilePage";
 import OrdersPage from "./Pages/OrdersPage";
