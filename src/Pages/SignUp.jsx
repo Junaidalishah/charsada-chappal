@@ -211,7 +211,7 @@ export default function SignUp() {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    placeholder="Junaid Ali"
+                    placeholder="Full Name"
                     required
                     className="w-full border border-outline rounded-lg px-4 py-3 bg-transparent focus:ring-2 focus:ring-primary outline-none"
                   />
