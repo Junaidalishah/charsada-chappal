@@ -24,17 +24,10 @@ const Checkout = () => {
 
   // ================= PROTECT CHECKOUT =================
   useEffect(() => {
-    if (authLoading) return;
-
-    if (!userInfo) {
-      navigate("/login");
-      return;
-    }
-
     if (cart.length === 0) {
       navigate("/cart");
     }
-  }, [userInfo, cart, navigate, authLoading]);
+  }, [cart, navigate]);
 
   useEffect(() => {
     if (userInfo) {
@@ -152,15 +145,17 @@ const Checkout = () => {
         user: userInfo?._id,
       };
 
+      const headers = {
+        "Content-Type": "application/json",
+      };
+
+      if (userInfo?.token) {
+        headers.Authorization = `Bearer ${userInfo.token}`;
+      }
+
       const response = await fetch(`${API_URL}/orders`, {
         method: "POST",
-
-        headers: {
-          "Content-Type": "application/json",
-
-          Authorization: `Bearer ${userInfo.token}`,
-        },
-
+        headers,
         body: JSON.stringify(orderData),
       });
 
@@ -183,10 +178,6 @@ const Checkout = () => {
     }
   };
 
-  if (authLoading) {
-    return <Loader />;
-  }
-
   return (
     <>
       {loading && <Loader />}
@@ -198,13 +189,11 @@ const Checkout = () => {
         <div className="lg:col-span-7">
           <h1 className="mb-12 font-serif text-4xl tracking-tight">Checkout</h1>
 
-          {/* SHIPPING */}
           <div className="mb-12 space-y-6">
             <h2 className="text-sm uppercase tracking-widest opacity-60">
               Shipping Details
             </h2>
 
-            {/* NAME */}
             <input
               name="customerName"
               value={formData.customerName}
@@ -214,7 +203,6 @@ const Checkout = () => {
               required
             />
 
-            {/* PHONE */}
             <input
               name="phone"
               value={formData.phone}
@@ -224,7 +212,6 @@ const Checkout = () => {
               required
             />
 
-            {/* CITY + PROVINCE */}
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <input
                 name="city"

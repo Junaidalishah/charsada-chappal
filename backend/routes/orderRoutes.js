@@ -15,7 +15,7 @@ const router = express.Router();
 router.get("/", protect, admin, getOrders);
 
 // CREATE ORDER
-router.post("/", protect, createOrder);
+router.post("/", createOrder);
 
 // MY ORDERS
 router.get("/myorders", protect, getMyOrders);

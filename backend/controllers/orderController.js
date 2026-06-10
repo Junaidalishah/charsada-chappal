@@ -6,7 +6,7 @@ import sendEmail from "../utils/sendEmail.js";
 export const createOrder = async (req, res) => {
   try {
     const order = await Order.create({
-      user: req.user.id,
+      user: req.user?._id || null,
       customerName: req.body.customerName,
       email: req.body.email,
       phone: req.body.phone,

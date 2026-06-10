@@ -50,14 +50,15 @@ const WhyChooseUs = () => {
               {/* ICON */}
               <div
                 className="
-                  mx-auto mb-7
-                  flexh-16 w-16 md:h-20 md:w-20
-                  items-center justify-center
-                  rounded-full
-                  bg-[#f4f1e8]
-                "
+    mx-auto mb-7
+    flex h-16 w-16
+    md:h-20 md:w-20
+    items-center justify-center
+    rounded-full
+    bg-[#f4f1e8]
+  "
               >
-                <span className="material-symbols-outlined text-3xl md:text-4xl text-[#061b0e]">
+                <span className="material-symbols-outlined leading-none text-3xl md:text-4xl text-[#061b0e]">
                   {feature.icon}
                 </span>
               </div>
