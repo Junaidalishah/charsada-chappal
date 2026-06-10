@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import ScrollToTop from "./components/ScrollToTop";
 import { CartProvider } from "./context/CartContext";
 import { AuthProvider } from "./context/AuthContext";
 import WhatsAppButton from "./components/WhatsAppButton";
@@ -42,6 +42,7 @@ function App() {
     <AuthProvider>
       <CartProvider>
         <BrowserRouter>
+          <ScrollToTop />
           <Routes>
             {/* ================= STORE FRONT ================= */}
             <Route path="/" element={<Home />} />

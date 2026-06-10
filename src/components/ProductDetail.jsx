@@ -38,6 +38,8 @@ const ProductDetail = () => {
     comment: "",
   });
 
+  const [showFullscreen, setShowFullscreen] = useState(false);
+
   // ================= FETCH PRODUCT =================
   useEffect(() => {
     const fetchProduct = async () => {
@@ -270,6 +272,7 @@ const ProductDetail = () => {
                 src={selectedImage}
                 alt={product.name}
                 style={zoomStyle}
+                onClick={() => setShowFullscreen(true)}
                 className="
     w-full
     aspect-square
@@ -291,21 +294,29 @@ const ProductDetail = () => {
                   .map((img, index) => (
                     <div
                       key={index}
-                      onMouseEnter={() => setSelectedImage(img)}
+                      onClick={() => {
+                        setSelectedImage(img);
+                        setShowFullscreen(true);
+                      }}
                       className="overflow-hidden rounded-3xl bg-white border border-black/10 transition-all duration-300 cursor-pointer hover:border-black/20"
                     >
-                      <img
-                        src={img}
-                        alt={`product-${index}`}
-                        className="
-    w-full
-    aspect-square
-    lg:h-[750px]
-    lg:aspect-auto
-    object-cover
-    transition duration-700 hover:scale-[1.15]
-  "
-                      />
+                      <div className="overflow-hidden">
+                        <img
+                          src={img}
+                          alt={`product-${index}`}
+                          className="
+      w-full
+      aspect-square
+      lg:h-[750px]
+      lg:aspect-auto
+      object-cover
+      transition-transform
+      duration-300
+      hover:scale-[2]
+      cursor-zoom-in
+    "
+                        />
+                      </div>
                     </div>
                   ))}
               </div>
@@ -608,6 +619,26 @@ const ProductDetail = () => {
         )}
       </main>
 
+      {showFullscreen && (
+        <div
+          className="fixed inset-0 z-[9999] bg-black flex items-center justify-center"
+          onClick={() => setShowFullscreen(false)}
+        >
+          <button
+            onClick={() => setShowFullscreen(false)}
+            className="absolute top-4 right-4 text-white text-4xl z-10"
+          >
+            ✕
+          </button>
+
+          <img
+            src={selectedImage}
+            alt={product.name}
+            className="w-full h-full object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
       <Footer />
     </div>
   );

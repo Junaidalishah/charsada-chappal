@@ -16,7 +16,7 @@ import API_URL from "../config/api";
 const Checkout = () => {
   const { cart, clearCart } = useCart();
 
-  const { userInfo } = useAuth();
+  const { userInfo, loading: authLoading } = useAuth();
 
   const { showToast } = useToast();
 
@@ -24,6 +24,8 @@ const Checkout = () => {
 
   // ================= PROTECT CHECKOUT =================
   useEffect(() => {
+    if (authLoading) return;
+
     if (!userInfo) {
       navigate("/login");
       return;
@@ -32,7 +34,7 @@ const Checkout = () => {
     if (cart.length === 0) {
       navigate("/cart");
     }
-  }, [userInfo, cart, navigate]);
+  }, [userInfo, cart, navigate, authLoading]);
 
   useEffect(() => {
     if (userInfo) {
@@ -180,6 +182,10 @@ const Checkout = () => {
       setLoading(false);
     }
   };
+
+  if (authLoading) {
+    return <Loader />;
+  }
 
   return (
     <>

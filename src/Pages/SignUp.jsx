@@ -228,7 +228,7 @@ export default function SignUp() {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder="junaid@gmail.com"
+                    placeholder="Email Address"
                     required
                     className="w-full border border-outline rounded-lg px-4 py-3 bg-transparent focus:ring-2 focus:ring-primary outline-none"
                   />
