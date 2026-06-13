@@ -36,12 +36,14 @@ import Messages from "./Pages/admin/Messages";
 import AdminOrderDetailsPage from "./Pages/admin/AdminOrderDetailsPage";
 import AdminProfilePage from "./Pages/admin/ProfilePage";
 import AdminManagement from "./Pages/admin/AdminManagement";
+import AnalyticsTracker from "./components/AnalyticsTracker";
 
 function App() {
   return (
     <AuthProvider>
       <CartProvider>
         <BrowserRouter>
+          <AnalyticsTracker />
           <ScrollToTop />
           <Routes>
             {/* ================= STORE FRONT ================= */}
