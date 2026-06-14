@@ -96,6 +96,18 @@ const ProductDetail = () => {
     fetchProduct();
   }, [id, userInfo]);
 
+  useEffect(() => {
+    if (product && window.fbq) {
+      window.fbq("track", "ViewContent", {
+        content_name: product.name,
+        content_ids: [product._id],
+        content_type: "product",
+        value: product.price,
+        currency: "PKR",
+      });
+    }
+  }, [product]);
+
   // ================= LOADING =================
   if (loading) {
     return (
@@ -130,6 +142,15 @@ const ProductDetail = () => {
       color: selectedColor?.name || "",
       size: selectedSize,
     });
+
+    if (window.fbq) {
+      window.fbq("track", "AddToCart", {
+        content_name: product.name,
+        content_ids: [product._id],
+        value: product.price,
+        currency: "PKR",
+      });
+    }
 
     window.dispatchEvent(new Event("openCart"));
   };

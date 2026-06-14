@@ -71,6 +71,16 @@ const Checkout = () => {
 
   const total = subtotal + shipping;
 
+  useEffect(() => {
+    if (window.fbq && total > 0) {
+      window.fbq("track", "InitiateCheckout", {
+        value: total,
+        currency: "PKR",
+        num_items: cart.length,
+      });
+    }
+  }, []);
+
   // ================= PLACE ORDER =================
   const handlePlaceOrder = async () => {
     // EMPTY CART PROTECTION
@@ -163,6 +173,15 @@ const Checkout = () => {
 
       if (response.ok) {
         showToast("Order placed successfully");
+
+        // Facebook Pixel Purchase Event
+        if (window.fbq) {
+          window.fbq("track", "Purchase", {
+            value: total,
+            currency: "PKR",
+          });
+        }
+
         clearCart();
 
         navigate("/");
