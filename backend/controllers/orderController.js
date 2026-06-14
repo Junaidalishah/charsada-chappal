@@ -6,13 +6,15 @@ import sendEmail from "../utils/sendEmail.js";
 export const createOrder = async (req, res) => {
   try {
     const order = await Order.create({
-      user: req.user?._id || null,
+      user: req.body.user || null,
+
       customerName: req.body.customerName,
       email: req.body.email,
       phone: req.body.phone,
       city: req.body.city,
       address: req.body.address,
       province: req.body.province,
+
       paymentMethod: req.body.paymentMethod,
       items: req.body.items,
       totalAmount: req.body.totalAmount,
