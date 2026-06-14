@@ -230,27 +230,63 @@ const ProductDetail = () => {
 
           <meta property="og:title" content={product.name} />
           <meta property="og:description" content={product.description} />
-          <meta property="og:image" content={product.image} />
+          <meta
+            property="og:image"
+            content={product.colors?.[0]?.images?.[0] || product.image}
+          />
           <meta property="og:type" content="product" />
 
           <meta property="og:url" content={window.location.href} />
 
           <script type="application/ld+json">
             {JSON.stringify({
-              "@context": "https://schema.org/",
+              "@context": "https://schema.org",
               "@type": "Product",
+
               name: product.name,
-              image: product.image,
+
+              image: product.colors?.flatMap((c) => c.images) || [
+                product.image,
+              ],
+
               description: product.description,
+
+              sku: product._id,
+
+              brand: {
+                "@type": "Brand",
+                name: "Charsadda Chappal",
+              },
+
               offers: {
                 "@type": "Offer",
-                price: product.price,
+
+                url: `https://www.charsaddachappal.store/product/${product._id}`,
+
                 priceCurrency: "PKR",
+
+                price: product.price,
+
                 availability:
                   product.stock > 0
                     ? "https://schema.org/InStock"
                     : "https://schema.org/OutOfStock",
+
+                itemCondition: "https://schema.org/NewCondition",
               },
+
+              aggregateRating:
+                product.reviews?.length > 0
+                  ? {
+                      "@type": "AggregateRating",
+                      ratingValue: (
+                        product.reviews.reduce((sum, r) => sum + r.rating, 0) /
+                        product.reviews.length
+                      ).toFixed(1),
+
+                      reviewCount: product.reviews.length,
+                    }
+                  : undefined,
             })}
           </script>
         </Helmet>
