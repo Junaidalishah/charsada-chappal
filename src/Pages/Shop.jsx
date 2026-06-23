@@ -20,7 +20,7 @@ function Shop() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [priceRange, setPriceRange] = useState({
     min: 0,
-    max: 50000,
+    max: 10000,
   });
 
   // ================= FETCH PRODUCTS =================
