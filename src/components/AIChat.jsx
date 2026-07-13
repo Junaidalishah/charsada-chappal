@@ -84,7 +84,7 @@ const AIChat = () => {
         const newMessage = {
           sender: "ai",
           text: data.reply,
-          action: data.action || null, // ✅ Store action if present
+          action: data.action || null,
         };
 
         updated.push(newMessage);
@@ -212,7 +212,7 @@ const AIChat = () => {
                 ) : (
                   <>
                     {message.text}
-                    {/* ✅ Render Action Button if present */}
+                    {/* Action Button */}
                     {message.action && message.action.type === "link" && (
                       <button
                         onClick={() => {
@@ -230,34 +230,38 @@ const AIChat = () => {
             </div>
           ))}
 
-          {/* Product Cards */}
+          {/* Product Cards - Responsive Version */}
           {aiProducts.length > 0 && (
             <div className="space-y-4 mt-4">
               {aiProducts.map((product) => (
                 <div
                   key={product._id}
-                  className="bg-white border rounded-2xl shadow-sm overflow-hidden"
+                  className="w-full overflow-hidden rounded-2xl border bg-white shadow-sm"
                 >
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-44 object-cover"
+                    className="h-40 w-full object-cover sm:h-44"
                   />
-                  <div className="p-4">
-                    <h3 className="font-bold text-lg">{product.name}</h3>
+                  <div className="p-3 sm:p-4">
+                    <h3 className="text-base font-bold sm:text-lg">
+                      {product.name}
+                    </h3>
                     <p className="text-[#061b0e] font-semibold">
                       PKR {product.price}
                     </p>
-                    <p className="text-sm text-gray-500 mt-2">
+                    <p className="mt-2 text-xs text-gray-500 sm:text-sm">
                       {product.description?.slice(0, 80)}...
                     </p>
-                    <div className="flex gap-2 mt-4">
+
+                    {/* Responsive Buttons */}
+                    <div className="mt-4 flex flex-col gap-2 sm:flex-row">
                       <button
                         onClick={() => {
                           navigate(`/product/${product._id}`);
                           setIsOpen(false);
                         }}
-                        className="flex-1 bg-[#061b0e] text-white rounded-xl py-2 hover:bg-[#0b2b16]"
+                        className="w-full sm:flex-1 rounded-xl bg-[#061b0e] py-2 text-white transition hover:bg-[#0b2b16]"
                       >
                         View Product
                       </button>
@@ -273,7 +277,7 @@ const AIChat = () => {
                             },
                           ]);
                         }}
-                        className="flex-1 border rounded-xl py-2 hover:bg-gray-100"
+                        className="w-full sm:flex-1 rounded-xl border py-2 transition hover:bg-gray-100"
                       >
                         Add to Cart
                       </button>
