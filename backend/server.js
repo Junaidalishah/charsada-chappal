@@ -13,6 +13,8 @@ import adminRoutes from "./routes/adminRoutes.js";
 import newsletterRoutes from "./routes/newsletterRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
 import notificationRoutes from "./routes/notificationRoutes.js";
+import sitemapRoutes from "./routes/sitemapRoutes.js";
+import aiRoutes from "./routes/aiRoutes.js";
 
 console.log("EMAIL_USER =", process.env.EMAIL_USER);
 console.log("EMAIL_PASS =", process.env.EMAIL_PASS);
@@ -36,8 +38,11 @@ app.use("/api/newsletter", newsletterRoutes);
 
 app.use("/api/contact", contactRoutes);
 
+app.use("/api/ai", aiRoutes);
+
 app.use("/api/notifications", notificationRoutes);
 
+app.use("/", sitemapRoutes);
 // DATABASE CONNECTION
 mongoose
   .connect(process.env.MONGO_URI)

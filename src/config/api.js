@@ -1,3 +1,3 @@
-const API_URL = "https://charsada-chappal.onrender.com/api";
+const API_URL = "http://localhost:5000/api";
 
 export default API_URL;

@@ -3,6 +3,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import { CartProvider } from "./context/CartContext";
 import { AuthProvider } from "./context/AuthContext";
 import WhatsAppButton from "./components/WhatsAppButton";
+import AIChat from "./components/AIChat";
 
 /* STORE FRONT */
 import Home from "./Pages/Home";
@@ -149,6 +150,7 @@ function App() {
             />
           </Routes>
           <WhatsAppButton />
+          <AIChat />
         </BrowserRouter>
       </CartProvider>
     </AuthProvider>
