@@ -134,7 +134,6 @@ export const createOrder = async (req, res) => {
   }
 };
 
-// ================= REST OF YOUR CONTROLLER (No changes needed) =================
 export const getOrders = async (req, res) => {
   try {
     const orders = await Order.find()
@@ -163,6 +162,71 @@ export const updateOrderStatus = async (req, res) => {
     }
 
     const updatedOrder = await order.save();
+
+    // Send status update email
+    if (updatedOrder.email) {
+      try {
+        await sendEmail({
+          to: updatedOrder.email,
+          subject: `Order #${updatedOrder._id.toString().slice(-6)} Status Updated`,
+          html: `
+        <h2>Order Status Updated</h2>
+
+        <p>Hello <strong>${updatedOrder.customerName}</strong>,</p>
+
+        <p>Your order status has been updated.</p>
+
+        <table border="1" cellpadding="10" cellspacing="0">
+          <tr>
+            <td><strong>Order ID</strong></td>
+            <td>#${updatedOrder._id.toString().slice(-6)}</td>
+          </tr>
+
+          <tr>
+            <td><strong>Status</strong></td>
+            <td>${updatedOrder.status}</td>
+          </tr>
+
+          <tr>
+            <td><strong>Total</strong></td>
+            <td>PKR ${updatedOrder.totalAmount}</td>
+          </tr>
+
+          ${
+            updatedOrder.courierCompany
+              ? `
+          <tr>
+            <td><strong>Courier</strong></td>
+            <td>${updatedOrder.courierCompany}</td>
+          </tr>`
+              : ""
+          }
+
+          ${
+            updatedOrder.trackingNumber
+              ? `
+          <tr>
+            <td><strong>Tracking Number</strong></td>
+            <td>${updatedOrder.trackingNumber}</td>
+          </tr>`
+              : ""
+          }
+        </table>
+
+        <br>
+
+        <p>You can also track your order on our website using your phone number.</p>
+
+        <p>Thank you for shopping with Charsadda Chappal ❤️</p>
+      `,
+        });
+
+        console.log("✅ Status email sent");
+      } catch (err) {
+        console.error("Status Email Error:", err.message);
+      }
+    }
+
     res.json(updatedOrder);
   } catch (error) {
     res.status(500).json({ message: error.message });
