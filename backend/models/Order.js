@@ -43,28 +43,30 @@ const orderSchema = new mongoose.Schema(
     // ================= PAYMENT =================
     paymentMethod: {
       type: String,
-      default: "Cash On Delivery",
+      enum: ["cod", "online"],
+      default: "cod",
+      required: true,
+    },
+
+    // Optional: Track payment status for online payments
+    paymentStatus: {
+      type: String,
+      enum: ["pending", "paid", "failed"],
+      default: "pending",
     },
 
     // ================= ORDER ITEMS =================
     items: [
       {
-        // ⭐ IMPORTANT FOR REVIEWS
         product: {
           type: mongoose.Schema.Types.ObjectId,
           ref: "Product",
         },
-
         title: String,
-
         price: Number,
-
         quantity: Number,
-
         size: String,
-
         color: String,
-
         image: String,
       },
     ],

@@ -38,6 +38,39 @@ const AdminOrderDetailsPage = () => {
     fetchOrder();
   }, [id, userInfo]);
 
+  const getPaymentDisplay = (method) => {
+    if (method === "cod") return "Cash on Delivery";
+    if (method === "online") return "EasyPaisa / JazzCash";
+    return method || "N/A";
+  };
+
+  const saveTrackingInfo = async () => {
+    try {
+      setSaving(true);
+      const { data } = await axios.put(
+        `${API_URL}/orders/${order._id}`,
+        {
+          status: order.status,
+          courierCompany,
+          trackingNumber,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${userInfo.token}`,
+          },
+        },
+      );
+
+      setOrder(data);
+      alert("Tracking information updated successfully");
+    } catch (error) {
+      console.log(error);
+      alert("Failed to update tracking information");
+    } finally {
+      setSaving(false);
+    }
+  };
+
   if (loading) {
     return (
       <DashboardLayout>
@@ -54,41 +87,11 @@ const AdminOrderDetailsPage = () => {
     );
   }
 
-  const saveTrackingInfo = async () => {
-    try {
-      setSaving(true);
-
-      const { data } = await axios.put(
-        `${API_URL}/orders/${order._id}`,
-        {
-          status: order.status,
-          courierCompany,
-          trackingNumber,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${userInfo.token}`,
-          },
-        },
-      );
-
-      setOrder(data);
-
-      alert("Tracking information updated successfully");
-    } catch (error) {
-      console.log(error);
-      alert("Failed to update tracking information");
-    } finally {
-      setSaving(false);
-    }
-  };
-
   return (
     <DashboardLayout>
       <div className="space-y-8">
         <div>
           <h1 className="text-3xl font-bold">Order #{order._id.slice(-6)}</h1>
-
           <p className="text-gray-500 mt-2">
             {new Date(order.createdAt).toLocaleDateString()}
           </p>
@@ -97,13 +100,12 @@ const AdminOrderDetailsPage = () => {
         {/* CUSTOMER INFO */}
         <div className="bg-white p-6 rounded-3xl border">
           <h2 className="text-xl font-semibold mb-4">Customer Information</h2>
-
           <div className="space-y-2">
             <p>
               <strong>Name:</strong> {order.customerName}
             </p>
             <p>
-              <strong>Email:</strong> {order.user?.email}
+              <strong>Email:</strong> {order.user?.email || order.email}
             </p>
             <p>
               <strong>Phone:</strong> {order.phone}
@@ -111,25 +113,29 @@ const AdminOrderDetailsPage = () => {
             <p>
               <strong>City:</strong> {order.city}
             </p>
-
-            <p>
-              <strong>Courier:</strong> {order.courierCompany || "Not Assigned"}
-            </p>
-
-            <p>
-              <strong>Tracking:</strong>{" "}
-              {order.trackingNumber || "Not Available"}
-            </p>
             <p>
               <strong>Address:</strong> {order.address}
             </p>
+            <p>
+              <strong>Payment Method:</strong>{" "}
+              <span className="font-semibold text-green-700">
+                {getPaymentDisplay(order.paymentMethod)}
+              </span>
+            </p>
+            {order.paymentMethod === "online" && (
+              <p>
+                <strong>Payment Status:</strong>{" "}
+                <span className="capitalize">
+                  {order.paymentStatus || "pending"}
+                </span>
+              </p>
+            )}
           </div>
         </div>
 
         {/* PRODUCTS */}
         <div className="bg-white p-6 rounded-3xl border">
           <h2 className="text-xl font-semibold mb-6">Ordered Products</h2>
-
           <div className="space-y-6">
             {order.items.map((item, index) => (
               <div
@@ -141,15 +147,12 @@ const AdminOrderDetailsPage = () => {
                   alt={item.title}
                   className="w-20 h-20 rounded-xl object-cover"
                 />
-
                 <div className="flex-1">
                   <h3 className="font-semibold">{item.title}</h3>
-
                   <p>Size: {item.size}</p>
                   <p>Color: {item.color}</p>
                   <p>Qty: {item.quantity}</p>
                 </div>
-
                 <div>PKR {item.price}</div>
               </div>
             ))}
@@ -159,21 +162,21 @@ const AdminOrderDetailsPage = () => {
         {/* ORDER SUMMARY */}
         <div className="bg-white p-6 rounded-3xl border">
           <h2 className="text-xl font-semibold mb-6">Order Summary</h2>
-
           <div className="space-y-3">
             <div className="flex justify-between">
               <span>Payment Method</span>
-              <span>{order.paymentMethod}</span>
+              <span className="font-semibold">
+                {getPaymentDisplay(order.paymentMethod)}
+              </span>
             </div>
 
             <div className="flex justify-between">
-              <span>Status</span>
+              <span>Order Status</span>
               <span>{order.status}</span>
             </div>
 
             <div>
               <label className="block mb-2 font-medium">Courier Company</label>
-
               <input
                 type="text"
                 value={courierCompany}
@@ -185,7 +188,6 @@ const AdminOrderDetailsPage = () => {
 
             <div>
               <label className="block mb-2 font-medium">Tracking Number</label>
-
               <input
                 type="text"
                 value={trackingNumber}

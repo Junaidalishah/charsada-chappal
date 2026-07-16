@@ -50,11 +50,12 @@ const Navbar = () => {
       <nav className="fixed top-0 z-[9999] w-full border-b bg-[#fbf9f5]/80 shadow-md backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
           {/* LOGO */}
-          <NavLink
-            to="/"
-            className="font-serif text-base sm:text-lg md:text-2xl font-bold truncate max-w-[160px] sm:max-w-none"
-          >
-            Charsadda Chappal
+          <NavLink to="/" className="flex items-center shrink-0">
+            <img
+              src="/images/logo.png"
+              alt="Charsadda Chappal"
+              className="h-14 w-auto"
+            />
           </NavLink>
 
           {/* DESKTOP LINKS */}
