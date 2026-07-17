@@ -12,7 +12,6 @@ const Orders = () => {
   const fetchOrders = async () => {
     try {
       const { data } = await api.get("/orders");
-
       setOrders(data);
     } catch (error) {
       console.log(error.response?.data || error.message);
@@ -23,14 +22,12 @@ const Orders = () => {
 
   // ================= UPDATE STATUS =================
   const updateStatus = async (id, status) => {
-    console.log("Updating:", id, status);
-
     try {
       await api.put(`/orders/${id}`, { status });
-
-      fetchOrders();
+      fetchOrders(); // Refresh list after update
     } catch (error) {
       console.log(error.response?.data || error.message);
+      alert("Failed to update status");
     }
   };
 
@@ -39,19 +36,17 @@ const Orders = () => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this order?",
     );
-
     if (!confirmDelete) return;
 
     try {
       await api.delete(`/orders/${id}`);
-
       fetchOrders();
     } catch (error) {
       console.log(error.response?.data || error.message);
+      alert("Failed to delete order");
     }
   };
 
-  // ================= USE EFFECT =================
   useEffect(() => {
     fetchOrders();
   }, []);
@@ -59,12 +54,10 @@ const Orders = () => {
   return (
     <DashboardLayout>
       <div className="space-y-6">
-        {/* TOP */}
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold text-[#061b0e]">
             Orders
           </h1>
-
           <p className="mt-1 text-sm text-gray-500">
             Track and manage customer orders
           </p>
@@ -72,6 +65,7 @@ const Orders = () => {
 
         {/* TABLE */}
         <div className="rounded-3xl border border-black/5 bg-white p-6 shadow-sm">
+          {/* Mobile View */}
           <div className="space-y-4 lg:hidden">
             {orders.map((order) => (
               <div
@@ -80,7 +74,6 @@ const Orders = () => {
               >
                 <div className="flex justify-between">
                   <h3 className="font-semibold">#{order._id.slice(-6)}</h3>
-
                   <span
                     className={`rounded-full px-3 py-1 text-xs font-medium ${
                       order.status === "Delivered"
@@ -98,11 +91,9 @@ const Orders = () => {
                   <p>
                     <strong>Customer:</strong> {order.customerName}
                   </p>
-
                   <p>
                     <strong>Phone:</strong> {order.phone}
                   </p>
-
                   <p>
                     <strong>Amount:</strong> PKR {order.totalAmount}
                   </p>
@@ -129,7 +120,6 @@ const Orders = () => {
                   >
                     View
                   </Link>
-
                   <button
                     onClick={() => deleteOrder(order._id)}
                     className="flex-1 rounded-xl bg-red-600 py-2 text-white"
@@ -141,6 +131,7 @@ const Orders = () => {
             ))}
           </div>
 
+          {/* Desktop Table - WITHOUT Payment Method Column */}
           <div className="hidden lg:block overflow-x-auto">
             <table className="w-full min-w-[700px]">
               <thead>
@@ -155,7 +146,6 @@ const Orders = () => {
                   <th className="pb-4">Delete</th>
                 </tr>
               </thead>
-
               <tbody>
                 {loading ? (
                   <tr>
@@ -175,13 +165,9 @@ const Orders = () => {
                       <td className="py-5 font-medium text-[#061b0e]">
                         #{order._id.slice(-6)}
                       </td>
-
                       <td>{order.customerName}</td>
-
                       <td>{order.phone}</td>
-
                       <td>PKR {order.totalAmount}</td>
-
                       <td>
                         <span
                           className={`rounded-full px-3 py-1 text-xs font-medium ${
@@ -195,7 +181,6 @@ const Orders = () => {
                           {order.status}
                         </span>
                       </td>
-
                       <td>
                         <select
                           value={order.status}
@@ -215,30 +200,18 @@ const Orders = () => {
                           <option value="Cancelled">Cancelled</option>
                         </select>
                       </td>
-
                       <td>
                         <Link
                           to={`/admin/orders/${order._id}`}
-                          className="
-rounded-xl bg-[#061b0e]
-px-3 py-2 sm:px-4
-text-xs sm:text-sm
-text-white
-"
+                          className="rounded-xl bg-[#061b0e] px-3 py-2 text-xs sm:text-sm text-white hover:bg-black"
                         >
                           View
                         </Link>
                       </td>
-
                       <td>
                         <button
                           onClick={() => deleteOrder(order._id)}
-                          className="
-rounded-xl bg-red-600
-px-3 py-2 sm:px-4
-text-xs sm:text-sm
-text-white hover:bg-red-700
-"
+                          className="rounded-xl bg-red-600 px-3 py-2 text-xs sm:text-sm text-white hover:bg-red-700"
                         >
                           Delete
                         </button>

@@ -122,14 +122,6 @@ const AdminOrderDetailsPage = () => {
                 {getPaymentDisplay(order.paymentMethod)}
               </span>
             </p>
-            {order.paymentMethod === "online" && (
-              <p>
-                <strong>Payment Status:</strong>{" "}
-                <span className="capitalize">
-                  {order.paymentStatus || "pending"}
-                </span>
-              </p>
-            )}
           </div>
         </div>
 
