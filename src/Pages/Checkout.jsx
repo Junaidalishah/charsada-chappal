@@ -20,7 +20,8 @@ const Checkout = () => {
   const navigate = useNavigate();
 
   // Payment Method State
-  const [paymentMethod, setPaymentMethod] = useState("cod");
+  // const [paymentMethod, setPaymentMethod] = useState("cod");
+  const [paymentMethod, setPaymentMethod] = useState("online");
 
   // ================= PROTECT CHECKOUT =================
   useEffect(() => {
@@ -254,7 +255,7 @@ const Checkout = () => {
 
             <div className="space-y-4">
               {/* Cash on Delivery */}
-              <label className="flex items-start gap-3 cursor-pointer">
+              {/* <label className="flex items-start gap-3 cursor-pointer">
                 <input
                   type="radio"
                   name="payment"
@@ -268,7 +269,7 @@ const Checkout = () => {
                     Pay when your order arrives.
                   </p>
                 </div>
-              </label>
+              </label> */}
 
               {/* Online Payment */}
               <label className="flex items-start gap-3 cursor-pointer">
