@@ -120,7 +120,11 @@ export default function Login() {
             <div className="absolute inset-0 bg-black/30 z-10" />
 
             <img
-              src="/images/sign1.png"
+              src="/images/sign1-1600.webp"
+              srcSet="/images/sign1-800.webp 800w, /images/sign1-1600.webp 1162w"
+              sizes="60vw"
+              width="1162"
+              height="1354"
               alt="Artisan"
               className="absolute inset-0 w-full h-full object-cover"
             />

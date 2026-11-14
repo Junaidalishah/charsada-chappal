@@ -1,56 +1,61 @@
+import { Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import { CartProvider } from "./context/CartContext";
 import { AuthProvider } from "./context/AuthContext";
 import WhatsAppButton from "./components/WhatsAppButton";
-import AIChat from "./components/AIChat";
-
-/* STORE FRONT */
 import Home from "./Pages/Home";
-import Shop from "./Pages/Shop";
-import Collection from "./Pages/Collection";
-import ProductDetail from "./components/ProductDetail";
-import Cart from "./Pages/cart";
-import Checkout from "./Pages/Checkout";
-import ReturnsRefunds from "./Pages/ReturnsRefunds";
-import PrivacyPolicy from "./Pages/PrivacyPolicy";
-import Contact from "./Pages/Contact";
-import ProfilePage from "./Pages/ProfilePage";
-import OrdersPage from "./Pages/OrdersPage";
-import OrderDetailsPage from "./Pages/admin/OrderDetailsPage";
-
-/* AUTH */
-import Login from "./Pages/Login";
-import SignUp from "./Pages/SignUp";
-import ForgotPassword from "./Pages/ForgotPassword";
-import ResetPassword from "./Pages/ResetPassword";
-
-/* ADMIN PAGES */
 import AdminRoute from "./components/AdminRoute";
-import Dashboard from "./Pages/admin/Dashboard";
-import Products from "./Pages/admin/Products";
-import Orders from "./Pages/admin/Orders";
-import Customers from "./Pages/admin/Customers";
-import Analytics from "./Pages/admin/Analytics";
-import Reviews from "./Pages/admin/Reviews";
-import Messages from "./Pages/admin/Messages";
-import AdminOrderDetailsPage from "./Pages/admin/AdminOrderDetailsPage";
-import AdminProfilePage from "./Pages/admin/ProfilePage";
-import AdminManagement from "./Pages/admin/AdminManagement";
 import AnalyticsTracker from "./components/AnalyticsTracker";
+import AgentTools from "./agent/AgentTools";
+import {
+  AIChat,
+  Shop,
+  Collection,
+  ProductDetail,
+  Cart,
+  Checkout,
+  ReturnsRefunds,
+  PrivacyPolicy,
+  Contact,
+  ProfilePage,
+  OrdersPage,
+  OrderDetailsPage,
+  Login,
+  SignUp,
+  ForgotPassword,
+  ResetPassword,
+  Dashboard,
+  Products,
+  Orders,
+  Customers,
+  Analytics,
+  Reviews,
+  Messages,
+  AdminOrderDetailsPage,
+  AdminProfilePage,
+  AdminManagement,
+  Guide,
+} from "./pages";
 
-function App() {
+// Everything inside the router; shared by the browser entry (BrowserRouter)
+// and the build-time prerenderer (StaticRouter in entry-server.jsx).
+export function AppShell(props) {
+  const { Router, routerProps = {}, withWidgets = true } = props;
   return (
     <AuthProvider>
       <CartProvider>
-        <BrowserRouter>
+        <Router {...routerProps}>
           <AnalyticsTracker />
           <ScrollToTop />
+          <AgentTools />
+          <Suspense fallback={<div className="min-h-screen bg-[#f8f6f1]" aria-busy="true" />}>
           <Routes>
             {/* ================= STORE FRONT ================= */}
             <Route path="/" element={<Home />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/collections" element={<Collection />} />
+            <Route path="/charsadda-chappal-guide" element={<Guide />} />
             <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
@@ -149,12 +154,23 @@ function App() {
               }
             />
           </Routes>
-          <WhatsAppButton />
-          <AIChat />
-        </BrowserRouter>
+          </Suspense>
+          {withWidgets && (
+            <>
+              <WhatsAppButton />
+              <Suspense fallback={null}>
+                <AIChat />
+              </Suspense>
+            </>
+          )}
+        </Router>
       </CartProvider>
     </AuthProvider>
   );
+}
+
+function App() {
+  return <AppShell Router={BrowserRouter} />;
 }
 
 export default App;

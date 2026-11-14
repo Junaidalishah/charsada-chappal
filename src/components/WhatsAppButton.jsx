@@ -27,6 +27,7 @@ const WhatsAppButton = () => {
           href={whatsappURL}
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="Chat with Charsadda Chappal on WhatsApp"
           className="
             fixed bottom-5 right-5 z-50
             flex items-center justify-center
@@ -38,10 +39,10 @@ const WhatsAppButton = () => {
             animate-bounce
           "
         >
-          <Phone size={24} />
+          <Phone size={24} aria-hidden="true" />
 
           {/* glow effect */}
-          <span className="absolute w-full h-full rounded-full bg-[#25D366] opacity-30 animate-ping"></span>
+          <span aria-hidden="true" className="absolute w-full h-full rounded-full bg-[#25D366] opacity-30 animate-ping"></span>
         </a>
       )}
     </>

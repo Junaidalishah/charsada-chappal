@@ -30,8 +30,9 @@ const features = [
 
 const WhyChooseUs = () => {
   return (
-    <section className="bg-[#f8f6f1] py-16 md:py-20 lg:py-28 px-4 sm:px-6">
+    <section aria-labelledby="why-heading" className="bg-[#f8f6f1] py-16 md:py-20 lg:py-28 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto">
+        <h2 id="why-heading" className="sr-only">Why buy from Charsadda Chappal</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-10">
           {features.map((feature, index) => (
             <div
@@ -58,7 +59,7 @@ const WhyChooseUs = () => {
     bg-[#f4f1e8]
   "
               >
-                <span className="material-symbols-outlined leading-none text-3xl md:text-4xl text-[#061b0e]">
+                <span aria-hidden="true" className="material-symbols-outlined leading-none text-3xl md:text-4xl text-[#061b0e]">
                   {feature.icon}
                 </span>
               </div>

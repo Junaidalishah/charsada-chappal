@@ -1,0 +1,164 @@
+[
+  {
+    "_id": "6a2653ddd3afdbd1fd576f9d",
+    "name": "kaptaan chappal",
+    "price": 5000,
+    "stock": 11,
+    "category": "kaptaan chappal",
+    "description": "Handcrafted from premium genuine leather, Kaptaan Chappal offers the perfect combination of comfort, durability, and traditional elegance. Its iconic design and superior craftsmanship make it an ideal choice for both casual and formal wear.",
+    "details": [],
+    "sizes": [
+      "PAK 6 / EU 39",
+      "PAK 9 / EU 42",
+      "PAK 13 / EU 46"
+    ],
+    "disabledSizes": [],
+    "colors": [
+      {
+        "name": "Black",
+        "images": [
+          "https://res.cloudinary.com/drujzy5lq/image/upload/v1780896706/blihdzbxq3qcdurxzm9m.png",
+          "https://res.cloudinary.com/drujzy5lq/image/upload/v1780896727/grcfepxyxwz4tdq0pelz.png"
+        ],
+        "_id": "6a2653ddd3afdbd1fd576f9e"
+      }
+    ],
+    "image": "https://res.cloudinary.com/drujzy5lq/image/upload/v1780896706/blihdzbxq3qcdurxzm9m.png",
+    "featured": false,
+    "reviews": [],
+    "createdAt": "2026-06-08T05:32:13.163Z",
+    "updatedAt": "2026-10-27T09:28:12.360Z",
+    "__v": 1
+  },
+  {
+    "_id": "6a265050d3afdbd1fd576f1a",
+    "name": "Gol T",
+    "price": 4000,
+    "stock": 5,
+    "category": "Gol T",
+    "description": "Our most popular traditional handmade chappals, made from authentic leather. Discover a perfect blend of comfort and sophistication like never before!",
+    "details": [],
+    "sizes": [
+      "PAK 6 / EU 39",
+      "PAK 8 / EU 41",
+      "PAK 10 / EU 43",
+      "PAK 12 / EU 45",
+      "PAK 13 / EU 46",
+      "PAK 11 / EU 44",
+      "PAK 9 / EU 42",
+      "PAK 7 / EU 40"
+    ],
+    "disabledSizes": [],
+    "colors": [
+      {
+        "name": "Brown",
+        "images": [
+          "https://res.cloudinary.com/drujzy5lq/image/upload/v1780895820/i0mrisvuwzprhakcym0o.png"
+        ],
+        "_id": "6a265050d3afdbd1fd576f1b"
+      }
+    ],
+    "image": "https://res.cloudinary.com/drujzy5lq/image/upload/v1780895820/i0mrisvuwzprhakcym0o.png",
+    "featured": true,
+    "reviews": [],
+    "createdAt": "2026-06-08T05:17:04.517Z",
+    "updatedAt": "2026-11-13T15:17:58.172Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a2643bcd3afdbd1fd576bd9",
+    "name": "Gol T",
+    "price": 4000,
+    "stock": 8,
+    "category": "Gol T",
+    "description": "Our most popular traditional handmade chappals, made from authentic leather.\n\nDiscover a perfect blend of comfort and sophistication like never before!\n",
+    "details": [],
+    "sizes": [
+      "PAK 6 / EU 39",
+      "PAK 7 / EU 40",
+      "PAK 8 / EU 41",
+      "PAK 9 / EU 42",
+      "PAK 13 / EU 46",
+      "PAK 12 / EU 45",
+      "PAK 11 / EU 44",
+      "PAK 10 / EU 43"
+    ],
+    "disabledSizes": [],
+    "colors": [
+      {
+        "name": "Black",
+        "images": [
+          "https://res.cloudinary.com/drujzy5lq/image/upload/v1780892023/b0aw22cxd3nvtxyc3thg.png",
+          "https://res.cloudinary.com/drujzy5lq/image/upload/v1780892051/wbggpnhashmbfqwq6bqs.png"
+        ],
+        "_id": "6a2643bcd3afdbd1fd576bda"
+      },
+      {
+        "name": "Brown",
+        "images": [
+          "https://res.cloudinary.com/drujzy5lq/image/upload/v1780892597/xjb88dd8ect7hgifi9tr.png"
+        ],
+        "_id": "6a2643bcd3afdbd1fd576bdb"
+      }
+    ],
+    "image": "https://res.cloudinary.com/drujzy5lq/image/upload/v1780892023/b0aw22cxd3nvtxyc3thg.png",
+    "featured": true,
+    "reviews": [
+      {
+        "_id": "6a2e82088c2206ee3516e1a2",
+        "user": "6a26f64d630b60fd4d636441",
+        "name": "Amir",
+        "rating": 5,
+        "comment": "  best article",
+        "createdAt": "2026-06-14T10:27:20.669Z"
+      }
+    ],
+    "createdAt": "2026-06-08T04:23:24.170Z",
+    "updatedAt": "2026-11-13T15:43:35.202Z",
+    "__v": 3
+  },
+  {
+    "_id": "6a13f58355be8e11d7ea04f3",
+    "name": "Zardari Chappal",
+    "price": 4000,
+    "stock": 9,
+    "category": "Zardari Chappal",
+    "description": "Premium quality handmade traditional chappals crafted with pure genuine leather.\nBuilt for comfort, designed for elegance, and made to last for years.",
+    "details": [],
+    "sizes": [
+      "PAK 6 / EU 39",
+      "PAK 7 / EU 40",
+      "PAK 8 / EU 41",
+      "PAK 11 / EU 44",
+      "PAK 10 / EU 43",
+      "PAK 9 / EU 42",
+      "PAK 12 / EU 45",
+      "PAK 13 / EU 46"
+    ],
+    "disabledSizes": [],
+    "colors": [
+      {
+        "name": "Brown",
+        "images": [
+          "https://res.cloudinary.com/drujzy5lq/image/upload/v1779692846/c88zg0n9qctclcnb9ima.png",
+          "https://res.cloudinary.com/drujzy5lq/image/upload/v1779692856/i3y3vqvdtgdc2vbalhdi.jpg"
+        ],
+        "_id": "6a13f58355be8e11d7ea04f4"
+      },
+      {
+        "name": "Black",
+        "images": [
+          "https://res.cloudinary.com/drujzy5lq/image/upload/v1779692896/kqtzd9hei9nfiflxbyfj.png",
+          "https://res.cloudinary.com/drujzy5lq/image/upload/v1779692925/rxkefynjugfgj7eo6xsk.png"
+        ],
+        "_id": "6a13f58355be8e11d7ea04f5"
+      }
+    ],
+    "image": "https://res.cloudinary.com/drujzy5lq/image/upload/v1779692846/c88zg0n9qctclcnb9ima.png",
+    "featured": true,
+    "reviews": [],
+    "createdAt": "2026-05-25T07:08:51.914Z",
+    "updatedAt": "2026-08-04T19:48:08.879Z",
+    "__v": 3
+  }
+]

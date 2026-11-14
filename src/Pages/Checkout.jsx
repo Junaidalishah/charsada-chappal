@@ -193,6 +193,9 @@ const Checkout = () => {
 
             <input
               name="customerName"
+            aria-label="Full name"
+            autoComplete="name"
+            toolparamdescription="Recipient's full name"
               value={formData.customerName}
               onChange={handleChange}
               className="w-full rounded-xl border p-4 outline-none focus:border-black"
@@ -202,6 +205,9 @@ const Checkout = () => {
 
             <input
               name="phone"
+            aria-label="Phone number"
+            autoComplete="tel"
+            toolparamdescription="Pakistani mobile number for delivery and WhatsApp confirmation, e.g. 03001234567"
               value={formData.phone}
               onChange={handleChange}
               className="w-full rounded-xl border p-4 outline-none focus:border-black"
@@ -212,6 +218,9 @@ const Checkout = () => {
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <input
                 name="city"
+              aria-label="City"
+              autoComplete="address-level2"
+              toolparamdescription="Delivery city in Pakistan"
                 value={formData.city}
                 onChange={handleChange}
                 className="w-full rounded-xl border p-4 outline-none focus:border-black"
@@ -221,6 +230,9 @@ const Checkout = () => {
 
               <input
                 name="province"
+              aria-label="Province"
+              autoComplete="address-level1"
+              toolparamdescription="Province, e.g. Punjab, Sindh, Khyber Pakhtunkhwa, Balochistan"
                 value={formData.province}
                 onChange={handleChange}
                 className="w-full rounded-xl border p-4 outline-none focus:border-black"
@@ -231,6 +243,9 @@ const Checkout = () => {
 
             <textarea
               name="address"
+            aria-label="Full address"
+            autoComplete="street-address"
+            toolparamdescription="Full street delivery address"
               value={formData.address}
               onChange={handleChange}
               rows="4"
@@ -241,6 +256,9 @@ const Checkout = () => {
 
             <input
               name="email"
+            aria-label="Email address"
+            autoComplete="email"
+            toolparamdescription="Email for the order confirmation"
               value={formData.email}
               onChange={handleChange}
               className="w-full rounded-xl border p-4 outline-none focus:border-black"

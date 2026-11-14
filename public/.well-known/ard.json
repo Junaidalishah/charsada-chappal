@@ -1,0 +1,28 @@
+{
+  "entries": [
+    {
+      "identifier": "urn:air:charsaddachappal.store:skills:shop-charsadda-chappal",
+      "displayName": "Shop Charsadda Chappal",
+      "type": "application/agent-skills+md",
+      "url": "https://www.charsaddachappal.store/.well-known/agent-skills/shop-charsadda-chappal.md",
+      "description": "How an AI agent can browse, compare and buy handmade Charsadda / Peshawari leather chappals (Kaptaan, Zardari, Gol T) from charsaddachappal.store, including WebMCP tools, sizes, prices in PKR, delivery and returns.",
+      "representativeQueries": [
+        "buy a handmade Charsadda chappal online in Pakistan",
+        "Kaptaan chappal price in Pakistan",
+        "where to order genuine leather Peshawari chappal with delivery",
+        "Charsadda chappal size guide PAK to EU"
+      ],
+      "capabilities": [
+        "search_products",
+        "get_product_details",
+        "add_to_cart",
+        "view_cart",
+        "go_to_checkout",
+        "get_store_info"
+      ],
+      "tags": ["ecommerce", "footwear", "charsadda chappal", "peshawari chappal", "pakistan"],
+      "version": "1.0.0",
+      "updatedAt": "2026-11-14T00:00:00Z"
+    }
+  ]
+}

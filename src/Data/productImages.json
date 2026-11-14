@@ -1,0 +1,22 @@
+{
+  "widths": [
+    320,
+    480,
+    640,
+    800,
+    1000,
+    1400
+  ],
+  "images": {
+    "https://res.cloudinary.com/drujzy5lq/image/upload/v1780896706/blihdzbxq3qcdurxzm9m.png": "37df7b32828c",
+    "https://res.cloudinary.com/drujzy5lq/image/upload/v1780896727/grcfepxyxwz4tdq0pelz.png": "0828a8898569",
+    "https://res.cloudinary.com/drujzy5lq/image/upload/v1780895820/i0mrisvuwzprhakcym0o.png": "48f4d7c9d297",
+    "https://res.cloudinary.com/drujzy5lq/image/upload/v1780892023/b0aw22cxd3nvtxyc3thg.png": "99ed5ca80887",
+    "https://res.cloudinary.com/drujzy5lq/image/upload/v1780892051/wbggpnhashmbfqwq6bqs.png": "8f2f4e4cd3e9",
+    "https://res.cloudinary.com/drujzy5lq/image/upload/v1780892597/xjb88dd8ect7hgifi9tr.png": "243548115bfd",
+    "https://res.cloudinary.com/drujzy5lq/image/upload/v1779692846/c88zg0n9qctclcnb9ima.png": "8b992730d97d",
+    "https://res.cloudinary.com/drujzy5lq/image/upload/v1779692856/i3y3vqvdtgdc2vbalhdi.jpg": "9241b4fb97f9",
+    "https://res.cloudinary.com/drujzy5lq/image/upload/v1779692896/kqtzd9hei9nfiflxbyfj.png": "3f213bc6866a",
+    "https://res.cloudinary.com/drujzy5lq/image/upload/v1779692925/rxkefynjugfgj7eo6xsk.png": "407abf4f6f26"
+  }
+}
