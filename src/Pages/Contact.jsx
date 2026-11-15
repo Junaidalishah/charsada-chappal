@@ -90,7 +90,7 @@ const Contact = () => {
 
             <p className="text-gray-600"><a href="tel:+923102991736" className="underline-offset-4 hover:underline">+92 310 2991736</a></p>
 
-            <p className="text-gray-600 mt-2"><a href="tel:+923169852047" className="underline-offset-4 hover:underline">+92 316 985 2047</a></p>
+            <p className="text-gray-600 mt-2">Call or WhatsApp</p>
           </div>
 
           <div className="bg-[#f8f6f1] rounded-3xl p-8 text-center">

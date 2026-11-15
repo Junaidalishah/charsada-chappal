@@ -83,13 +83,6 @@ const Footer = () => {
             </a>
 
             <a
-              href="tel:+923169852047"
-              className="block transition hover:opacity-60"
-            >
-              +92 316 985 2047
-            </a>
-
-            <a
               href="mailto:infocharsaddachappal@gmail.com"
               className="block transition hover:opacity-60"
             >

@@ -12,8 +12,8 @@ export const BUSINESS = {
   image: `${SITE_URL}/images/og-image.jpg`,
   description:
     "Charsadda Chappal is an online store for handmade Charsadda and Peshawari chappals — Kaptaan, Zardari and Gol T styles — made from genuine leather by artisans in Charsadda, Khyber Pakhtunkhwa, and delivered across Pakistan.",
-  phones: ["+92 310 2991736", "+92 316 985 2047"],
-  phonesE164: ["+923102991736", "+923169852047"],
+  phones: ["+92 310 2991736"],
+  phonesE164: ["+923102991736"],
   whatsapp: "923102991736",
   email: "infocharsaddachappal@gmail.com",
   locality: "Charsadda",

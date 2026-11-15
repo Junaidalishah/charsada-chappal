@@ -14,6 +14,7 @@ import { Phone } from "lucide-react";
 import Seo from "../seo/Seo";
 import { graph, productSchema, breadcrumbSchema, organizationSchema, productName } from "../seo/schema.js";
 import { getProductsSync, loadProducts } from "../hooks/useProducts";
+import { trackMeta } from "../analytics";
 import { cld, cldSrcSet } from "../utils/image";
 
 const ProductDetail = () => {
@@ -119,8 +120,8 @@ const ProductDetail = () => {
   }, [id, userInfo]);
 
   useEffect(() => {
-    if (product && window.fbq) {
-      window.fbq("track", "ViewContent", {
+    if (product) {
+      trackMeta("ViewContent", {
         content_name: product.name,
         content_ids: [product._id],
         content_type: "product",
@@ -128,7 +129,9 @@ const ProductDetail = () => {
         currency: "PKR",
       });
     }
-  }, [product]);
+    // Once per product (product is replaced when live data arrives).
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [product?._id]);
 
   // ================= LOADING =================
   if (loading) {
@@ -165,14 +168,13 @@ const ProductDetail = () => {
       size: selectedSize,
     });
 
-    if (window.fbq) {
-      window.fbq("track", "AddToCart", {
-        content_name: product.name,
-        content_ids: [product._id],
-        value: product.price,
-        currency: "PKR",
-      });
-    }
+    trackMeta("AddToCart", {
+      content_name: product.name,
+      content_ids: [product._id],
+      content_type: "product",
+      value: product.price,
+      currency: "PKR",
+    });
 
     window.dispatchEvent(new Event("openCart"));
   };

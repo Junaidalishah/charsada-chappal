@@ -15,10 +15,8 @@ import contactRoutes from "./routes/contactRoutes.js";
 import notificationRoutes from "./routes/notificationRoutes.js";
 import sitemapRoutes from "./routes/sitemapRoutes.js";
 import aiRoutes from "./routes/aiRoutes.js";
+import metaRoutes from "./routes/metaRoutes.js";
 
-console.log("EMAIL_USER =", process.env.EMAIL_USER);
-console.log("EMAIL_PASS =", process.env.EMAIL_PASS);
-console.log("ADMIN_EMAIL =", process.env.ADMIN_EMAIL);
 
 const app = express();
 
@@ -39,6 +37,8 @@ app.use("/api/newsletter", newsletterRoutes);
 app.use("/api/contact", contactRoutes);
 
 app.use("/api/ai", aiRoutes);
+
+app.use("/api/meta", metaRoutes);
 
 app.use("/api/notifications", notificationRoutes);
 

@@ -11,6 +11,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { formatCurrency } from "../utils/formatCurrency";
+import { trackMeta } from "../analytics";
 import API_URL from "../config/api";
 
 const Checkout = () => {
@@ -70,8 +71,8 @@ const Checkout = () => {
   const total = subtotal + shipping;
 
   useEffect(() => {
-    if (window.fbq && total > 0) {
-      window.fbq("track", "InitiateCheckout", {
+    if (total > 0) {
+      trackMeta("InitiateCheckout", {
         value: total,
         currency: "PKR",
         num_items: cart.length,
@@ -155,12 +156,17 @@ const Checkout = () => {
       if (response.ok) {
         showToast("Order placed successfully");
 
-        if (window.fbq) {
-          window.fbq("track", "Purchase", {
+        trackMeta(
+          "Purchase",
+          {
             value: total,
             currency: "PKR",
-          });
-        }
+            content_ids: cart.map((i) => i.id),
+            content_type: "product",
+            num_items: cart.reduce((n, i) => n + (Number(i.quantity) || 1), 0),
+          },
+          { email: formData.email, phone: formData.phone, city: formData.city },
+        );
 
         clearCart();
         navigate("/");

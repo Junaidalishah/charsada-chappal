@@ -109,6 +109,15 @@ const PrivacyPolicy = () => {
               We may use trusted third-party services such as payment providers,
               delivery partners, and analytics tools to operate our business.
             </p>
+
+            <p className="mt-4">
+              We use Google Analytics to understand how visitors use our site,
+              and the Meta (Facebook) Pixel and Conversions API to measure our
+              advertising. When you place an order, your email address, phone
+              number and city are converted into an irreversible hash before
+              being shared with Meta for ad measurement; we never share your
+              address or payment details.
+            </p>
           </div>
 
           {/* RIGHTS */}
@@ -140,7 +149,7 @@ const PrivacyPolicy = () => {
               </p>
 
               <p className="font-semibold text-[#061b0e]">
-                WhatsApp: +92 316 985 2047
+                Email: infocharsaddachappal@gmail.com
               </p>
             </div>
           </div>
