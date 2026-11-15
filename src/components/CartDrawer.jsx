@@ -1,9 +1,13 @@
 import { useCart } from "../context/CartContext";
+import { cld } from "../utils/image";
 import { useNavigate } from "react-router-dom";
+import useHydrated from "../hooks/useHydrated";
 import { formatCurrency } from "../utils/formatCurrency";
 
 const CartDrawer = ({ isOpen, onClose }) => {
-  const { cart, removeFromCart } = useCart();
+  const { cart: storedCart, removeFromCart } = useCart();
+  const hydrated = useHydrated();
+  const cart = hydrated ? storedCart : [];
   const navigate = useNavigate();
 
   const subtotal = cart.reduce((sum, item) => {
@@ -16,6 +20,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
     <>
       {/* OVERLAY */}
       <div
+        aria-hidden="true"
         onClick={onClose}
         className={`fixed inset-0 bg-black/40 z-40 transition-opacity ${
           isOpen ? "opacity-100 visible" : "opacity-0 invisible"
@@ -24,6 +29,10 @@ const CartDrawer = ({ isOpen, onClose }) => {
 
       {/* DRAWER */}
       <div
+        role="dialog"
+        aria-label="Shopping bag"
+        aria-hidden={!isOpen}
+        inert={!isOpen}
         className={`fixed top-0 right-0 h-full w-full max-w-[380px] bg-white z-50 shadow-xl
   transform transition-transform duration-300 ${
     isOpen ? "translate-x-0" : "translate-x-full"
@@ -32,8 +41,13 @@ const CartDrawer = ({ isOpen, onClose }) => {
         {/* HEADER */}
         <div className="flex justify-between items-center p-6 border-b">
           <h2 className="text-lg font-medium">Your Bag</h2>
-          <button onClick={onClose} className="text-xl cursor-pointer">
-            ✕
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close shopping bag"
+            className="text-xl cursor-pointer"
+          >
+            <span aria-hidden="true">✕</span>
           </button>
         </div>
 
@@ -45,7 +59,10 @@ const CartDrawer = ({ isOpen, onClose }) => {
             cart.map((item, i) => (
               <div key={i} className="flex gap-4">
                 <img
-                  src={item.image}
+                  src={cld(item.image, 160)}
+                  width="80"
+                  height="96"
+                  loading="lazy"
                   className="w-20 h-24 object-cover"
                   alt={item.title}
                 />
@@ -66,7 +83,9 @@ const CartDrawer = ({ isOpen, onClose }) => {
                     </span>
 
                     <button
+                      type="button"
                       onClick={() => removeFromCart(item)}
+                      aria-label={`Remove ${item.title} from bag`}
                       className="text-xs text-red-500 cursor-pointer"
                     >
                       Remove

@@ -1,49 +1,44 @@
 import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
-import ReactGA from "react-ga4";
 
 import "./index.css";
 import App from "./App.jsx";
+import { preloadRoute } from "./preload";
 import { ToastProvider } from "./context/ToastContext";
+import { initAnalytics } from "./analytics";
 
-// GA4 init
-ReactGA.initialize("G-DPNZJM55JZ");
+initAnalytics();
 
-// Meta Pixel
-const PIXEL_ID = "3263994340476127";
+const render = () => {
+  // Prerendered <title>/<meta>/JSON-LD exist for crawlers; React re-creates
+  // them per route, so drop the static copies to avoid duplicates.
+  document.head.querySelectorAll("[data-prerender]").forEach((el) => el.remove());
+  const container = document.getElementById("root");
+  const app = (
+    <StrictMode>
+      <ToastProvider>
+        <HelmetProvider>
+          <App />
+        </HelmetProvider>
+      </ToastProvider>
+    </StrictMode>
+  );
 
-(function () {
-  if (typeof window === "undefined") return;
-  if (window.fbq) return;
+  if (container.firstElementChild) {
+    // Prerendered page: adopt the existing DOM instead of repainting it, so the
+    // LCP image painted from HTML stays put. If anything differs (e.g. a
+    // returning visitor's cart), React quietly re-renders on the client.
+    hydrateRoot(container, app, {
+      onRecoverableError: (err) => {
+        if (import.meta.env.DEV) console.warn("[hydration]", err);
+      },
+    });
+  } else {
+    createRoot(container).render(app);
+  }
+};
 
-  window.fbq = function () {
-    window.fbq.callMethod
-      ? window.fbq.callMethod.apply(window.fbq, arguments)
-      : window.fbq.queue.push(arguments);
-  };
-
-  window._fbq = window.fbq;
-  window.fbq.push = window.fbq;
-  window.fbq.loaded = true;
-  window.fbq.version = "2.0";
-  window.fbq.queue = [];
-
-  const script = document.createElement("script");
-  script.async = true;
-  script.src = "https://connect.facebook.net/en_US/fbevents.js";
-  document.head.appendChild(script);
-
-  window.fbq("init", PIXEL_ID);
-  window.fbq("track", "PageView");
-})();
-
-createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <ToastProvider>
-      <HelmetProvider>
-        <App />
-      </HelmetProvider>
-    </ToastProvider>
-  </StrictMode>,
-);
+// Load the current page's chunk first so hydration can match the prerendered
+// HTML synchronously (no Suspense fallback in between).
+preloadRoute(window.location.pathname).then(render);

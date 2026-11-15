@@ -22,12 +22,12 @@ export const CartProvider = ({ children }) => {
       if (existing) {
         return prev.map((p) =>
           p.id === item.id && p.size === item.size && p.color === item.color
-            ? { ...p, quantity: (p.quantity || 1) + 1 }
+            ? { ...p, quantity: (p.quantity || 1) + (Number(item.quantity) || 1) }
             : p,
         );
       }
 
-      return [...prev, { ...item, quantity: 1 }];
+      return [...prev, { ...item, quantity: Math.max(1, Number(item.quantity) || 1) }];
     });
   };
 

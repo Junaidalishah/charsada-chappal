@@ -15,10 +15,8 @@ import contactRoutes from "./routes/contactRoutes.js";
 import notificationRoutes from "./routes/notificationRoutes.js";
 import sitemapRoutes from "./routes/sitemapRoutes.js";
 import aiRoutes from "./routes/aiRoutes.js";
+import metaRoutes from "./routes/metaRoutes.js";
 
-console.log("EMAIL_USER =", process.env.EMAIL_USER);
-console.log("EMAIL_PASS =", process.env.EMAIL_PASS);
-console.log("ADMIN_EMAIL =", process.env.ADMIN_EMAIL);
 
 const app = express();
 
@@ -26,6 +24,16 @@ app.use(cors());
 app.use(express.json());
 
 // ROUTES
+// Lightweight health check for uptime pings (no database query).
+app.get("/api/health", (req, res) => {
+  res.set("Cache-Control", "no-store");
+  res.json({
+    status: "ok",
+    db: mongoose.connection.readyState === 1 ? "connected" : "disconnected",
+    uptime: Math.round(process.uptime()),
+  });
+});
+
 app.use("/api/orders", orderRoutes);
 
 app.use("/api/auth", authRoutes);
@@ -40,6 +48,8 @@ app.use("/api/contact", contactRoutes);
 
 app.use("/api/ai", aiRoutes);
 
+app.use("/api/meta", metaRoutes);
+
 app.use("/api/notifications", notificationRoutes);
 
 app.use("/", sitemapRoutes);
@@ -53,15 +63,12 @@ mongoose
   })
   .then(() => {
     console.log("MongoDB Connected");
-
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
-    });
   })
   .catch((err) => {
     console.error("MongoDB Error:", err);
   });
 
+// Listen once, immediately, so health checks answer even while MongoDB connects.
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

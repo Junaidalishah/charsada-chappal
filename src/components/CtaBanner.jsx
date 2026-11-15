@@ -61,6 +61,9 @@ const CtaBanner = () => {
             <div className="flex flex-col gap-4 sm:flex-row">
               <input
                 type="email"
+                name="email"
+                autoComplete="email"
+                aria-label="Email address for newsletter"
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -78,6 +81,7 @@ const CtaBanner = () => {
               />
 
               <button
+                type="button"
                 onClick={handleSubscribe}
                 disabled={loading}
                 className="

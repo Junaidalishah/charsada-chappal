@@ -11,6 +11,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { formatCurrency } from "../utils/formatCurrency";
+import { trackMeta } from "../analytics";
 import API_URL from "../config/api";
 
 const Checkout = () => {
@@ -70,8 +71,8 @@ const Checkout = () => {
   const total = subtotal + shipping;
 
   useEffect(() => {
-    if (window.fbq && total > 0) {
-      window.fbq("track", "InitiateCheckout", {
+    if (total > 0) {
+      trackMeta("InitiateCheckout", {
         value: total,
         currency: "PKR",
         num_items: cart.length,
@@ -155,12 +156,17 @@ const Checkout = () => {
       if (response.ok) {
         showToast("Order placed successfully");
 
-        if (window.fbq) {
-          window.fbq("track", "Purchase", {
+        trackMeta(
+          "Purchase",
+          {
             value: total,
             currency: "PKR",
-          });
-        }
+            content_ids: cart.map((i) => i.id),
+            content_type: "product",
+            num_items: cart.reduce((n, i) => n + (Number(i.quantity) || 1), 0),
+          },
+          { email: formData.email, phone: formData.phone, city: formData.city },
+        );
 
         clearCart();
         navigate("/");
@@ -193,6 +199,9 @@ const Checkout = () => {
 
             <input
               name="customerName"
+            aria-label="Full name"
+            autoComplete="name"
+            toolparamdescription="Recipient's full name"
               value={formData.customerName}
               onChange={handleChange}
               className="w-full rounded-xl border p-4 outline-none focus:border-black"
@@ -202,6 +211,9 @@ const Checkout = () => {
 
             <input
               name="phone"
+            aria-label="Phone number"
+            autoComplete="tel"
+            toolparamdescription="Pakistani mobile number for delivery and WhatsApp confirmation, e.g. 03001234567"
               value={formData.phone}
               onChange={handleChange}
               className="w-full rounded-xl border p-4 outline-none focus:border-black"
@@ -212,6 +224,9 @@ const Checkout = () => {
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <input
                 name="city"
+              aria-label="City"
+              autoComplete="address-level2"
+              toolparamdescription="Delivery city in Pakistan"
                 value={formData.city}
                 onChange={handleChange}
                 className="w-full rounded-xl border p-4 outline-none focus:border-black"
@@ -221,6 +236,9 @@ const Checkout = () => {
 
               <input
                 name="province"
+              aria-label="Province"
+              autoComplete="address-level1"
+              toolparamdescription="Province, e.g. Punjab, Sindh, Khyber Pakhtunkhwa, Balochistan"
                 value={formData.province}
                 onChange={handleChange}
                 className="w-full rounded-xl border p-4 outline-none focus:border-black"
@@ -231,6 +249,9 @@ const Checkout = () => {
 
             <textarea
               name="address"
+            aria-label="Full address"
+            autoComplete="street-address"
+            toolparamdescription="Full street delivery address"
               value={formData.address}
               onChange={handleChange}
               rows="4"
@@ -241,6 +262,9 @@ const Checkout = () => {
 
             <input
               name="email"
+            aria-label="Email address"
+            autoComplete="email"
+            toolparamdescription="Email for the order confirmation"
               value={formData.email}
               onChange={handleChange}
               className="w-full rounded-xl border p-4 outline-none focus:border-black"

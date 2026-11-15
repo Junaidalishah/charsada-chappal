@@ -11,7 +11,11 @@ import API_URL from "../config/api";
 import { useCart } from "../context/CartContext";
 import { createWhatsAppProductMessage } from "../utils/whatsapp";
 import { Phone } from "lucide-react";
-import { Helmet } from "react-helmet-async";
+import Seo from "../seo/Seo";
+import { graph, productSchema, breadcrumbSchema, organizationSchema, productName } from "../seo/schema.js";
+import { getProductsSync, loadProducts } from "../hooks/useProducts";
+import { trackMeta } from "../analytics";
+import { cld, cldSrcSet } from "../utils/image";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -19,11 +23,16 @@ const ProductDetail = () => {
   const { addToCart, clearCart } = useCart();
   const { userInfo } = useAuth();
 
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [selectedColor, setSelectedColor] = useState(null);
-  const [selectedImage, setSelectedImage] = useState("");
-  const [selectedSize, setSelectedSize] = useState("");
+  // Initial state from the build-time snapshot so the page (and its
+  // prerendered HTML) shows the product immediately.
+  const initial = getProductsSync().find((p) => p._id === id) || null;
+  const [product, setProduct] = useState(initial);
+  const [loading, setLoading] = useState(!initial);
+  const [selectedColor, setSelectedColor] = useState(initial?.colors?.[0] || null);
+  const [selectedImage, setSelectedImage] = useState(
+    initial?.colors?.[0]?.images?.[0] || initial?.image || "",
+  );
+  const [selectedSize, setSelectedSize] = useState(initial?.sizes?.[0] || "");
   const [quantity, setQuantity] = useState(1);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [zoomStyle, setZoomStyle] = useState({});
@@ -43,16 +52,30 @@ const ProductDetail = () => {
   // ================= FETCH PRODUCT =================
   useEffect(() => {
     const fetchProduct = async () => {
+      // Render instantly from the build-time snapshot, then refresh with live data.
+      const cached = getProductsSync().find((p) => p._id === id);
+      if (cached) {
+        setProduct(cached);
+        if (cached.colors?.length > 0) {
+          setSelectedColor(cached.colors[0]);
+          setSelectedImage(cached.colors[0].images[0]);
+        } else {
+          setSelectedImage(cached.image);
+        }
+        if (cached.sizes?.length > 0) setSelectedSize(cached.sizes[0]);
+        setLoading(false);
+      }
+
       try {
-        setLoading(true);
+        if (!cached) setLoading(true);
         const { data } = await axios.get(`${API_URL}/products/${id}`);
 
         setProduct(data);
 
-        // Fetch random products
-        const productsResponse = await axios.get(`${API_URL}/products`);
+        // Related products (shared, cached catalogue request)
+        const allProducts = await loadProducts();
 
-        const randomProducts = productsResponse.data
+        const randomProducts = allProducts
           .filter((item) => item._id !== data._id)
           .sort(() => Math.random() - 0.5)
           .slice(0, 4);
@@ -97,8 +120,8 @@ const ProductDetail = () => {
   }, [id, userInfo]);
 
   useEffect(() => {
-    if (product && window.fbq) {
-      window.fbq("track", "ViewContent", {
+    if (product) {
+      trackMeta("ViewContent", {
         content_name: product.name,
         content_ids: [product._id],
         content_type: "product",
@@ -106,7 +129,9 @@ const ProductDetail = () => {
         currency: "PKR",
       });
     }
-  }, [product]);
+    // Once per product (product is replaced when live data arrives).
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [product?._id]);
 
   // ================= LOADING =================
   if (loading) {
@@ -143,14 +168,13 @@ const ProductDetail = () => {
       size: selectedSize,
     });
 
-    if (window.fbq) {
-      window.fbq("track", "AddToCart", {
-        content_name: product.name,
-        content_ids: [product._id],
-        value: product.price,
-        currency: "PKR",
-      });
-    }
+    trackMeta("AddToCart", {
+      content_name: product.name,
+      content_ids: [product._id],
+      content_type: "product",
+      value: product.price,
+      currency: "PKR",
+    });
 
     window.dispatchEvent(new Event("openCart"));
   };
@@ -240,78 +264,22 @@ const ProductDetail = () => {
 
   return (
     <div className="min-h-screen bg-[#f8f6f1] text-[#061b0e]">
-      {product && (
-        <Helmet>
-          <title>{product.name} | Charsadda Chappal</title>
-
-          <meta
-            name="description"
-            content={product.description?.slice(0, 150)}
-          />
-
-          <meta property="og:title" content={product.name} />
-          <meta property="og:description" content={product.description} />
-          <meta
-            property="og:image"
-            content={product.colors?.[0]?.images?.[0] || product.image}
-          />
-          <meta property="og:type" content="product" />
-
-          <meta property="og:url" content={window.location.href} />
-
-          <script type="application/ld+json">
-            {JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Product",
-
-              name: product.name,
-
-              image: product.colors?.flatMap((c) => c.images) || [
-                product.image,
-              ],
-
-              description: product.description,
-
-              sku: product._id,
-
-              brand: {
-                "@type": "Brand",
-                name: "Charsadda Chappal",
-              },
-
-              offers: {
-                "@type": "Offer",
-
-                url: `https://www.charsaddachappal.store/product/${product._id}`,
-
-                priceCurrency: "PKR",
-
-                price: product.price,
-
-                availability:
-                  product.stock > 0
-                    ? "https://schema.org/InStock"
-                    : "https://schema.org/OutOfStock",
-
-                itemCondition: "https://schema.org/NewCondition",
-              },
-
-              aggregateRating:
-                product.reviews?.length > 0
-                  ? {
-                      "@type": "AggregateRating",
-                      ratingValue: (
-                        product.reviews.reduce((sum, r) => sum + r.rating, 0) /
-                        product.reviews.length
-                      ).toFixed(1),
-
-                      reviewCount: product.reviews.length,
-                    }
-                  : undefined,
-            })}
-          </script>
-        </Helmet>
-      )}
+      <Seo
+        path={`/product/${product._id}`}
+        title={`${productName(product)} – Handmade Leather | PKR ${Number(product.price).toLocaleString("en-US")} | Charsadda Chappal`}
+        description={`${productName(product)}: ${String(product.description || "").replace(/\s+/g, " ").slice(0, 110)} Free delivery across Pakistan.`}
+        image={cld(product.colors?.[0]?.images?.[0] || product.image, 1200)}
+        type="product"
+        jsonLd={graph(
+          organizationSchema(),
+          productSchema(product),
+          breadcrumbSchema([
+            ["Home", "/"],
+            ["Shop", "/shop"],
+            [productName(product), `/product/${product._id}`],
+          ]),
+        )}
+      />
 
       <Navbar />
 
@@ -326,8 +294,13 @@ const ProductDetail = () => {
               onMouseLeave={handleMouseLeave}
             >
               <img
-                src={selectedImage}
-                alt={product.name}
+                src={cld(selectedImage, 1000)}
+                srcSet={cldSrcSet(selectedImage, [480, 640, 800, 1000, 1400])}
+                sizes="(min-width: 1024px) 60vw, calc(100vw - 48px)"
+                width="1000"
+                height="1000"
+                fetchPriority="high"
+                alt={`${productName(product)} in ${selectedColor?.name || "leather"} — handmade Charsadda chappal`}
                 style={zoomStyle}
                 onClick={() => setShowFullscreen(true)}
                 className="
@@ -359,8 +332,13 @@ const ProductDetail = () => {
                     >
                       <div className="overflow-hidden">
                         <img
-                          src={img}
-                          alt={`product-${index}`}
+                          src={cld(img, 1000)}
+                          srcSet={cldSrcSet(img, [480, 640, 800, 1000])}
+                          sizes="(min-width: 1024px) 60vw, 100vw"
+                          width="1000"
+                          height="1000"
+                          loading="lazy"
+                          alt={`${productName(product)} — view ${index + 2}`}
                           className="
       w-full
       aspect-square
@@ -382,15 +360,15 @@ const ProductDetail = () => {
 
           {/* RIGHT SIDE - DETAILS */}
           <div className="lg:sticky lg:top-28 h-fit">
-            <p className="mb-3 text-xs uppercase tracking-[0.3em] text-[#775a19]">
+            <p className="mb-3 text-xs uppercase tracking-[0.3em] text-[#6b5216]">
               {product.category}
             </p>
 
             <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-              {product.name}
+              {productName(product)}
             </h1>
 
-            <p className="mt-5 text-3xl font-semibold">PKR {product.price}</p>
+            <p className="mt-5 text-3xl font-semibold">PKR {Number(product.price).toLocaleString("en-US")}</p>
 
             {/* Stock Status */}
             <div className="mt-4">
@@ -415,6 +393,9 @@ const ProductDetail = () => {
                   {product.colors.map((color, index) => (
                     <button
                       key={index}
+                      type="button"
+                      aria-label={`Colour: ${color.name}`}
+                      aria-pressed={selectedColor?.name === color.name}
                       onClick={() => {
                         setSelectedColor(color);
                         setSelectedImage(color.images[0]);
@@ -426,8 +407,11 @@ const ProductDetail = () => {
                       }`}
                     >
                       <img
-                        src={color.images[0]}
-                        alt={color.name}
+                        src={cld(color.images[0], 160)}
+                        width="64"
+                        height="80"
+                        loading="lazy"
+                        alt=""
                         className="h-20 w-16 object-cover"
                       />
                     </button>
@@ -445,10 +429,12 @@ const ProductDetail = () => {
                 </p>
               </div>
 
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-3" role="group" aria-label="Size">
                 {product.sizes?.map((size) => (
                   <button
                     key={size}
+                    type="button"
+                    aria-pressed={selectedSize === size}
                     onClick={() => setSelectedSize(size)}
                     className={`min-w-[140px] px-5 py-3 rounded-xl border text-sm font-medium transition-all duration-200
           ${
@@ -466,9 +452,9 @@ const ProductDetail = () => {
 
             {/* DESCRIPTION */}
             <div className="mt-10 border-t border-black/10 pt-8">
-              <h3 className="mb-4 text-lg font-semibold">
+              <h2 className="mb-4 text-lg font-semibold">
                 Product Description
-              </h3>
+              </h2>
               <p className="leading-8 text-gray-600">{product.description}</p>
             </div>
 
@@ -493,13 +479,17 @@ const ProductDetail = () => {
               </p>
               <div className="flex w-fit items-center overflow-hidden rounded-2xl border border-black/10 bg-white">
                 <button
+                  type="button"
+                  aria-label="Decrease quantity"
                   onClick={() => quantity > 1 && setQuantity(quantity - 1)}
                   className="px-5 py-3 text-xl hover:bg-gray-100"
                 >
                   −
                 </button>
-                <span className="px-6 font-medium">{quantity}</span>
+                <span className="px-6 font-medium" aria-live="polite">{quantity}</span>
                 <button
+                  type="button"
+                  aria-label="Increase quantity"
                   onClick={() => setQuantity(quantity + 1)}
                   className="px-5 py-3 text-xl hover:bg-gray-100"
                 >
@@ -561,9 +551,9 @@ const ProductDetail = () => {
                   className="rounded-3xl border border-black/5 bg-white p-6"
                 >
                   <div className="flex items-center justify-between">
-                    <h4 className="text-lg font-semibold">{review.name}</h4>
+                    <h3 className="text-lg font-semibold">{review.name}</h3>
 
-                    <span className="text-yellow-500">
+                    <span className="text-yellow-500" role="img" aria-label={`${review.rating} out of 5 stars`}>
                       {"⭐".repeat(review.rating)}
                     </span>
                   </div>
@@ -572,8 +562,8 @@ const ProductDetail = () => {
                     {review.comment}
                   </p>
 
-                  <p className="mt-3 text-xs text-gray-400">
-                    {new Date(review.createdAt).toLocaleDateString()}
+                  <p className="mt-3 text-xs text-[#5f5a52]">
+                    {new Date(review.createdAt).toLocaleDateString("en-GB", { timeZone: "UTC" })}
                   </p>
                 </div>
               ))}
@@ -589,9 +579,10 @@ const ProductDetail = () => {
 
             <div className="rounded-3xl bg-white p-6 border border-black/5">
               <div className="mb-4">
-                <label className="block mb-2 font-medium">Rating</label>
+                <label htmlFor="review-rating" className="block mb-2 font-medium">Rating</label>
 
                 <select
+                  id="review-rating"
                   value={reviewData.rating}
                   onChange={(e) =>
                     setReviewData({
@@ -610,9 +601,10 @@ const ProductDetail = () => {
               </div>
 
               <div className="mb-6">
-                <label className="block mb-2 font-medium">Comment</label>
+                <label htmlFor="review-comment" className="block mb-2 font-medium">Comment</label>
 
                 <textarea
+                  id="review-comment"
                   rows="5"
                   value={reviewData.comment}
                   onChange={(e) =>
@@ -644,7 +636,7 @@ const ProductDetail = () => {
                 You May Also Like
               </h2>
 
-              <p className="mt-2 text-gray-500">
+              <p className="mt-2 text-[#5f5a52]">
                 Premium handcrafted footwear selected for you.
               </p>
             </div>
@@ -658,14 +650,17 @@ const ProductDetail = () => {
                 >
                   <div className="relative aspect-square overflow-hidden rounded-3xl bg-white border border-black/5">
                     <img
-                      src={item.colors?.[0]?.images?.[0] || item.image}
-                      alt={item.name}
+                      src={cld(item.colors?.[0]?.images?.[0] || item.image, 480)}
+                      width="480"
+                      height="480"
+                      loading="lazy"
+                      alt={productName(item)}
                       className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
                     />
                   </div>
 
                   <h3 className="mt-4 font-semibold text-[#061b0e] group-hover:text-[#775a19] transition">
-                    {item.name}
+                    {productName(item)}
                   </h3>
 
                   <p className="mt-1 font-bold">PKR {item.price}</p>
@@ -682,15 +677,17 @@ const ProductDetail = () => {
           onClick={() => setShowFullscreen(false)}
         >
           <button
+            type="button"
+            aria-label="Close full-screen image"
             onClick={() => setShowFullscreen(false)}
             className="absolute top-4 right-4 text-white text-4xl z-10"
           >
-            ✕
+            <span aria-hidden="true">✕</span>
           </button>
 
           <img
-            src={selectedImage}
-            alt={product.name}
+            src={cld(selectedImage, 1600)}
+            alt={productName(product)}
             className="w-full h-full object-contain"
             onClick={(e) => e.stopPropagation()}
           />

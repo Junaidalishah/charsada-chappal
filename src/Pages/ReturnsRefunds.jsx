@@ -1,9 +1,11 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Seo from "../seo/Seo";
 
 const ReturnsRefunds = () => {
   return (
     <>
+      <Seo path="/returns-refunds" />
       <Navbar />
 
       <main className="pt-36 pb-24 px-6 md:px-12 max-w-5xl mx-auto">

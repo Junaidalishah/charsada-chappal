@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { cld } from "../utils/image";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { Bot, Send, X } from "lucide-react";
@@ -132,14 +133,19 @@ const AIChat = () => {
             overflow-hidden
           "
         >
-          <span className="absolute inset-0 rounded-full bg-[#061b0e] opacity-30 animate-ping"></span>
-          <Bot className="relative z-10" size={20} />
+          <span aria-hidden="true" className="absolute inset-0 rounded-full bg-[#061b0e] opacity-30 animate-ping"></span>
+          <Bot className="relative z-10" size={20} aria-hidden="true" />
           <span className="relative z-10 font-semibold">AI</span>
+          <span className="sr-only"> shopping assistant</span>
         </button>
       )}
 
       {/* Chat Window */}
       <div
+        role="dialog"
+        aria-label="AI Shopping Assistant"
+        aria-hidden={!isOpen}
+        inert={!isOpen}
         className={`
           fixed
           right-5
@@ -179,10 +185,12 @@ const AIChat = () => {
             </div>
           </div>
           <button
+            type="button"
             onClick={() => setIsOpen(false)}
+            aria-label="Close AI shopping assistant"
             className="transition hover:scale-110"
           >
-            <X size={22} />
+            <X size={22} aria-hidden="true" />
           </button>
         </div>
 
@@ -239,8 +247,9 @@ const AIChat = () => {
                   className="w-full overflow-hidden rounded-2xl border bg-white shadow-sm"
                 >
                   <img
-                    src={product.image}
+                    src={cld(product.image, 400)}
                     alt={product.name}
+                    loading="lazy"
                     className="h-40 w-full object-cover sm:h-44"
                   />
                   <div className="p-3 sm:p-4">
@@ -296,6 +305,7 @@ const AIChat = () => {
             <input
               type="text"
               placeholder="Ask anything..."
+              aria-label="Ask the AI shopping assistant"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => {
@@ -315,7 +325,9 @@ const AIChat = () => {
               "
             />
             <button
+              type="button"
               onClick={handleSend}
+              aria-label="Send message"
               className="
                 absolute
                 right-2
@@ -333,7 +345,7 @@ const AIChat = () => {
                 hover:scale-110
               "
             >
-              <Send size={18} />
+              <Send size={18} aria-hidden="true" />
             </button>
           </div>
         </div>

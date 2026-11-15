@@ -1,24 +1,26 @@
-import PersonIcon from "@mui/icons-material/Person";
-import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
-import MenuIcon from "@mui/icons-material/Menu";
+import { User, ShoppingBag, Menu } from "lucide-react";
 import CartDrawer from "../components/CartDrawer";
 import { NavLink, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 import { useCart } from "../context/CartContext";
+import useHydrated from "../hooks/useHydrated";
 import { useState, useEffect } from "react";
 
 const Links = [
   { to: "/", label: "Home" },
   { to: "/shop", label: "Shop" },
   { to: "/collections", label: "Collection" },
+  { to: "/charsadda-chappal-guide", label: "Guide" },
 ];
 
 const Navbar = () => {
   const { userInfo, logout } = useAuth();
   const [open, setOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
-  const { cart } = useCart();
+  const { cart: storedCart } = useCart();
+  const hydrated = useHydrated();
+  const cart = hydrated ? storedCart : [];
   const [profileOpen, setProfileOpen] = useState(false);
 
   const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
@@ -50,16 +52,18 @@ const Navbar = () => {
       <nav className="fixed top-0 z-[9999] w-full border-b bg-[#fbf9f5]/80 shadow-md backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
           {/* LOGO */}
-          <NavLink to="/" className="flex items-center shrink-0">
+          <NavLink to="/" className="flex items-center shrink-0" aria-label="Charsadda Chappal home">
             <img
-              src="/images/logo.png"
+              src="/images/logo-112.webp"
               alt="Charsadda Chappal"
+              width="80"
+              height="56"
               className="h-14 w-auto"
             />
           </NavLink>
 
           {/* DESKTOP LINKS */}
-          <div className="hidden md:flex space-x-10 items-center">
+          <div className="hidden md:flex space-x-10 items-center" role="navigation" aria-label="Main">
             {Links.map((link) => (
               <NavLink key={link.to} to={link.to}>
                 {link.label}
@@ -79,13 +83,17 @@ const Navbar = () => {
               {userInfo ? (
                 <>
                   <button
+                    type="button"
                     onClick={(e) => {
                       e.stopPropagation();
                       setProfileOpen(!profileOpen);
                     }}
+                    aria-label={`Account menu for ${userInfo.name}`}
+                    aria-expanded={profileOpen}
+                    aria-haspopup="menu"
                     className="flex items-center gap-2"
                   >
-                    <PersonIcon />
+                    <User size={24} aria-hidden="true" />
 
                     <span className="hidden md:block text-sm">
                       {userInfo.name}
@@ -131,38 +139,47 @@ const Navbar = () => {
                   )}
                 </>
               ) : (
-                <Link to="/login">
-                  <PersonIcon />
+                <Link to="/login" aria-label="Sign in to your account" className="flex p-1">
+                  <User size={24} aria-hidden="true" />
                 </Link>
               )}
             </div>
 
             {/* CART */}
-            <div
+            <button
+              type="button"
+              data-agent-action="open-cart"
               className="relative cursor-pointer p-2 rounded-full hover:bg-black/5"
               onClick={() => setCartOpen((prev) => !prev)}
+              aria-label={`Open shopping bag, ${totalItems} item${totalItems === 1 ? "" : "s"}`}
+              aria-expanded={cartOpen}
             >
-              <ShoppingBagIcon />
+              <ShoppingBag size={24} aria-hidden="true" />
 
               {totalItems > 0 && (
-                <span className="absolute -top-2 -right-2 bg-black text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                <span aria-hidden="true" className="absolute -top-2 -right-2 bg-black text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
                   {totalItems}
                 </span>
               )}
-            </div>
+            </button>
 
             {/* MOBILE MENU */}
             <button
+              type="button"
               onClick={() => setOpen(!open)}
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
+              aria-controls="mobile-menu"
               className="rounded-lg p-2 transition hover:bg-black/5 md:hidden"
             >
-              <MenuIcon />
+              <Menu size={24} aria-hidden="true" />
             </button>
           </div>
         </div>
         {/* MOBILE MENU */}
         {open && (
           <div
+            id="mobile-menu"
             className={`md:hidden overflow-hidden border-t bg-[#fbf9f5] transition-all duration-300 ${
               open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
             }`}
