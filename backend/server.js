@@ -24,6 +24,16 @@ app.use(cors());
 app.use(express.json());
 
 // ROUTES
+// Lightweight health check for uptime pings (no database query).
+app.get("/api/health", (req, res) => {
+  res.set("Cache-Control", "no-store");
+  res.json({
+    status: "ok",
+    db: mongoose.connection.readyState === 1 ? "connected" : "disconnected",
+    uptime: Math.round(process.uptime()),
+  });
+});
+
 app.use("/api/orders", orderRoutes);
 
 app.use("/api/auth", authRoutes);
@@ -53,15 +63,12 @@ mongoose
   })
   .then(() => {
     console.log("MongoDB Connected");
-
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
-    });
   })
   .catch((err) => {
     console.error("MongoDB Error:", err);
   });
 
+// Listen once, immediately, so health checks answer even while MongoDB connects.
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
